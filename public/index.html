@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <title>Pasukan Teknikal ICT Baling</title>
+
+  <!-- FAVICON -->
+  <link rel="icon" href="/assets/favicon.png" type="image/png">
+
+  <!-- TAILWIND CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- ================= FIREBASE SDK ================= -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "API_KEY_ANDA",
+      authDomain: "PROJECT_ID.firebaseapp.com",
+      projectId: "PROJECT_ID",
+      storageBucket: "PROJECT_ID.appspot.com",
+      messagingSenderId: "SENDER_ID",
+      appId: "APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <!-- CUSTOM CSS (MENU / MOBILE / FIX KECIL) -->
+  <style>
+    /* Contoh: animasi atau override kecil */
+  </style>
+
+  <style>
+    /* SUBMENU MOBILE ANIMASI */
+    .submenu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+
+    .submenu-open {
+      max-height: 500px;
+    }
+
+    .arrow-rotate {
+      transform: rotate(180deg);
+    }
+  </style>
+
+</head>
+
+
+<body class="bg-gray-100">
+
+<!-- ================= HEADER ================= -->
+<header class="bg-blue-900 text-white">
+
+  <!-- BAR ATAS: LOGO + TAJUK -->
+  <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 p-4 md:p-6 max-w-7xl mx-auto">
+
+  <!-- KIRI: LOGO + TAJUK -->
+  <div class="flex items-center gap-4">
+    <img
+      src="/assets/logo.png"
+      alt="LOGO ICT"
+      class="h-12 w-12 object-contain bg-white rounded p-1"
+    >
+
+    <div>
+      <h1 class="text-xl font-bold">
+        PASUKAN TEKNIKAL ICT SEKOLAH DAERAH BALING
+      </h1>
+      <p class="text-sm">
+        ZON KUALA KETIL
+      </p>
+    </div>
+  </div>
+
+  <!-- TOLAK KE HUJUNG KANAN -->
+  <div class="ml-auto text-right flex flex-col items-end">
+    <a href="/login.html"
+       class="bg-white text-blue-900 px-4 py-2 rounded font-semibold text-sm hover:bg-gray-200">
+      LOGIN ADMIN
+    </a>
+
+    <span id="tarikhHari"
+          class="text-xs mt-1 text-blue-100">
+    </span>
+  </div>
+
+</div>
+
+</header>
+
+<!-- NAVIGATION BAR UTAMA -->
+<nav class="bg-blue-800 relative z-40">
+
+<!-- MENU TOGGLE (MOBILE) -->
+<div class="md:hidden flex justify-end px-4 py-2">
+  <button id="menuBtn" class="text-white text-2xl font-bold">☰</button>
+</div>
+
+<ul id="mainMenu"
+  class="hidden md:flex flex-col md:flex-row
+         justify-center items-center
+         gap-3 md:gap-6 py-3
+         text-sm font-semibold text-white">
+
+  <li><a href="/index.html" class="nav-link hover:underline">UTAMA</a></li>
+
+  <li>
+    <a href="/sektor-pengurusan.html" class="nav-link hover:underline">
+      SEKTOR PENGURUSAN MAKLUMAT
+    </a>
+  </li>
+
+<!-- AHLI PASUKAN (HOVER) -->
+<li class="relative group">
+
+  <span id="btnAhli"
+      class="nav-parent nav-link flex items-center gap-1 cursor-pointer hover:underline">
+
+    AHLI PASUKAN
+    <svg class="h-4 w-4 transition-transform duration-200 group-hover:rotate-180"
+         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </span>
+
+  <!-- SUBMENU -->
+<ul data-parent="btnAhli"
+    class="absolute left-0 top-full hidden
+           group-hover:block
+           bg-white text-blue-900 min-w-[260px]
+           rounded shadow-lg border z-50">
+
+
+    <li>
+      <a href="/ahli-pasukan.html"
+         class="nav-link block px-4 py-2 hover:bg-blue-100">
+        Carta Organisasi Pasukan
+      </a>
+    </li>
+
+    <li>
+      <a href="/skop-tugas-jtk.html"
+         class="nav-link block px-4 py-2 hover:bg-blue-100">
+        Skop Tugas Juruteknik Komputer (JTK)
+      </a>
+    </li>
+
+    <li>
+      <a href="/maklumat-perhubungan.html"
+         class="nav-link block px-4 py-2 hover:bg-blue-100">
+        Maklumat Perhubungan
+      </a>
+    </li>
+
+  </ul>
+</li>
+
+<!-- MAKLUMAT SEKOLAH (HOVER) -->
+<li class="relative group">
+
+  <span class="flex items-center gap-1 cursor-pointer hover:underline">
+    MAKLUMAT SEKOLAH
+    <svg class="h-4 w-4 transition-transform duration-200 group-hover:rotate-180"
+         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </span>
+
+  <ul
+    class="absolute left-0 top-full
+           hidden group-hover:block
+           bg-white text-blue-900 min-w-[260px]
+           rounded shadow-lg border z-50">
+
+    <li>
+      <a href="/maklumat-sekolah.html"
+         class="nav-link block px-4 py-2 hover:bg-blue-100">
+        Maklumat Keseluruhan
+      </a>
+    </li>
+
+    <li>
+      <a href="/peranan-guru-penyelaras-ict.html"
+         class="nav-link block px-4 py-2 hover:bg-blue-100">
+        Peranan Guru Penyelaras ICT
+      </a>
+    </li>
+
+  </ul>
+</li>
+
+
+  <li><a href="/meja-perkhidmatan-isd.html" class="nav-link hover:underline">
+    MEJA PERKHIDMATAN ISD</a></li>
+
+  <li><a href="/kabinet-borang.html" class="nav-link hover:underline">
+    MUAT TURUN</a></li>
+
+</ul>
+</nav>
+
+<!-- ================= MAIN CONTENT ================= -->
+<main class="p-6 max-w-6xl mx-auto space-y-8">
+
+  <!-- HERO / PENGENALAN -->
+  <section class="bg-white p-8 rounded shadow text-center">
+    <h2 class="text-2xl font-bold mb-4 text-blue-900">
+      SELAMAT DATANG KE PORTAL RASMI
+    </h2>
+
+    <p class="text-gray-700 leading-relaxed max-w-3xl mx-auto">
+      Portal Pasukan Teknikal ICT Sekolah Daerah Baling berfungsi sebagai
+      pusat rujukan rasmi bagi pengurusan, dokumentasi serta sokongan
+      teknikal ICT untuk sekolah-sekolah di Zon Kuala Ketil.
+    </p>
+  </section>
+
+  <!-- PERANAN PORTAL -->
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <!-- GURU -->
+    <div class="bg-blue-50 border border-blue-200 p-6 rounded shadow">
+      <h3 class="font-bold text-lg mb-2 text-blue-900">👩‍🏫 UNTUK GURU</h3>
+      <ul class="text-sm text-gray-700 list-disc list-inside space-y-1">
+        <li>Maklumat sokongan ICT sekolah</li>
+        <li>Akses sistem & platform rasmi</li>
+        <li>Rujukan teknikal dan dokumentasi</li>
+      </ul>
+    </div>
+
+    <!-- PELAJAR -->
+    <div class="bg-green-50 border border-green-200 p-6 rounded shadow">
+      <h3 class="font-bold text-lg mb-2 text-green-900">👨‍🎓 UNTUK PELAJAR</h3>
+      <ul class="text-sm text-gray-700 list-disc list-inside space-y-1">
+        <li>Akses DELIMA & platform pembelajaran</li>
+        <li>Maklumat asas kemudahan ICT sekolah</li>
+        <li>Saluran rujukan digital</li>
+      </ul>
+    </div>
+
+    <!-- ORANG AWAM -->
+    <div class="bg-yellow-50 border border-yellow-200 p-6 rounded shadow">
+      <h3 class="font-bold text-lg mb-2 text-yellow-900">👥 UNTUK ORANG AWAM</h3>
+      <ul class="text-sm text-gray-700 list-disc list-inside space-y-1">
+        <li>Maklumat peranan ICT pendidikan</li>
+        <li>Rujukan organisasi & struktur</li>
+        <li>Saluran komunikasi rasmi</li>
+      </ul>
+    </div>
+
+  </section> <!-- ✅ TUTUP PERANAN PORTAL -->
+
+  <!-- MAKLUMAN / PENGUMUMAN -->
+  <section class="bg-white p-6 rounded shadow">
+
+    <h2 class="text-lg font-bold text-blue-900 mb-4 text-center">
+      📢 MAKLUMAN & PENGUMUMAN
+    </h2>
+
+    <div class="space-y-4">
+
+      <div class="border-l-4 border-blue-600 bg-blue-50 p-4 rounded">
+        <p class="text-sm text-gray-500 mb-1">20 Januari 2026</p>
+        <p class="font-semibold text-gray-800">
+          PORTAL RASMI PASUKAN TEKNIKAL ICT SEKOLAH ZON KUALA KETIL KINI BEROPERASI SEPENUHNYA.
+        </p>
+        <p class="text-sm text-gray-700 mt-1">
+          Semua guru dan pihak sekolah boleh menggunakan portal ini sebagai rujukan ICT.
+        </p>
+      </div>
+
+      <div class="border-l-4 border-green-600 bg-green-50 p-4 rounded">
+        <p class="text-sm text-gray-500 mb-1">20 Januari 2026</p>
+        <p class="font-semibold text-gray-800">
+          VERSI MOBILE AKAN DIKEMASKINI. SEMENTARA SILA MENGGUNAKAN BROWSER DAHULU. SEKIAN,TERIMA KASIH
+        </p>
+      </div>
+
+      <div class="border-l-4 border-yellow-500 bg-yellow-50 p-4 rounded">
+        <p class="font-semibold text-gray-800">
+          Sebarang aduan ICT hendaklah melalui saluran rasmi sekolah masing-masing.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- PAUTAN PANTAS -->
+  <section class="bg-blue-100 border border-blue-200 rounded shadow p-6">
+    <h2 class="text-lg font-semibold text-center mb-4">
+      PAUTAN PANTAS
+    </h2>
+
+    <ul class="flex flex-wrap justify-center gap-6 text-sm font-semibold text-blue-900">
+      <li><a href="https://www.moe.gov.my/" target="_blank" class="hover:underline">KPM</a></li>
+      <li><a href="https://jpnkedah.moe.gov.my/" target="_blank" class="hover:underline">JPN KEDAH</a></li>
+      <li><a href="https://hrmis2.eghrmis.gov.my/" target="_blank" class="hover:underline">HRMIS</a></li>
+      <li><a href="https://d2.delima.edu.my/login" target="_blank" class="hover:underline">DELIMA LOGIN</a></li>
+      <li><a href="https://sites.google.com/moe-dl.edu.my/ustp-ppd-baling" target="_blank" class="hover:underline">USTP PPD BALING</a></li>
+      <li><a href="https://www.youtube.com/@coepkgkualaketil" target="_blank" class="hover:underline">COE KUALA KETIL</a></li>
+      <li><a href="https://www.mygovuc.gov.my/" target="_blank" class="hover:underline">PORTAL RASMI MYGOVUC</a></li>
+    </ul>
+  </section>
+
+  <!-- HUBUNGI -->
+  <section class="bg-white p-6 rounded shadow text-center">
+    <h2 class="text-lg font-semibold mb-2">
+      HUBUNGI PASUKAN TEKNIKAL ICT
+    </h2>
+    <p class="text-sm text-gray-700">
+      Sebarang pertanyaan atau sokongan teknikal boleh dibuat melalui
+      pihak sekolah atau saluran rasmi yang disediakan.
+    </p>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-blue-900 text-white mt-12">
+  <div class="max-w-7xl mx-auto px-6 py-6 text-center text-sm">
+   
+    <div class="mt-2">
+      © 2026 PASUKAN TEKNIKAL ICT SEKOLAH DAERAH BALING<br>
+      ZON KUALA KETIL
+    </div>
+
+    <div id="infoBar" class="info-bar-footer">
+      <span id="lastUpdate"></span>
+      <span>|</span>
+      <span id="visitorCount"></span>
+    </div>
+
+  </div>
+</footer>
+
+<!-- PAPAR JTK MENU JIKA LOGIN -->
+<script type="module" src="/js/jtk-menu.js"></script>
+
+<script>
+  function kemaskiniTarikh() {
+    const hari = [
+      "Ahad", "Isnin", "Selasa", "Rabu",
+      "Khamis", "Jumaat", "Sabtu"
+    ];
+
+    const bulan = [
+      "Januari", "Februari", "Mac", "April",
+      "Mei", "Jun", "Julai", "Ogos",
+      "September", "Oktober", "November", "Disember"
+    ];
+
+    const sekarang = new Date();
+
+    const paparan =
+      hari[sekarang.getDay()] + ", " +
+      sekarang.getDate() + " " +
+      bulan[sekarang.getMonth()] + " " +
+      sekarang.getFullYear() + " • " +
+      sekarang.toLocaleTimeString("ms-MY");
+
+    const el = document.getElementById("tarikhHari");
+    if (el) el.textContent = paparan;
+  }
+
+  kemaskiniTarikh();
+  setInterval(kemaskiniTarikh, 1000);
+</script>
+
+<!-- ================= CHATBOT FLOATING ================= -->
+<style>
+  .chatbot-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    animation: float 2.5s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+  }
+
+  .chatbot-text {
+    background: #1e40af;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  .chatbot-icon {
+    width: 60px;
+    height: 60px;
+    background: #2563eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    color: white;
+    font-size: 24px;
+  }
+
+  .chatbot-modal {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 360px;
+    height: 520px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
+    z-index: 9999;
+    display: none;
+  }
+
+  .chatbot-header {
+    background: #1e40af;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .chatbot-header button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 640px) {
+    .chatbot-modal {
+      width: 95%;
+      height: 80%;
+      right: 2.5%;
+      bottom: 90px;
+    }
+  }
+</style>
+
+<style>
+/* MENU AKTIF */
+.nav-active {
+  color: #fde047; /* kuning Tailwind */
+  font-weight: 700;
+  position: relative;
+}
+
+.nav-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background-color: #fde047;
+  border-radius: 999px;
+}
+
+/* SUBMENU AKTIF */
+.submenu-active {
+  background-color: #dbeafe; /* biru lembut */
+  font-weight: 600;
+}
+</style>
+
+<style>
+/* ================= INFO BAR FOOTER (CENTER RAPAT) ================= */
+.info-bar-footer {
+  display: inline-flex;   /* PENTING */
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Parent container center */
+footer .max-w-7xl {
+  text-align: center;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .info-bar-footer {
+    font-size: 12px;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+</style>
+
+
+<!-- BUTTON -->
+<div class="chatbot-btn" onclick="bukaChatbot()">
+  <div class="chatbot-text">
+    Perlukan bantuan? Klik saya 💬
+  </div>
+  <div class="chatbot-icon">
+    🤖
+  </div>
+</div>
+
+<!-- MODAL CHATBOT -->
+<div class="chatbot-modal" id="chatbotModal">
+  <div class="chatbot-header">
+    PTIS Kuala Ketil
+    <button onclick="tutupChatbot()">✖</button>
+  </div>
+
+  <iframe
+    src="https://app.edcafe.ai/chatbots/695cb8cc88fa84267a8b4b04"
+    title="PTIS KUALA KETIL"
+    allow="microphone"
+    style="border:none; width:100%; height:100%;">
+  </iframe>
+</div>
+
+<script>
+  function bukaChatbot() {
+    document.getElementById("chatbotModal").style.display = "block";
+  }
+
+  function tutupChatbot() {
+    document.getElementById("chatbotModal").style.display = "none";
+  }
+</script>
+<!-- ================= TAMAT CHATBOT ================= -->
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const menuBtn = document.getElementById("menuBtn");
+  const mainMenu = document.getElementById("mainMenu");
+
+  const dropdowns = [
+    {
+      btn: "btnAhli",
+      menu: "menuAhli",
+      arrow: "arrowAhli"
+    },
+    {
+      btn: "btnMaklumatSekolah",
+      menu: "menuMaklumatSekolah",
+      arrow: "arrowMaklumatSekolah"
+    }
+  ];
+
+  /* TOGGLE MENU MOBILE */
+  menuBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    mainMenu.classList.toggle("hidden");
+  });
+
+  /* DROPDOWN KLIK (DESKTOP + MOBILE) */
+  dropdowns.forEach(d => {
+    const btn = document.getElementById(d.btn);
+    const menu = document.getElementById(d.menu);
+    const arrow = document.getElementById(d.arrow);
+
+    if (!btn || !menu) return;
+
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+
+      // tutup dropdown lain
+      dropdowns.forEach(x => {
+        if (x.menu !== d.menu) {
+          document.getElementById(x.menu)?.classList.add("hidden");
+          document.getElementById(x.arrow)?.classList.remove("rotate-180");
+        }
+      });
+
+      menu.classList.toggle("hidden");
+      arrow?.classList.toggle("rotate-180");
+    });
+  });
+
+  /* TUTUP SEMUA BILA KLIK LUAR */
+  document.addEventListener("click", () => {
+    dropdowns.forEach(d => {
+      document.getElementById(d.menu)?.classList.add("hidden");
+      document.getElementById(d.arrow)?.classList.remove("rotate-180");
+    });
+  });
+
+});
+</script>
+
+
+<script>
+/* ================= TARIKH KEMASKINI ================= */
+function formatTarikh(date) {
+  const bulan = [
+    "Januari","Februari","Mac","April","Mei","Jun",
+    "Julai","Ogos","September","Oktober","November","Disember"
+  ];
+
+  return `${date.getDate().toString().padStart(2,'0')} ${
+    bulan[date.getMonth()]
+  } ${date.getFullYear()} ${date.getHours().toString().padStart(2,'0')}:${date.getMinutes().toString().padStart(2,'0')}`;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const el = document.getElementById("lastUpdate");
+  if (el) {
+    el.textContent = "Tarikh Kemaskini : " + formatTarikh(new Date());
+  }
+});
+</script>
+
+<!-- ================= FIRESTORE VISITOR COUNTER ================= -->
+<script type="module">
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  updateDoc,
+  increment,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+/* ================= FIREBASE CONFIG ================= */
+const firebaseconfig = {
+  apiKey: "API_KEY_ANDA",
+  authDomain: "ptiszonkualaketil.firebaseapp.com",
+  projectId: "ptiszonkualaketil",
+  storageBucket: "ptiszonkualaketil.appspot.com",
+  messagingSenderId: "XXXX",
+  appId: "XXXX"
+};
+
+/* ================= INIT SEKALI SAHAJA ================= */
+const app = getApps().length
+  ? getApps()[0]
+  : initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+const ref = doc(db, "stats", "visitors");
+
+/* ================= PASTIKAN DOKUMEN WUJUD ================= */
+await setDoc(ref, { count: 0 }, { merge: true });
+
+/* ================= KIRA SEKALI SETIAP SESI ================= */
+if (!sessionStorage.getItem("hasVisited")) {
+  updateDoc(ref, { count: increment(1) })
+    .then(() => {
+      sessionStorage.setItem("hasVisited", "true");
+      console.log("Visitor +1");
+    })
+    .catch(err => console.error("Update error:", err));
+}
+
+/* ================= PAPAR JUMLAH ================= */
+onSnapshot(ref, snap => {
+  if (snap.exists()) {
+    const el = document.getElementById("visitorCount");
+    if (el) {
+      el.textContent =
+        "Jumlah Pelawat : " + snap.data().count.toLocaleString();
+    }
+  }
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const currentPath = window.location.pathname;
+
+  document.querySelectorAll(".nav-link").forEach(link => {
+    const linkPath = new URL(link.href).pathname;
+
+    if (linkPath === currentPath) {
+      link.classList.add("nav-active");
+
+      // Jika submenu → highlight parent dropdown
+      const parentDropdown = link.closest("li.relative.group");
+      if (parentDropdown) {
+        const parentBtn = parentDropdown.querySelector("button");
+        parentBtn?.classList.add("nav-active");
+        link.classList.add("submenu-active");
+      }
+    }
+  });
+});
+</script>
+
+</body>
+</html>

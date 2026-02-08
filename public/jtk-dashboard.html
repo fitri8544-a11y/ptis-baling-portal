@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard JTK</title>
+  <link rel="icon" href="/assets/favicon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<!-- ================= HEADER ================= -->
+<header class="bg-blue-900 text-white">
+  <div class="flex justify-between items-center p-6 max-w-7xl mx-auto">
+    <div class="flex items-center gap-4">
+      <img src="/assets/logo.png" 
+      class="h-12 w-12 object-contain bg-white rounded p-1">
+      <div>
+        <h1 class="text-xl font-bold">DASHBOARD JTK</h1>
+        <p class="text-sm">Pasukan Teknikal ICT • Zon Kuala Ketil</p>
+      </div>
+    </div>
+
+    <div class="text-right space-y-1">
+      <div id="tarikhHari" class="text-xs text-blue-100"></div>
+      <button onclick="logout()"
+        class="bg-white text-blue-900 px-4 py-2 rounded text-sm font-semibold">
+        LOG KELUAR
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto p-6 space-y-10">
+
+  <!-- ================= AKSES PANTAS ================= -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+  <!-- ISD -->
+  <a href="https://isd.moe.gov.my" target="_blank"
+     class="group rounded-xl border border-green-200 bg-green-50 p-4
+            shadow-sm hover:shadow-md transition
+            flex flex-col justify-between text-center">
+
+    <div class="text-2xl mb-2">🛠️</div>
+
+    <h3 class="text-sm font-semibold text-green-900 group-hover:underline">
+      ISD
+    </h3>
+    <p class="text-xs text-green-700">Meja Bantuan</p>
+
+    <span class="mt-3 text-[11px] px-2 py-0.5 rounded-full
+                 bg-white text-green-800 font-medium w-fit mx-auto">
+      Sistem Rasmi
+    </span>
+  </a>
+
+  <!-- ScanMe -->
+  <a href="https://idme.moe.gov.my/login" target="_blank"
+     class="group rounded-xl border border-yellow-200 bg-yellow-50 p-4
+            shadow-sm hover:shadow-md transition
+            flex flex-col justify-between text-center">
+
+    <div class="text-2xl mb-2">📲</div>
+
+    <h3 class="text-sm font-semibold text-yellow-900 group-hover:underline">
+      ScanMe
+    </h3>
+    <p class="text-xs text-yellow-700">Sistem Kehadiran</p>
+
+    <span class="mt-3 text-[11px] px-2 py-0.5 rounded-full
+                 bg-white text-yellow-800 font-medium w-fit mx-auto">
+      Login KPM
+    </span>
+  </a>
+
+  <!-- S3PTIS -->
+  <a href="#"
+     class="group rounded-xl border border-purple-200 bg-purple-50 p-4
+            shadow-sm hover:shadow-md transition
+            flex flex-col justify-between text-center">
+
+    <div class="text-2xl mb-2">📊</div>
+
+    <h3 class="text-sm font-semibold text-purple-900 group-hover:underline">
+      S3PTIS
+    </h3>
+    <p class="text-xs text-purple-700">Laporan Harian JTK</p>
+
+    <span class="mt-3 text-[11px] px-2 py-0.5 rounded-full
+                 bg-white text-purple-800 font-medium w-fit mx-auto">
+      Dalaman
+    </span>
+  </a>
+
+  <!-- EDU Baling -->
+  <a href="https://edubaling.web.app" target="_blank"
+     class="group rounded-xl border border-indigo-200 bg-indigo-50 p-4
+            shadow-sm hover:shadow-md transition
+            flex flex-col justify-between text-center">
+
+    <div class="text-2xl mb-2">🌐</div>
+
+    <h3 class="text-sm font-semibold text-indigo-900 group-hover:underline">
+      EDU Baling WEB
+    </h3>
+    <p class="text-xs text-indigo-700">E-Gerak</p>
+
+    <span class="mt-3 text-[11px] px-2 py-0.5 rounded-full
+                 bg-white text-indigo-800 font-medium w-fit mx-auto">
+      Portal Rasmi
+    </span>
+  </a>
+
+  <!-- Pelan Lantai PKGKK -->
+  <a href="https://drive.google.com/drive/folders/1sPkACgxmbZXPFl-d0Q9hH49wVBurm599?usp=sharing"
+     target="_blank"
+     class="group rounded-xl border border-blue-200 bg-blue-50 p-4
+            shadow-sm hover:shadow-md transition
+            flex flex-col justify-between text-center">
+
+    <div class="text-2xl mb-2">📐</div>
+
+    <h3 class="text-sm font-semibold text-blue-900 group-hover:underline">
+      Pelan Lantai PKGKK
+    </h3>
+    <p class="text-xs text-blue-700">Muat Turun Dokumen</p>
+
+    <span class="mt-3 text-[11px] px-2 py-0.5 rounded-full
+                 bg-white text-blue-800 font-medium w-fit mx-auto">
+      🔒 Akses Terhad
+    </span>
+  </a>
+
+  <!-- MyGovUC -->
+  <a href="https://redtoneservicedesk.freshservice.com/support/home"
+     target="_blank"
+     class="group rounded-xl border border-red-200 bg-red-50 p-4
+            shadow-sm hover:shadow-md transition
+            flex flex-col justify-between text-center">
+
+    <div class="text-2xl mb-2">📧</div>
+
+    <h3 class="text-sm font-semibold text-red-900 group-hover:underline">
+      MyGovUC
+    </h3>
+    <p class="text-xs text-red-700">Email Rasmi</p>
+
+    <span class="mt-3 text-[11px] px-2 py-0.5 rounded-full
+                 bg-white text-red-800 font-medium w-fit mx-auto">
+      Sokongan Teknikal
+    </span>
+  </a>
+
+  <!-- Intune Manager -->
+  <a id="intuneCard"
+     href="https://intune.microsoft.com"
+     target="_blank"
+     class="hidden group rounded-xl border border-sky-200 bg-sky-50 p-4
+            shadow-sm hover:shadow-md transition
+            flex flex-col justify-between text-center">
+
+    <div class="text-2xl mb-2">🛡️</div>
+
+    <h3 class="text-sm font-semibold text-sky-900 group-hover:underline">
+      Intune Manager
+    </h3>
+    <p class="text-xs text-sky-700">Pengurusan Peranti</p>
+
+    <span class="mt-3 text-[11px] px-2 py-0.5 rounded-full
+                 bg-white text-sky-800 font-medium w-fit mx-auto">
+      Admin Sahaja
+    </span>
+  </a>
+
+<!-- Google Sheet Kemaskini Data -->
+<a
+  href="https://docs.google.com/spreadsheets/d/1U-uEoDnY407Qfy2WDae-9YfhC4oGbHjN8ggw7cILFW0/edit"
+  target="_blank"
+  class="group rounded-xl border border-emerald-200 bg-emerald-50 p-4
+         shadow-sm hover:shadow-md transition
+         flex flex-col justify-between text-center">
+
+  <div class="text-2xl mb-2">📊</div>
+
+  <h3 class="text-sm font-semibold text-emerald-900 group-hover:underline">
+    Kemaskini Maklumat Talian Internet
+  </h3>
+
+  <p class="text-xs text-emerald-700">
+    Google Sheet Talian Internet
+  </p>
+
+  <span class="mt-3 text-[11px] px-2 py-0.5 rounded-full
+               bg-white text-emerald-800 font-medium w-fit mx-auto">
+    JTK / Admin
+  </span>
+</a>
+
+</section>
+
+<!-- ================= ADMIN ONLY ================= -->
+  <section id="adminSection"
+           class="hidden bg-white p-6 rounded shadow space-y-6 border border-red-200">
+
+  <h2 class="text-xl font-bold text-red-700 flex items-center gap-2">
+    🔐 Maklumat Admin (Password Peranti Sewaan)
+  </h2>
+
+  <p class="text-sm text-gray-600">
+    Maklumat ini adalah sulit. Untuk kegunaan dalaman Pasukan Teknikal ICT sahaja.
+  </p>
+
+  <!-- ================= PERALATAN PdP ================= -->
+  <details class="border rounded">
+    <summary class="cursor-pointer p-4 font-semibold bg-blue-50">
+      💻 Peralatan Pembelajaran & Pengajaran (PdP)
+    </summary>
+
+    <div class="p-4 space-y-4 text-sm">
+
+      <!-- FASA 1 -->
+      <details class="border rounded">
+        <summary class="cursor-pointer p-3 font-semibold bg-gray-50">
+          Fasa 1
+        </summary>
+        <div class="p-3 space-y-1">
+          <p><strong>Nama Syarikat:</strong> Setia Makmur Gemilang Sdn. Bhd</p>
+          <p><strong>Admin Password:</strong> KPMpdp@2022</p>
+          <p><strong>User / Student ID:</strong> school@2022</p>
+          <p><strong>Tempoh Sewaan:</strong> 60 Bulan (15 Apr 2021 – 14 Apr 2027)</p>
+        </div>
+      </details>
+
+      <!-- FASA 2 -->
+      <details class="border rounded">
+        <summary class="cursor-pointer p-3 font-semibold bg-gray-50">
+          Fasa 2
+        </summary>
+        <div class="p-3 space-y-1">
+          <p><strong>Nama Syarikat:</strong> SNS Network Sdn. Bhd</p>
+          <p><strong>Admin Password:</strong> KPMpdpf2@2023</p>
+          <p><strong>User / Student ID:</strong> KOD SEKOLAH-L43@ NO LAPTOP</p>
+          <p><strong>Tempoh Sewaan:</strong> 60 Bulan (20 Apr 2023 – 19 Apr 2028)</p>
+        </div>
+      </details>
+
+      <!-- FASA 3 -->
+      <details class="border rounded">
+        <summary class="cursor-pointer p-3 font-semibold bg-gray-50">
+          Fasa 3
+        </summary>
+        <div class="p-3 space-y-1">
+          <p><strong>Nama Syarikat:</strong> Privasia Sdn. Bhd</p>
+          <p><strong>Admin Password:</strong> KPMpdp@Fasa3</p>
+          <p><strong>User / Student ID:</strong> KOD SEKOLAH-L43@ NO LAPTOP</p>
+          <p><strong>Tempoh Sewaan:</strong> 60 Bulan (26 Feb 2024 – 25 Feb 2029)</p>
+        </div>
+      </details>
+
+    </div>
+  </details>
+
+  <!-- ================= PERALATAN PENTADBIRAN ================= -->
+  <details class="border rounded">
+    <summary class="cursor-pointer p-4 font-semibold bg-green-50">
+      🗄️ Peralatan Pentadbiran
+    </summary>
+
+    <div class="p-4 space-y-4 text-sm">
+
+      <!-- FASA 1 -->
+      <details class="border rounded">
+        <summary class="cursor-pointer p-3 font-semibold bg-gray-50">
+          Fasa 1
+        </summary>
+        <div class="p-3 space-y-1">
+          <p><strong>Nama Syarikat:</strong> Night Electronic Sdn. Bhd</p>
+          <p><strong>Admin Password:</strong> PDT1@kpm</p>
+          <p><strong>Tempoh Sewaan:</strong> 60 Bulan (31 Ogos 2021 – 2 Sept 2026)</p>
+        </div>
+      </details>
+
+      <!-- FASA 2 -->
+      <details class="border rounded">
+        <summary class="cursor-pointer p-3 font-semibold bg-gray-50">
+          Fasa 2
+        </summary>
+        <div class="p-3 space-y-1">
+          <p><strong>Nama Syarikat:</strong> Ariz Digital Sdn. Bhd</p>
+          <p><strong>Admin Password:</strong> Pdt2@2025_kpm</p>
+          <p><strong>User Password:</strong> KOD SEKOLAH@PDT2</p>
+          <p><strong>Office ID:</strong> kod sekolah.t3@m365a1.moe.edu.my</p>
+          <p><strong>Office Password:</strong> KOD SEKOLAH@PDT2</p>
+          <p><strong>Tempoh Sewaan:</strong> 60 Bulan (1 Mei 2025 – 30 April 2030)</p>
+        </div>
+      </details>
+
+    </div>
+  </details>
+
+  <!-- ================= PERANTI GURU ================= -->
+  <details class="border rounded">
+    <summary class="cursor-pointer p-4 font-semibold bg-purple-50">
+      👨‍🏫 Peranti Guru
+    </summary>
+
+    <div class="p-4 text-sm space-y-2">
+      <p><strong>Nama Syarikat:</strong> Prodata Sdn. Bhd</p>
+      <p><strong>Tempoh Sewaan:</strong> 60 Bulan (15 Dis 2023 – 14 Dis 2028)</p>
+    </div>
+  </details>
+
+</section>
+
+<!-- ================= RINGKASAN DASHBOARD ================= -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+
+<!-- ================= INTERNET & HARTA MODAL ================= -->
+<div class="bg-white rounded-xl shadow p-6 h-full flex flex-col">
+  <h2 class="text-lg font-bold text-blue-900">
+    🏫 Maklumat Internet Sekolah Seliaan
+  </h2>
+
+  <p class="text-sm text-gray-600 mb-2">
+    Data dikemaskini secara langsung melalui Google Sheets
+  </p>
+
+  <ul id="senaraiInternet"
+      class="list-disc list-inside text-sm space-y-2 flex-1">
+    <li class="italic text-gray-400">Memuatkan data...</li>
+  </ul>
+
+  <p class="text-sm font-semibold text-blue-900 mt-3">
+    Jumlah Sekolah: <span id="jumlahInternet">0</span>
+  </p>
+</div>
+
+<div class="bg-white rounded-xl shadow p-6 h-full flex flex-col">
+  <h2 class="text-lg font-bold text-blue-900">
+    🏷️ Maklumat Harta Modal ICT Sekolah
+  </h2>
+
+  <p class="text-sm text-gray-600 mb-2">
+    Data inventori ICT sekolah seliaan
+  </p>
+
+  <ul id="senaraiHartaModal"
+      class="list-disc list-inside text-sm space-y-2 flex-1">
+    <li class="italic text-gray-400">Memuatkan data...</li>
+  </ul>
+
+  <p class="text-sm font-semibold text-blue-900 mt-3">
+    Jumlah Sekolah: <span id="jumlahHartaModal">0</span>
+  </p>
+</div>
+
+<!-- ================= MICROSOFT M365 & MAKLUMAN ================= -->
+<div class="bg-white rounded-xl shadow p-6 h-full flex flex-col">
+  <h2 class="text-lg font-bold text-purple-900">
+    ☁️ Maklumat Microsoft Office M365 A1
+  </h2>
+
+  <p class="text-sm text-gray-600 mb-2">
+    Akaun rasmi sekolah (Akses Terhad)
+  </p>
+
+  <ul id="senaraiM365"
+      class="list-disc list-inside text-sm space-y-2 flex-1">
+    <li class="italic text-gray-400">Memuatkan data...</li>
+  </ul>
+
+  <p class="text-sm font-semibold text-purple-900 mt-3">
+    Jumlah Akaun: <span id="jumlahM365">0</span>
+  </p>
+</div>
+
+<div class="bg-white rounded-xl shadow p-6 h-full flex flex-col
+            border-2 border-dashed border-red-300">
+
+  <h2 class="text-lg font-bold text-indigo-900 flex items-center gap-2">
+  📢 Makluman & Aplikasi Akan Datang
+
+  <span class="text-[10px] px-2 py-0.5 rounded-full
+               bg-yellow-100 text-yellow-800 font-semibold">
+    AKAN DATANG
+  </span>
+</h2>
+
+
+  <ul class="mt-4 text-sm text-gray-700 list-disc list-inside space-y-2 flex-1">
+    <li>📌 Sistem Inventori Terperinci</li>
+    <li>📌 Laporan Aduan ICT Sekolah</li>
+    <li>📌 Integrasi Laporan Automatik</li>
+  </ul>
+
+  <div class="mt-4 text-xs text-indigo-700 italic">
+    * Maklumat akan dikemaskini dari semasa ke semasa
+  </div>
+</div>
+
+</section>
+
+
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-blue-900 text-white text-center p-4 mt-12 text-sm">
+  © 2026 Pasukan Teknikal ICT Sekolah Daerah Baling • Zon Kuala Ketil
+</footer>
+
+<!-- ================= TARIKH ================= -->
+<script>
+function kemaskiniTarikh() {
+  const d = new Date();
+  document.getElementById("tarikhHari").textContent =
+    d.toLocaleString("ms-MY");
+}
+kemaskiniTarikh();
+setInterval(kemaskiniTarikh, 1000);
+</script>
+
+<!-- ================= FIREBASE ================= -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+<script>
+firebase.initializeApp({
+  apiKey: "AIzaSyDxZSjjGrzDPuw8b4XUM-8BVwq9cmCtghA",
+  authDomain: "ptiszonkualaketil.firebaseapp.com",
+  projectId: "ptiszonkualaketil",
+});
+</script>
+
+<script>
+const SHEET_ID = "1U-uEoDnY407Qfy2WDae-9YfhC4oGbHjN8ggw7cILFW0";
+const SHEET_NAME = "Sheet1";
+
+/* ================= CONFIG ================= */
+const ADMIN_EMAILS = [
+  "fitrieusop@moe.gov.my",
+  "harisrosli@moe.gov.my",
+  "mohmadishak@moe.gov.my",
+  "yusminudin@moe.gov.my",
+  "dianasaad@moe.gov.my",
+  "dikneswarysubaiah@moe.gov.my"
+];
+
+/* ================= GOOGLE SHEETS ================= */
+// INTERNET
+const INTERNET_SHEET_ID = "1U-uEoDnY407Qfy2WDae-9YfhC4oGbHjN8ggw7cILFW0";
+const INTERNET_SHEET_NAME = "Sheet1";
+
+// M365
+const M365_SHEET_ID = "1LPiA_LwBdn2q-ycI9JwPOfcUGOqATA9zLAJRhEDWe5Q";
+const M365_SHEET_NAME = "Sheet1";
+
+// HARTA MODAL
+const HARTA_MODAL_SHEET_ID = "1RoNePKW1on5rZWRM56d4THRh_9yzUsD4oFH0AID0oMo";
+const HARTA_MODAL_SHEET_NAME = "DASHBOARD_KESELURUHAN";
+
+/* ================= LOAD INTERNET ================= */
+function loadInternet(email) {
+  const url = `https://opensheet.elk.sh/${INTERNET_SHEET_ID}/${INTERNET_SHEET_NAME}`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      const ul = document.getElementById("senaraiInternet");
+      const jumlah = document.getElementById("jumlahInternet");
+      ul.innerHTML = "";
+
+      const senarai = data.filter(row =>
+        row.email &&
+        row.email.toLowerCase().trim() === email
+      );
+
+      if (senarai.length === 0) {
+        ul.innerHTML =
+          "<li class='text-red-600 italic'>Tiada data internet untuk akaun ini</li>";
+        jumlah.textContent = "0";
+        return;
+      }
+
+      senarai.forEach(row => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <strong>${row["NAMA SEKOLAH"]}</strong><br>
+          <span class="text-xs text-gray-600">
+            ISP: ${row.ISP ?? "-"} |
+            Modem: ${row["JUMLAH MODEM"] ?? "-"} |
+            Status: ${row["STATUS PEMASANGAN SUBWARAN 2"] ?? "-"}
+          </span>
+        `;
+        ul.appendChild(li);
+      });
+
+      jumlah.textContent = senarai.length;
+    })
+    .catch(err => console.error("Ralat Internet Sheet:", err));
+}
+
+/* ================= LOAD M365 ================= */
+function loadM365(email) {
+  const url = `https://opensheet.elk.sh/${M365_SHEET_ID}/${M365_SHEET_NAME}`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+
+      // 🔍 SEMAK STRUKTUR DATA (DEBUG)
+      console.log("DATA M365 FULL:", data);
+      console.log("ROW SAMPLE:", data[0]);
+
+      if (!Array.isArray(data)) {
+        console.error("DATA BUKAN ARRAY:", data);
+        return;
+      }
+
+      const ul = document.getElementById("senaraiM365");
+      const jumlah = document.getElementById("jumlahM365");
+      ul.innerHTML = "";
+
+      const emailLogin = email.toLowerCase().replace(/\s+/g, "");
+
+      const senarai = data.filter(row =>
+        row.email &&
+        row.email.toLowerCase().replace(/\s+/g, "") === emailLogin
+      );
+
+      if (senarai.length === 0) {
+        ul.innerHTML =
+          "<li class='text-red-600 italic'>Tiada data M365 untuk akaun ini</li>";
+        jumlah.textContent = "0";
+        return;
+      }
+
+      senarai.forEach(row => {
+  const namaSekolah =
+    row["NAMA SEKOLAH"] ||
+    row["NAMA SEKOLAH "] ||
+    row["Nama Sekolah"] ||
+    row["nama sekolah"] ||
+    "-";
+
+  const li = document.createElement("li");
+  li.innerHTML = `
+    <strong>${namaSekolah}</strong><br>
+    <span class="text-xs text-gray-600">
+      ID M365A1: ${row["ID M365A1"] ?? "-"} |
+      Jumlah ID: ${row["JUMLAH ID"] ?? "-"}
+    </span>
+  `;
+  ul.appendChild(li);
+});
+
+      jumlah.textContent = senarai.length;
+    })
+    .catch(err => console.error("Ralat M365:", err));
+}
+
+/* ================= LOAD HARTA MODAL ================= */
+
+function loadHartaModal(email) {
+
+  const url =
+    "https://opensheet.elk.sh/1RoNePKW1on5rZWRM56d4THRh_9yzUsD4oFH0AID0oMo/DASHBOARD_KESELURUHAN";
+
+  fetch(url)
+    .then(r => r.json())
+    .then(data => {
+
+      const list = document.getElementById("senaraiHartaModal");
+      const jumlahEl = document.getElementById("jumlahHartaModal");
+
+      list.innerHTML = "";
+      let kiraSekolah = 0;
+
+      const emailLogin = email.toLowerCase().trim();
+
+      const senarai = data.filter(row =>
+        row.email &&
+        row.email.toLowerCase().trim() === emailLogin
+      );
+
+      if (senarai.length === 0) {
+        list.innerHTML =
+          "<li class='italic text-gray-400'>Tiada data harta modal untuk sekolah seliaan anda.</li>";
+        if (jumlahEl) jumlahEl.textContent = "0";
+        return;
+      }
+
+      senarai.forEach(row => {
+
+        const sekolah = row["NAMA SEKOLAH"];
+        const baik = Number(row["JUMLAH BAIK"] || 0);
+        const rosak = Number(row["JUMLAH ROSAK"] || 0);
+
+        kiraSekolah++;
+
+        const statusClass =
+  rosak > 0
+    ? "border-l-4 border-red-500 bg-red-50"
+    : "border-l-4 border-green-500 bg-green-50";
+
+list.innerHTML += `
+  <li class="mb-4 p-3 rounded ${statusClass}">
+    <strong class="text-blue-900">${sekolah}</strong><br>
+    <span class="text-xs text-gray-700">
+      Baik: <strong>${baik}</strong> |
+      Rosak: <strong>${rosak}</strong>
+    </span><br>
+    <a href="https://docs.google.com/spreadsheets/d/1RoNePKW1on5rZWRM56d4THRh_9yzUsD4oFH0AID0oMo/edit"
+       target="_blank"
+       class="inline-block mt-1 text-xs text-blue-700 hover:underline">
+      🔎 Lihat & Kemaskini
+    </a>
+  </li>
+`;
+
+      });
+
+      if (jumlahEl) jumlahEl.textContent = kiraSekolah;
+    })
+    .catch(err => {
+      console.error("Harta Modal:", err);
+      document.getElementById("senaraiHartaModal").innerHTML =
+        "<li class='text-red-600'>Gagal memuatkan data.</li>";
+    });
+}
+
+
+/* ================= AUTH ================= */
+firebase.auth().onAuthStateChanged(user => {
+  if (!user) {
+    window.location.href = "/login.html";
+    return;
+  }
+
+  const email = user.email.toLowerCase();
+  console.log("Email login:", email);
+
+  loadInternet(email);
+  loadM365(email);
+  loadHartaModal(email); // ✅ TAMBAH BARIS INI
+  
+
+ // 🔐 AKSES ADMIN
+  if (ADMIN_EMAILS.includes(email)) {
+    document.getElementById("adminSection")?.classList.remove("hidden");
+    document.getElementById("intuneCard")?.classList.remove("hidden");
+    console.log("Akses admin diberi:", email);
+  } else {
+    console.warn("Pengguna biasa:", email);
+  }
+});
+
+/* ================= LOGOUT ================= */
+function logout() {
+  firebase.auth().signOut()
+    .then(() => window.location.href = "/index.html")
+    .catch(err => alert("Ralat log keluar: " + err.message));
+}
+</script>
+
+</body>
+</html>

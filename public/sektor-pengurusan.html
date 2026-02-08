@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <title>Sektor Pengurusan Maklumat</title>
+  <link rel="icon" href="/assets/favicon.png" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<!-- HEADER -->
+<header class="bg-blue-900 text-white">
+  <div class="flex items-center p-6 max-w-7xl mx-auto">
+
+  <!-- KIRI: LOGO + TAJUK -->
+  <div class="flex items-center gap-4">
+    <img
+      src="/assets/logo.png"
+      alt="LOGO ICT"
+      class="h-12 w-12 object-contain bg-white rounded p-1"
+    >
+
+    <div>
+      <h1 class="font-bold text-xl">
+        PASUKAN TEKNIKAL ICT SEKOLAH DAERAH BALING
+      </h1>
+      <p class="text-sm">
+        ZON KUALA KETIL
+      </p>
+    </div>
+  </div>
+
+  <!-- KANAN: LOGIN + TARIKH -->
+  <div class="ml-auto text-right flex flex-col items-end gap-1">
+
+
+    <!-- WAJIB ADA -->
+    <span id="tarikhHari" class="text-xs text-blue-100"></span>
+  </div>
+
+</div>
+
+
+  <!-- NAV -->
+  <nav class="bg-blue-800">
+  <ul class="flex justify-center items-center gap-6 py-3 text-sm font-semibold text-white">
+
+    <li><a href="/index.html" class="hover:underline">UTAMA</a></li>
+
+    <li>
+      <a href="/sektor-pengurusan.html" class="nav-link hover:underline">
+        SEKTOR PENGURUSAN MAKLUMAT
+      </a>
+    </li>
+
+    <!-- AHLI PASUKAN -->
+    <li class="relative group flex items-center">
+      <span class="cursor-pointer flex items-center gap-1 hover:underline leading-none select-none">
+        AHLI PASUKAN
+        <svg class="h-4 w-4 transition-transform duration-200 group-hover:rotate-180"
+             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </span>
+
+      <div class="absolute left-0 top-full h-2 w-full"></div>
+
+      <ul class="absolute left-0 top-full hidden group-hover:block
+                 bg-white text-blue-900 min-w-[260px]
+                 rounded shadow-lg border z-50">
+
+        <li><a href="/ahli-pasukan.html" class="block px-4 py-2 hover:bg-blue-100">
+          Carta Organisasi Pasukan
+        </a></li>
+
+        <li><a href="/skop-tugas-jtk.html" class="block px-4 py-2 hover:bg-blue-100">
+          Skop Tugas Juruteknik Komputer (JTK)
+        </a></li>
+
+        <li><a href="/maklumat-perhubungan.html" class="block px-4 py-2 hover:bg-blue-100">
+          Maklumat Perhubungan (Sekolah Seliaan)
+        </a></li>
+      </ul>
+    </li>
+
+      <!-- MAKLUMAT SEKOLAH -->
+<li class="relative group">
+
+  <button
+    type="button"
+    class="flex items-center gap-1 hover:underline select-none">
+
+    MAKLUMAT SEKOLAH
+
+    <svg class="h-4 w-4 transition-transform group-hover:rotate-180"
+         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </button>
+
+  <!-- SUBMENU -->
+  <ul
+    class="absolute left-0 top-full
+           hidden
+           group-hover:block
+           bg-white text-blue-900
+           min-w-[260px]
+           rounded shadow-lg border
+           z-50">
+
+    <li>
+      <a href="/maklumat-sekolah.html"
+         class="block px-4 py-2 hover:bg-blue-100 font-semibold">
+        Maklumat Keseluruhan
+      </a>
+    </li>
+
+    <li>
+      <a href="/peranan-guru-penyelaras-ict.html"
+         class="block px-4 py-2 hover:bg-blue-100">
+        Peranan Guru Penyelaras ICT
+      </a>
+    </li>
+
+  </ul>
+</li>
+
+    <li><a href="/meja-perkhidmatan-isd.html" class="hover:underline">
+    MEJA PERKHIDMATAN ISD
+  </a>
+</li>
+    
+    <li><a href="/kabinet-borang.html" class="hover:underline">
+      KABINET BORANG
+    </a>
+  </li>
+
+</header>
+
+<main class="max-w-6xl mx-auto p-6 space-y-8">
+
+  <!-- CARTA ORGANISASI -->
+  <section class="bg-white p-6 rounded shadow text-center">
+    <h2 class="text-2xl font-bold mb-4">
+      Carta Organisasi Sektor Pengurusan Maklumat
+    </h2>
+
+    <img src="/assets/carta-organisasi-spm.png"
+         alt="Carta Organisasi SPM"
+         class="mx-auto border rounded shadow max-w-full">
+
+    <p class="text-sm text-gray-600 mt-3">
+      Klik pada gambar untuk paparan penuh
+    </p>
+  </section>
+
+  <!-- OBJEKTIF SEKTOR -->
+  <section class="bg-blue-50 border border-blue-200 p-6 rounded shadow">
+    <h3 class="text-lg font-bold text-blue-900 mb-3">
+      🎯 Objektif Sektor
+    </h3>
+
+    <ul class="list-disc list-inside text-gray-800 space-y-2 text-sm">
+      <li>
+        Menguruskan infrastruktur dan infostruktur ICT dengan cekap mengikut
+        jadual yang ditetapkan supaya perkhidmatan ICT sentiasa boleh diakses
+        dan beroperasi dengan sempurna.
+      </li>
+      <li>
+        Menguruskan perbelanjaan peruntukan penyelenggaraan dengan baik supaya
+        perbelanjaan mencapai 100%.
+      </li>
+    </ul>
+  </section>
+
+  <!-- FUNGSI SEKTOR -->
+  <section class="bg-green-50 border border-green-200 p-6 rounded shadow">
+    <h3 class="text-lg font-bold text-green-900 mb-3">
+      ⚙️ Fungsi Sektor
+    </h3>
+
+    <ul class="list-disc list-inside text-gray-800 space-y-2 text-sm">
+      <li>
+        Merangka, merancang, mengurus dan menyelia penyelenggaraan perkakasan ICT
+        di JPN, PPD dan sekolah.
+      </li>
+      <li>
+        Merangka, merancang dan menyelia Polisi Keselamatan Siber, infrastruktur
+        rangkaian dan aplikasi ICT.
+      </li>
+      <li>
+        Merangka, merancang dan menyelia pembangunan serta pelaksanaan tadbir
+        urus ICT.
+      </li>
+    </ul>
+  </section>
+
+  <!-- HUBUNGI -->
+  <section class="bg-yellow-50 border border-yellow-200 p-6 rounded shadow">
+    <h3 class="text-lg font-bold text-yellow-900 mb-3">
+      📞 Hubungi
+    </h3>
+
+    <p class="text-sm text-gray-800 leading-relaxed">
+      <strong>Aras 3</strong>, Jabatan Pendidikan Negeri Kedah<br>
+      Kompleks Pendidikan, Jalan Stadium,<br>
+      05604 Alor Setar, Kedah
+    </p>
+
+    <p class="text-sm text-gray-800 mt-3">
+      Telefon: <strong>04-7404298</strong><br>
+      Faks: <strong>04-7404361</strong><br>
+      Emel: <a href="mailto:ictjpn.kedah@moe.gov.my"
+               class="text-blue-700 underline">
+        ictjpn.kedah@moe.gov.my
+      </a>
+    </p>
+  </section>
+
+</main>
+
+<footer class="bg-blue-900 text-white text-center py-6 mt-10 text-sm">
+  © 2026 PASUKAN TEKNIKAL ICT SEKOLAH DAERAH BALING<br>ZON KUALA KETIL
+</footer>
+
+<script>
+  function kemaskiniTarikh() {
+    const hari = [
+      "Ahad", "Isnin", "Selasa", "Rabu",
+      "Khamis", "Jumaat", "Sabtu"
+    ];
+
+    const bulan = [
+      "Januari", "Februari", "Mac", "April",
+      "Mei", "Jun", "Julai", "Ogos",
+      "September", "Oktober", "November", "Disember"
+    ];
+
+    const sekarang = new Date();
+
+    const paparan =
+      hari[sekarang.getDay()] + ", " +
+      sekarang.getDate() + " " +
+      bulan[sekarang.getMonth()] + " " +
+      sekarang.getFullYear() + " • " +
+      sekarang.toLocaleTimeString("ms-MY");
+
+    const el = document.getElementById("tarikhHari");
+    if (el) el.textContent = paparan;
+  }
+
+  kemaskiniTarikh();
+  setInterval(kemaskiniTarikh, 1000);
+</script>
+
+<script src="/js/tarikh.js"></script>
+
+<!-- ================= CHATBOT FLOATING ================= -->
+<style>
+  .chatbot-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    animation: float 2.5s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+  }
+
+  .chatbot-text {
+    background: #1e40af;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  .chatbot-icon {
+    width: 60px;
+    height: 60px;
+    background: #2563eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    color: white;
+    font-size: 24px;
+  }
+
+  .chatbot-modal {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 360px;
+    height: 520px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
+    z-index: 9999;
+    display: none;
+  }
+
+  .chatbot-header {
+    background: #1e40af;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .chatbot-header button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 640px) {
+    .chatbot-modal {
+      width: 95%;
+      height: 80%;
+      right: 2.5%;
+      bottom: 90px;
+    }
+  }
+</style>
+
+<style>
+/* MENU AKTIF */
+.nav-active {
+  color: #fde047; /* kuning Tailwind */
+  font-weight: 700;
+  position: relative;
+}
+
+.nav-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background-color: #fde047;
+  border-radius: 999px;
+}
+
+/* SUBMENU AKTIF */
+.submenu-active {
+  background-color: #dbeafe; /* biru lembut */
+  font-weight: 600;
+}
+</style>
+
+<!-- BUTTON -->
+<div class="chatbot-btn" onclick="bukaChatbot()">
+  <div class="chatbot-text">
+    Perlukan bantuan? Klik saya 💬
+  </div>
+  <div class="chatbot-icon">
+    🤖
+  </div>
+</div>
+
+<!-- MODAL CHATBOT -->
+<div class="chatbot-modal" id="chatbotModal">
+  <div class="chatbot-header">
+    PTIS Kuala Ketil
+    <button onclick="tutupChatbot()">✖</button>
+  </div>
+
+  <iframe
+    src="https://app.edcafe.ai/chatbots/695cb8cc88fa84267a8b4b04"
+    title="PTIS KUALA KETIL"
+    allow="microphone"
+    style="border:none; width:100%; height:100%;">
+  </iframe>
+</div>
+
+<script>
+  function bukaChatbot() {
+    document.getElementById("chatbotModal").style.display = "block";
+  }
+
+  function tutupChatbot() {
+    document.getElementById("chatbotModal").style.display = "none";
+  }
+</script>
+<!-- ================= TAMAT CHATBOT ================= -->
+ 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const currentPath = window.location.pathname;
+
+  document.querySelectorAll(".nav-link").forEach(link => {
+    const linkPath = new URL(link.href).pathname;
+
+    if (linkPath === currentPath) {
+      link.classList.add("nav-active");
+
+      // Jika submenu → highlight parent dropdown
+      const parentDropdown = link.closest("li.relative.group");
+      if (parentDropdown) {
+        const parentBtn = parentDropdown.querySelector("button");
+        parentBtn?.classList.add("nav-active");
+        link.classList.add("submenu-active");
+      }
+    }
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Admin ICT</title>
+  <link rel="icon" href="/assets/favicon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<!-- ================= HEADER ================= -->
+<header class="bg-blue-900 text-white">
+  <div class="max-w-7xl mx-auto p-6 flex justify-between items-center">
+
+    <div>
+      <h1 class="text-xl font-bold">Dashboard Admin ICT</h1>
+      <p class="text-sm text-blue-200">Pasukan Teknikal ICT • Zon Kuala Ketil</p>
+    </div>
+
+    <button onclick="logout()"
+      class="bg-white text-blue-900 px-4 py-2 rounded text-sm font-semibold">
+      LOG KELUAR
+    </button>
+
+  </div>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main class="max-w-7xl mx-auto p-6 space-y-10">
+
+<!-- ================= INFOGRAFIK ================= -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+
+  <div class="bg-blue-50 border border-blue-200 rounded p-4">
+    <p class="text-3xl">💻</p>
+    <p class="font-bold text-blue-900">Laptop</p>
+    <p class="text-xs text-gray-600">Fasa 1 – 3</p>
+  </div>
+
+  <div class="bg-green-50 border border-green-200 rounded p-4">
+    <p class="text-3xl">🖥️</p>
+    <p class="font-bold text-green-900">PDT</p>
+    <p class="text-xs text-gray-600">Makmal & Kiosk</p>
+  </div>
+
+  <div class="bg-yellow-50 border border-yellow-200 rounded p-4">
+    <p class="text-3xl">📄</p>
+    <p class="font-bold text-yellow-900">Borang</p>
+    <p class="text-xs text-gray-600">Rujukan Dalaman</p>
+  </div>
+
+  <div class="bg-red-50 border border-red-200 rounded p-4">
+    <p class="text-3xl">🔒</p>
+    <p class="font-bold text-red-900">Admin Sahaja</p>
+    <p class="text-xs text-gray-600">Maklumat Sensitif</p>
+  </div>
+
+</section>
+
+<!-- ================= AMARAN ================= -->
+<section class="bg-red-50 border border-red-200 p-5 rounded">
+  <h2 class="font-bold text-red-700 mb-2">⚠️ Peringatan Keselamatan</h2>
+  <p class="text-sm text-gray-700">
+    Maklumat dalam dashboard ini adalah <strong>RAHSIA</strong>.
+    Jangan kongsi ID atau kata laluan kepada pihak tidak berkenaan.
+  </p>
+</section>
+
+<!-- ================= ACCORDION PASSWORD ================= -->
+<section class="bg-white p-6 rounded shadow space-y-4">
+
+  <h2 class="text-xl font-bold text-blue-900">
+    🔐 Maklumat ID & Kata Laluan Sistem
+  </h2>
+
+  <!-- FASA LAPTOP -->
+  <details class="border rounded">
+    <summary class="cursor-pointer p-4 bg-blue-50 font-semibold">
+      💻 Fasa Laptop
+    </summary>
+    <div class="p-4 text-sm space-y-2">
+      <p><strong>Admin ID:</strong> KPMppd@2022</p>
+      <p><strong>Password:</strong> ••••••••</p>
+      <p class="text-xs text-gray-500">Rujuk dokumen rasmi untuk butiran penuh</p>
+    </div>
+  </details>
+
+  <!-- FASA PDT -->
+  <details class="border rounded">
+    <summary class="cursor-pointer p-4 bg-green-50 font-semibold">
+      🖥️ Fasa PDT
+    </summary>
+    <div class="p-4 text-sm space-y-2">
+      <p><strong>Admin ID:</strong> Password1</p>
+      <p><strong>Password:</strong> ••••••••</p>
+    </div>
+  </details>
+
+  <!-- OFFICE M365 -->
+  <details class="border rounded">
+    <summary class="cursor-pointer p-4 bg-yellow-50 font-semibold">
+      ☁️ Office M365 A1
+    </summary>
+    <div class="p-4 text-sm space-y-2">
+      <p><strong>Akaun:</strong> kodsekolah.t1@m365a1.moe.edu.my</p>
+      <p><strong>Password:</strong> ••••••••</p>
+    </div>
+  </details>
+
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-blue-900 text-white mt-12">
+  <div class="max-w-7xl mx-auto px-6 py-6 text-center text-sm">
+    © 2026 Pasukan Teknikal ICT Sekolah Daerah Baling • Zon Kuala Ketil
+  </div>
+</footer>
+
+<!-- ================= FIREBASE ================= -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "API_KEY_ANDA",
+    authDomain: "PROJECT_ID.firebaseapp.com",
+    projectId: "PROJECT_ID"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+<!-- ================= ROLE & LOGOUT ================= -->
+<script>
+const adminEmails = [
+  "fitrieusop@moe.gov.my"
+];
+
+firebase.auth().onAuthStateChanged(user => {
+  if (!user) {
+    window.location.href = "/login.html";
+    return;
+  }
+
+  const email = user.email.toLowerCase();
+  if (!adminEmails.includes(email)) {
+    alert("Akses admin tidak dibenarkan");
+    window.location.href = "/jtk-dashboard.html";
+  }
+});
+
+function logout() {
+  firebase.auth().signOut().then(() => {
+    window.location.replace("/index.html");
+  });
+}
+</script>
+
+</body>
+</html>
+

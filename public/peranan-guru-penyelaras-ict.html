@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <title>Maklumat Sekolah - Zon Kuala Ketil</title>
+  <link rel="icon" href="/assets/favicon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+<!-- HEADER -->
+<header class="bg-blue-900 text-white">
+
+  <div class="flex justify-between items-center p-6 max-w-7xl mx-auto">
+    <div class="flex items-center gap-4">
+      <img
+        src="/assets/logo.png"
+        alt="LOGO ICT"
+        class="h-12 w-12 object-contain bg-white rounded p-1">
+        
+      <div>
+        <h1 class="font-bold text-xl">
+          PASUKAN TEKNIKAL ICT SEKOLAH DAERAH BALING
+        </h1>
+        <p class="text-sm">ZON KUALA KETIL</p>
+      </div>
+    </div>
+
+    <!-- KANAN: TARIKH -->
+    <div class="ml-auto text-right">
+      <span id="tarikhHari" class="text-xs text-blue-100"></span>
+    </div>
+
+  </div>
+
+ <!-- NAV -->
+  <nav class="bg-blue-800">
+    <ul class="flex justify-center items-center gap-6 py-3 text-sm font-semibold text-white">
+          <li><a href="/index.html" class="hover:underline">UTAMA</a></li>
+
+      <li>
+        <a href="/sektor-pengurusan.html" class="hover:underline">
+          SEKTOR PENGURUSAN MAKLUMAT
+        </a>
+      </li>
+
+      <!-- AHLI PASUKAN -->
+      <li class="relative group flex items-center">
+        <span class="cursor-pointer flex items-center gap-1 hover:underline select-none">
+          AHLI PASUKAN
+          <svg class="h-4 w-4 transition-transform group-hover:rotate-180"
+               fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </span>
+
+        <ul class="absolute left-0 top-full hidden group-hover:block
+                   bg-white text-blue-900 min-w-[260px]
+                   rounded shadow-lg border z-50">
+
+          <li><a href="/ahli-pasukan.html" class="block px-4 py-2 hover:bg-blue-100">
+            Carta Organisasi Pasukan
+          </a></li>
+
+          <li><a href="/skop-tugas-jtk.html" class="block px-4 py-2 hover:bg-blue-100">
+            Skop Tugas Juruteknik Komputer (JTK)
+          </a></li>
+
+          <li><a href="/maklumat-perhubungan.html" class="block px-4 py-2 hover:bg-blue-100">
+            Maklumat Perhubungan
+          </a></li>
+        </ul>
+      </li>
+
+            <!-- MAKLUMAT SEKOLAH -->
+<li class="relative group">
+
+  <button
+    type="button"
+    class="flex items-center gap-1 hover:underline select-none">
+
+    MAKLUMAT SEKOLAH
+
+    <svg class="h-4 w-4 transition-transform group-hover:rotate-180"
+         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </button>
+
+  <!-- SUBMENU -->
+  <ul
+    class="absolute left-0 top-full
+           hidden
+           group-hover:block
+           bg-white text-blue-900
+           min-w-[260px]
+           rounded shadow-lg border
+           z-50">
+
+    <li>
+      <a href="/maklumat-sekolah.html"
+         class="block px-4 py-2 hover:bg-blue-100 font-semibold">
+        Maklumat Sekolah
+      </a>
+    </li>
+
+    <li>
+      <a href="/peranan-guru-penyelaras-ict.html"
+         class="nav-link block px-4 py-2 hover:bg-blue-100">
+        Peranan Guru Penyelaras ICT
+      </a>
+    </li>
+
+  </ul>
+</li>
+      <li><a href="/meja-perkhidmatan-isd.html" class="hover:underline">MEJA PERKHIDMATAN ISD</a></li>
+      <li><a href="/kabinet-borang.html" class="hover:underline">KABINET BORANG</a></li>
+
+    </ul>
+  </nav>
+
+</header>
+
+<!-- ================= CONTENT ================= -->
+<main class="flex-grow max-w-7xl mx-auto px-6 py-10">
+
+  <!-- PENGENALAN -->
+  <section class="mb-10">
+    <p class="leading-relaxed">
+      Guru Penyelaras ICT berperanan menyelaras hal ehwal Teknologi Maklumat dan
+      Komunikasi (ICT) di peringkat sekolah bagi menyokong pengurusan sekolah
+      serta pelaksanaan pembelajaran digital selaras dengan keperluan
+      Kementerian Pendidikan Malaysia.
+    </p>
+  </section>
+
+  <!-- PERANAN -->
+  <section>
+    <h3 class="text-2xl font-bold text-blue-900 mb-6">
+      Peranan dan Tanggungjawab
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <div class="bg-white border-l-4 border-blue-600 rounded shadow p-5">
+        <h4 class="font-semibold mb-2">Pengurusan ICT Sekolah</h4>
+        <ul class="list-disc ml-4 text-sm space-y-1">
+          <li>Menyelaras penggunaan kemudahan ICT</li>
+          <li>Memantau peralatan dan perisian</li>
+          <li>Membantu perancangan keperluan ICT</li>
+        </ul>
+      </div>
+
+      <div class="bg-white border-l-4 border-green-600 rounded shadow p-5">
+        <h4 class="font-semibold mb-2">Sokongan Sistem Rasmi</h4>
+        <ul class="list-disc ml-4 text-sm space-y-1">
+          <li>DELIMa</li>
+          <li>SPLKPM & e-Operasi</li>
+          <li>Sistem dalaman sekolah</li>
+        </ul>
+      </div>
+
+      <div class="bg-white border-l-4 border-yellow-500 rounded shadow p-5">
+        <h4 class="font-semibold mb-2">Sokongan PdP Digital</h4>
+        <ul class="list-disc ml-4 text-sm space-y-1">
+          <li>Bimbingan PdP digital</li>
+          <li>Perkongsian amalan terbaik</li>
+        </ul>
+      </div>
+
+      <div class="bg-white border-l-4 border-red-600 rounded shadow p-5">
+        <h4 class="font-semibold mb-2">Keselamatan & Penyelenggaraan</h4>
+        <ul class="list-disc ml-4 text-sm space-y-1">
+          <li>Keselamatan ICT</li>
+          <li>Pelaporan isu kritikal</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MAKLUMAN -->
+  <section class="mt-10">
+    <div class="bg-blue-50 border-l-4 border-blue-600 p-5 rounded">
+      <h4 class="font-semibold text-blue-900 mb-2">Makluman</h4>
+      <p class="text-sm leading-relaxed">
+        Guru Penyelaras ICT bertindak sebagai penyelaras dan pemberi sokongan asas.
+        Isu teknikal berskala besar hendaklah dirujuk kepada Pasukan Teknikal ICT
+        Zon atau PPD melalui saluran rasmi.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-blue-900 text-white mt-12">
+  <div class="max-w-7xl mx-auto px-6 py-6 text-center text-sm">
+    © 2026 Pasukan Teknikal ICT Sekolah Daerah Baling<br>
+    Zon Kuala Ketil
+  </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("btnMaklumat");
+  const menu = document.getElementById("menuMaklumat");
+  const arrow = document.getElementById("arrowMaklumat");
+
+  // buka / tutup bila klik
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    menu.classList.toggle("hidden");
+    arrow.classList.toggle("rotate-180");
+  });
+
+  // tutup bila klik luar
+  document.addEventListener("click", () => {
+    menu.classList.add("hidden");
+    arrow.classList.remove("rotate-180");
+  });
+});
+</script>
+
+<script>
+function kemaskiniTarikh() {
+  const hari = ["Ahad","Isnin","Selasa","Rabu","Khamis","Jumaat","Sabtu"];
+  const bulan = [
+    "Januari","Februari","Mac","April","Mei","Jun",
+    "Julai","Ogos","September","Oktober","November","Disember"
+  ];
+
+  const sekarang = new Date();
+  const paparan =
+    hari[sekarang.getDay()] + ", " +
+    sekarang.getDate() + " " +
+    bulan[sekarang.getMonth()] + " " +
+    sekarang.getFullYear() + " • " +
+    sekarang.toLocaleTimeString("ms-MY");
+
+  const el = document.getElementById("tarikhHari");
+  if (el) el.textContent = paparan;
+}
+
+kemaskiniTarikh();
+setInterval(kemaskiniTarikh, 1000);
+</script>
+
+<!-- ================= CHATBOT FLOATING ================= -->
+<style>
+  .chatbot-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    animation: float 2.5s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+  }
+
+  .chatbot-text {
+    background: #1e40af;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  .chatbot-icon {
+    width: 60px;
+    height: 60px;
+    background: #2563eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    color: white;
+    font-size: 24px;
+  }
+
+  .chatbot-modal {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 360px;
+    height: 520px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
+    z-index: 9999;
+    display: none;
+  }
+
+  .chatbot-header {
+    background: #1e40af;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .chatbot-header button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 640px) {
+    .chatbot-modal {
+      width: 95%;
+      height: 80%;
+      right: 2.5%;
+      bottom: 90px;
+    }
+  }
+</style>
+
+<style>
+/* MENU AKTIF */
+.nav-active {
+  color: #fde047; /* kuning Tailwind */
+  font-weight: 700;
+  position: relative;
+}
+
+.nav-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background-color: #fde047;
+  border-radius: 999px;
+}
+
+/* SUBMENU AKTIF */
+.submenu-active {
+  background-color: #dbeafe; /* biru lembut */
+  font-weight: 600;
+}
+</style>
+
+<!-- BUTTON -->
+<div class="chatbot-btn" onclick="bukaChatbot()">
+  <div class="chatbot-text">
+    Perlukan bantuan? Klik saya 💬
+  </div>
+  <div class="chatbot-icon">
+    🤖
+  </div>
+</div>
+
+<!-- MODAL CHATBOT -->
+<div class="chatbot-modal" id="chatbotModal">
+  <div class="chatbot-header">
+    PTIS Kuala Ketil
+    <button onclick="tutupChatbot()">✖</button>
+  </div>
+
+  <iframe
+    src="https://app.edcafe.ai/chatbots/695cb8cc88fa84267a8b4b04"
+    title="PTIS KUALA KETIL"
+    allow="microphone"
+    style="border:none; width:100%; height:100%;">
+  </iframe>
+</div>
+
+<script>
+  function bukaChatbot() {
+    document.getElementById("chatbotModal").style.display = "block";
+  }
+
+  function tutupChatbot() {
+    document.getElementById("chatbotModal").style.display = "none";
+  }
+</script>
+<!-- ================= TAMAT CHATBOT ================= -->
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const currentPath = window.location.pathname;
+
+  document.querySelectorAll(".nav-link").forEach(link => {
+    const linkPath = new URL(link.href).pathname;
+
+    if (linkPath === currentPath) {
+      link.classList.add("nav-active");
+
+      // Jika submenu → highlight parent dropdown
+      const parentDropdown = link.closest("li.relative.group");
+      if (parentDropdown) {
+        const parentBtn = parentDropdown.querySelector("button");
+        parentBtn?.classList.add("nav-active");
+        link.classList.add("submenu-active");
+      }
+    }
+  });
+});
+</script>
+
+</body>
+</html>

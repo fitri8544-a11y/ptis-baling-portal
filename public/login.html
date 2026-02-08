@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <title>LOGIN ADMIN</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+<div class="bg-white p-6 rounded shadow w-80">
+  <h2 class="text-lg font-bold mb-4 text-center">LOGIN ADMIN</h2>
+
+  <input id="email" type="email" placeholder="Email"
+    class="w-full p-2 border mb-3 rounded">
+
+  <input id="password" type="password" placeholder="Password"
+    class="w-full p-2 border mb-3 rounded">
+
+  <button onclick="login()"
+    class="w-full bg-blue-900 text-white p-2 rounded">
+    LOGIN
+  </button>
+
+  <p id="msg" class="text-red-500 text-sm mt-3 text-center"></p>
+</div>
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDxZSjjGrzDPuw8b4XUM-8BVwq9cmCtghA",
+    authDomain: "ptiszonkualaketil.firebaseapp.com",
+    projectId: "ptiszonkualaketil",
+    appId: "1:634031867148:web:5ffe2b9427e31f17563529"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+<script>
+  function login() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const msg = document.getElementById("msg");
+
+    msg.textContent = "Sedang log masuk...";
+    msg.className = "text-sm text-center text-gray-500 mt-2";
+
+    firebase.auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        // 🔑 redirect terus, jangan buat benda lain
+        window.location.replace("/jtk-dashboard.html");
+      })
+      .catch(error => {
+        msg.textContent = error.message;
+        msg.className = "text-sm text-center text-red-600 mt-2";
+      });
+  }
+</script>
+
+
+
+</body>
+</html>
