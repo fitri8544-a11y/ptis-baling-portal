@@ -367,7 +367,7 @@
     </h2>
 
     <p class="text-sm text-gray-600 mb-2">
-      Data inventori ICT sekolah seliaan
+      Data peralatan ICT sekolah seliaan
     </p>
 
     <ul id="senaraiHartaModal"
@@ -405,7 +405,7 @@
     </h2>
 
     <p class="text-sm text-gray-600 mb-4">
-      Status inventori pembelajaran
+      Peranti sewaan pembelajaran
     </p>
 
     <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded flex-1">
@@ -427,19 +427,16 @@
     </h2>
 
     <p class="text-sm text-gray-600 mb-4">
-      Status inventori pentadbiran
+      Peranti sewaan pentadbiran
     </p>
 
-    <div class="bg-orange-50 border-l-4 border-orange-400 p-4 rounded flex-1">
-      <p class="text-sm text-gray-700">
-        Maklumat sedang dikemaskini, harap maklum.
-      </p>
+    <ul id="senaraiPDT"
+          class="text-sm space-y-3 flex-1">
+        <li class="italic text-gray-400">Memuatkan data...</li>
+      </ul>
     </div>
 
-    <div class="mt-4 text-xs text-orange-700 italic">
-      * Sistem akan diaktifkan selepas pengesahan data lengkap
-    </div>
-  </div>
+
 
 </section>
 
@@ -529,6 +526,11 @@ const HARTA_MODAL_SHEET_NAME = "DASHBOARD_KESELURUHAN";
 // PERANTI GURU
 const PERANTI_GURU_SHEET_ID = "1cZCpT9C4sE0VBi6hJX7x5OsljmKdFOCSSIw7j_6j3eo";
 const PERANTI_GURU_SHEET_NAME = "FASA 1";
+
+// PERALATAN PDT
+const PDT_SHEET_ID = "1NhXLtUSmMjpb8kecoRZtM2MB26wddol6A25_J7ukfjQ";
+const PDT_SHEET_NAME = "Sheet1"; // tukar jika nama tab lain
+
 
 
 /* ================= LOAD INTERNET ================= */
@@ -781,6 +783,77 @@ function loadPerantiGuru(email) {
       "<li class='text-red-600'>Gagal memuatkan data.</li>";
   });
 }
+/* ================= LOAD PERALATAN PDT ================= */
+function loadPDT(email) {
+
+  Promise.all([
+    fetch(`https://opensheet.elk.sh/${PDT_SHEET_ID}/FASA 1`).then(r => r.json()),
+    fetch(`https://opensheet.elk.sh/${PDT_SHEET_ID}/FASA 2`).then(r => r.json())
+  ])
+  .then(([fasa1, fasa2]) => {
+
+    const list = document.getElementById("senaraiPDT");
+    list.innerHTML = "";
+
+    const emailLogin = email.toLowerCase().trim();
+    const dataGabung = [...fasa1, ...fasa2];
+
+    const tapisan = dataGabung.filter(row =>
+      row.email &&
+      row.email.toLowerCase().trim() === emailLogin
+    );
+
+    if (tapisan.length === 0) {
+      list.innerHTML =
+        "<li class='italic text-gray-400'>Tiada data peralatan PDT untuk sekolah seliaan anda.</li>";
+      return;
+    }
+
+    const ikutSekolah = {};
+
+    tapisan.forEach(row => {
+
+      const sekolah = row["NAMA SEKOLAH"]?.trim() || "-";
+      const fasa = row["FASA"]?.toString().replace(/\D/g, "");
+
+      const jumlahKey = Object.keys(row).find(
+        k => k.trim().toUpperCase() === "JUMLAH"
+      );
+
+      const jumlah = Number(row[jumlahKey] || 0);
+
+      if (!ikutSekolah[sekolah]) {
+        ikutSekolah[sekolah] = { 1: 0, 2: 0 };
+      }
+
+      if (fasa === "1") ikutSekolah[sekolah][1] = jumlah;
+      if (fasa === "2") ikutSekolah[sekolah][2] = jumlah;
+    });
+
+    Object.entries(ikutSekolah).forEach(([sekolah, data]) => {
+
+      list.innerHTML += `
+        <li class="border-l-4 border-orange-600 bg-orange-50 p-4 rounded shadow-sm">
+          <strong class="text-orange-900 block mb-2">
+            ${sekolah}
+          </strong>
+
+          <div class="text-sm text-gray-700 space-y-1">
+            <div>FASA 1 : <strong>${data[1]} UNIT</strong></div>
+            <div>FASA 2 : <strong>${data[2]} UNIT</strong></div>
+          </div>
+        </li>
+      `;
+    });
+
+  })
+  .catch(err => {
+    console.error("PDT Error:", err);
+    document.getElementById("senaraiPDT").innerHTML =
+      "<li class='text-red-600'>Gagal memuatkan data.</li>";
+  });
+}
+
 
 
 
@@ -796,8 +869,10 @@ firebase.auth().onAuthStateChanged(user => {
 
   loadInternet(email);
   loadM365(email);
-  loadHartaModal(email); // ✅ TAMBAH BARIS INI
+  loadHartaModal(email); 
   loadPerantiGuru(email);
+  loadPDT(email);
+
 
   
 
