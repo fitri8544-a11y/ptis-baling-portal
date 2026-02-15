@@ -688,16 +688,23 @@ function loadPerantiGuru(email) {
     const ikutSekolah = {};
 
     tapisan.forEach(row => {
-      const sekolah = row["NAMA SEKOLAH"]?.trim();
-      const fasa = row["FASA"]?.toString().trim();
-      const jumlah = Number(row["JUMLAH"] ?? 0);
 
-      if (!ikutSekolah[sekolah]) {
-        ikutSekolah[sekolah] = { 1: 0, 2: 0 };
-      }
+  const sekolah = row["NAMA SEKOLAH"]?.trim();
+  const fasa = row["FASA"]?.toString().trim();
 
-      ikutSekolah[sekolah][fasa] = jumlah;
-    });
+  const jumlahKey = Object.keys(row).find(
+    k => k.trim().toUpperCase() === "JUMLAH"
+  );
+
+  const jumlah = Number(row[jumlahKey] ?? 0);
+
+  if (!ikutSekolah[sekolah]) {
+    ikutSekolah[sekolah] = { 1: 0, 2: 0 };
+  }
+
+  ikutSekolah[sekolah][fasa] = jumlah;
+});
+
 
     Object.entries(ikutSekolah).forEach(([sekolah, data]) => {
 
