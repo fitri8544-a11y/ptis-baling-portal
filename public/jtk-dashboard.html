@@ -911,24 +911,19 @@ function loadPeralatanPDP(email) {
           };
         }
 
-        if ((row["JENAMA LAPTOP"] || "").toUpperCase() === "TIDAK TERLIBAT") {
+        const laptop = Number(row["JUMLAH LAPTOP"] ?? 0);
+        const printer = Number(row["JUMLAH PRINTER"] ?? 0);
+        const cart = Number(row["JUMLAH CART"] ?? 0);
 
-  ikutSekolah[sekolah][nomborFasa] = "TIDAK TERLIBAT";
-
-} else {
-
-  const laptop = Number(row["JUMLAH"] ?? 0);
-  const printer1 = Number(row["JUMLAH_1"] ?? 0);
-  const printer2 = Number(row["JUMLAH_2"] ?? 0);
-  const cart = Number(row["CHARGING CART"] ?? 0);
-
-  const totalPrinter = printer1 + printer2;
-
-  ikutSekolah[sekolah][nomborFasa] =
-    `${laptop} LAPTOP | ${totalPrinter} PRINTER | ${cart} CART`;
+        if (laptop === 0 && printer === 0 && cart === 0) {
+          ikutSekolah[sekolah][nomborFasa] = "TIDAK TERLIBAT";
+        } else {
+          ikutSekolah[sekolah][nomborFasa] =
+            `${laptop} LAPTOP | ${printer} PRINTER | ${cart} CART`;
         }
 
       });
+
     }
 
     prosesData(fasa1, 1);
@@ -950,21 +945,13 @@ function loadPeralatanPDP(email) {
           </strong>
 
           <div class="text-sm text-gray-700 space-y-1">
-            <div>
-              FASA 1 :
-              <strong>${data[1]}</strong>
-            </div>
-            <div>
-              FASA 2 :
-              <strong>${data[2]}</strong>
-            </div>
-            <div>
-              FASA 3 :
-              <strong>${data[3]}</strong>
-            </div>
+            <div>FASA 1 : <strong>${data[1]}</strong></div>
+            <div>FASA 2 : <strong>${data[2]}</strong></div>
+            <div>FASA 3 : <strong>${data[3]}</strong></div>
           </div>
         </li>
       `;
+
     });
 
   })
@@ -974,6 +961,7 @@ function loadPeralatanPDP(email) {
       "<li class='text-red-600'>Gagal memuatkan data.</li>";
   });
 }
+
 
 
 
