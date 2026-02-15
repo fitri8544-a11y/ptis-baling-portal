@@ -655,9 +655,6 @@ list.innerHTML += `
 /* ================= LOAD PERANTI GURU ================= */
 function loadPerantiGuru(email) {
 
-  const url =
-    `https://opensheet.elk.sh/${PERANTI_GURU_SHEET_ID}/FASA 1`;
-
   Promise.all([
     fetch(`https://opensheet.elk.sh/${PERANTI_GURU_SHEET_ID}/FASA 1`).then(r => r.json()),
     fetch(`https://opensheet.elk.sh/${PERANTI_GURU_SHEET_ID}/FASA 2`).then(r => r.json())
@@ -668,7 +665,6 @@ function loadPerantiGuru(email) {
     list.innerHTML = "";
 
     const emailLogin = email.toLowerCase().trim();
-
     const dataGabung = [...fasa1, ...fasa2];
 
     const tapisan = dataGabung.filter(row =>
@@ -686,22 +682,25 @@ function loadPerantiGuru(email) {
 
     tapisan.forEach(row => {
 
-  const sekolah = row["NAMA SEKOLAH"]?.trim();
-  const fasa = row["FASA"]?.toString().trim();
+      const sekolah = row["NAMA SEKOLAH"]?.trim() || "-";
 
-  const jumlahKey = Object.keys(row).find(
-    k => k.trim().toUpperCase() === "JUMLAH"
-  );
+      // Ambil nombor sahaja dari FASA (contoh: "FASA 1" → "1")
+      const fasa = row["FASA"]?.toString().replace(/\D/g, "");
 
-  const jumlah = Number(row[jumlahKey] ?? 0);
+      // Cari key JUMLAH sebenar
+      const jumlahKey = Object.keys(row).find(
+        k => k.trim().toUpperCase() === "JUMLAH"
+      );
 
-  if (!ikutSekolah[sekolah]) {
-    ikutSekolah[sekolah] = { 1: 0, 2: 0 };
-  }
+      const jumlah = Number(row[jumlahKey] || 0);
 
-  ikutSekolah[sekolah][fasa] = jumlah;
-});
+      if (!ikutSekolah[sekolah]) {
+        ikutSekolah[sekolah] = { 1: 0, 2: 0 };
+      }
 
+      if (fasa === "1") ikutSekolah[sekolah][1] = jumlah;
+      if (fasa === "2") ikutSekolah[sekolah][2] = jumlah;
+    });
 
     Object.entries(ikutSekolah).forEach(([sekolah, data]) => {
 
@@ -726,7 +725,6 @@ function loadPerantiGuru(email) {
       "<li class='text-red-600'>Gagal memuatkan data.</li>";
   });
 }
-
 
 
 /* ================= AUTH ================= */
