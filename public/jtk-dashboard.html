@@ -482,7 +482,7 @@ const HARTA_MODAL_SHEET_NAME = "DASHBOARD_KESELURUHAN";
 
 // PERANTI GURU
 const PERANTI_GURU_SHEET_ID = "1cZCpT9C4sE0VBi6hJX7x5OsljmKdFOCSSIw7j_6j3eo";
-const PERANTI_GURU_SHEET_NAME = "Sheet1";
+const PERANTI_GURU_SHEET_NAME = "FASA 1";
 
 
 /* ================= LOAD INTERNET ================= */
@@ -658,20 +658,32 @@ list.innerHTML += `
 /* ================= LOAD PERANTI GURU ================= */
 function loadPerantiGuru(email) {
 
-  const url = `https://opensheet.elk.sh/${PERANTI_GURU_SHEET_ID}/${PERANTI_GURU_SHEET_NAME}`;
+  const url =
+    `https://opensheet.elk.sh/${PERANTI_GURU_SHEET_ID}/${PERANTI_GURU_SHEET_NAME}`;
 
   fetch(url)
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) {
+        throw new Error("Sheet tidak dijumpai / nama sheet salah");
+      }
+      return res.json();
+    })
     .then(data => {
+
+      console.log("DATA PERANTI GURU:", data);
 
       const list = document.getElementById("senaraiPerantiGuru");
       list.innerHTML = "";
 
-      const emailLogin = email.toLowerCase().trim();
+      if (!Array.isArray(data)) {
+        throw new Error("Format data bukan array");
+      }
+
+      const emailLogin = email.toLowerCase().replace(/\s+/g, "");
 
       const senarai = data.filter(row =>
         row.email &&
-        row.email.toLowerCase().trim() === emailLogin
+        row.email.toLowerCase().replace(/\s+/g, "") === emailLogin
       );
 
       if (senarai.length === 0) {
@@ -682,9 +694,20 @@ function loadPerantiGuru(email) {
 
       senarai.forEach(row => {
 
-        const sekolah = row["NAMA SEKOLAH"] ?? "-";
-        const fasa = row["FASA"] ?? "-";
-        const jumlah = row["JUMLAH"] ?? 0;
+        const sekolah =
+          row["NAMA SEKOLAH"] ||
+          row["Nama Sekolah"] ||
+          "-";
+
+        const fasa =
+          row["FASA"] ||
+          row["Fasa"] ||
+          "-";
+
+        const jumlah =
+          Number(row["JUMLAH"] ||
+                 row["Jumlah"] ||
+                 0);
 
         list.innerHTML += `
           <li class="border-l-4 border-indigo-500 bg-indigo-50 p-3 rounded">
@@ -703,6 +726,7 @@ function loadPerantiGuru(email) {
         "<li class='text-red-600'>Gagal memuatkan data.</li>";
     });
 }
+
 
 
 /* ================= AUTH ================= */
