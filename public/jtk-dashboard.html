@@ -653,7 +653,10 @@ list.innerHTML += `
 }
 
 /* ================= LOAD PERANTI GURU ================= */
+/* ================= LOAD PERANTI GURU ================= */
 function loadPerantiGuru(email) {
+
+  const emailLogin = email.toLowerCase().trim();
 
   Promise.all([
     fetch(`https://opensheet.elk.sh/${PERANTI_GURU_SHEET_ID}/FASA 1`).then(r => r.json()),
@@ -664,12 +667,35 @@ function loadPerantiGuru(email) {
     const list = document.getElementById("senaraiPerantiGuru");
     list.innerHTML = "";
 
-    const emailLogin = email.toLowerCase().trim();
     const dataGabung = [...fasa1, ...fasa2];
 
+    if (!Array.isArray(dataGabung) || dataGabung.length === 0) {
+      list.innerHTML =
+        "<li class='italic text-gray-400'>Tiada data dijumpai dalam sheet.</li>";
+      return;
+    }
+
+    // 🔍 AUTO DETECT NAMA COLUMN EMAIL
+    const emailKey = Object.keys(dataGabung[0]).find(
+      k => k.trim().toLowerCase() === "email"
+    );
+
+    // 🔍 AUTO DETECT COLUMN JUMLAH
+    const jumlahKey = Object.keys(dataGabung[0]).find(
+      k => k.trim().toUpperCase() === "JUMLAH"
+    );
+
+    if (!emailKey || !jumlahKey) {
+      console.error("Kolum EMAIL atau JUMLAH tidak dijumpai.");
+      list.innerHTML =
+        "<li class='text-red-600'>Struktur sheet tidak betul.</li>";
+      return;
+    }
+
+    // ✅ TAPIS IKUT EMAIL LOGIN
     const tapisan = dataGabung.filter(row =>
-      row.email &&
-      row.email.toLowerCase().trim() === emailLogin
+      row[emailKey] &&
+      row[emailKey].toLowerCase().trim() === emailLogin
     );
 
     if (tapisan.length === 0) {
@@ -687,11 +713,6 @@ function loadPerantiGuru(email) {
       // Ambil nombor sahaja dari FASA (contoh: "FASA 1" → "1")
       const fasa = row["FASA"]?.toString().replace(/\D/g, "");
 
-      // Cari key JUMLAH sebenar
-      const jumlahKey = Object.keys(row).find(
-        k => k.trim().toUpperCase() === "JUMLAH"
-      );
-
       const jumlah = Number(row[jumlahKey] || 0);
 
       if (!ikutSekolah[sekolah]) {
@@ -702,6 +723,7 @@ function loadPerantiGuru(email) {
       if (fasa === "2") ikutSekolah[sekolah][2] = jumlah;
     });
 
+    // 🎨 PAPAR PROFESSIONAL FORMAT
     Object.entries(ikutSekolah).forEach(([sekolah, data]) => {
 
       list.innerHTML += `
@@ -725,6 +747,7 @@ function loadPerantiGuru(email) {
       "<li class='text-red-600'>Gagal memuatkan data.</li>";
   });
 }
+
 
 
 /* ================= AUTH ================= */
