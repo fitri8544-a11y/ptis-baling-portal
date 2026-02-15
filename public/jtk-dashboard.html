@@ -785,67 +785,79 @@ function loadPerantiGuru(email) {
 }
 
 /* ================= LOAD PERALATAN PDT ================= */
-function loadPeralatanPDT(email) {
+function loadPDT(email) {
 
   Promise.all([
-    fetch(`https://opensheet.elk.sh/${PDT_SHEET_ID}/FASA%201`).then(r => r.json()),
-    fetch(`https://opensheet.elk.sh/${PDT_SHEET_ID}/FASA%202`).then(r => r.json())
+    fetch(`https://opensheet.elk.sh/${PDT_SHEET_ID}/FASA 1`).then(r => r.json()),
+    fetch(`https://opensheet.elk.sh/${PDT_SHEET_ID}/FASA 2`).then(r => r.json())
   ])
   .then(([fasa1, fasa2]) => {
 
-    const list = document.getElementById("senaraiPeralatanPDT");
+    const list = document.getElementById("senaraiPDT");
     list.innerHTML = "";
 
     const emailLogin = email.toLowerCase().trim();
 
-    const dataGabung = [...fasa1, ...fasa2];
+    const ikutSekolah = {};
 
-    const tapisan = dataGabung.filter(row =>
-      row.email &&
-      row.email.toLowerCase().trim() === emailLogin
-    );
+    function prosesData(data, nomborFasa) {
 
-    if (tapisan.length === 0) {
+      data.forEach(row => {
+
+        if (!row.email) return;
+
+        if (row.email.toLowerCase().trim() !== emailLogin) return;
+
+        const sekolah = row["NAMA SEKOLAH"]?.trim() || "-";
+
+        const jumlahPC =
+          Number(row["JUMLAH PC"] || 0);
+
+        const jumlahPrinter =
+          Number(row["JUMLAH PRINTER"] || 0);
+
+        if (!ikutSekolah[sekolah]) {
+          ikutSekolah[sekolah] = {
+            1: { pc: 0, printer: 0 },
+            2: { pc: 0, printer: 0 }
+          };
+        }
+
+        ikutSekolah[sekolah][nomborFasa] = {
+          pc: jumlahPC,
+          printer: jumlahPrinter
+        };
+      });
+    }
+
+    prosesData(fasa1, 1);
+    prosesData(fasa2, 2);
+
+    if (Object.keys(ikutSekolah).length === 0) {
       list.innerHTML =
         "<li class='italic text-gray-400'>Tiada data peralatan PDT untuk sekolah seliaan anda.</li>";
       return;
     }
 
-    const ikutSekolah = {};
-
-    tapisan.forEach(row => {
-
-      const sekolah = row["NAMA SEKOLAH"]?.trim() || "-";
-
-      // Extract nombor fasa
-      const fasa = row["FASA"]?.toString().replace(/\D/g, "");
-
-      // Cari kolum JUMLAH secara dinamik (elak space tersembunyi)
-      const jumlahKey = Object.keys(row).find(
-        k => k.trim().toUpperCase() === "JUMLAH"
-      );
-
-      const jumlah = Number(row[jumlahKey] || 0);
-
-      if (!ikutSekolah[sekolah]) {
-        ikutSekolah[sekolah] = { 1: 0, 2: 0 };
-      }
-
-      if (fasa === "1") ikutSekolah[sekolah][1] = jumlah;
-      if (fasa === "2") ikutSekolah[sekolah][2] = jumlah;
-    });
-
     Object.entries(ikutSekolah).forEach(([sekolah, data]) => {
 
       list.innerHTML += `
-        <li class="border-l-4 border-orange-600 bg-orange-50 p-4 rounded shadow-sm">
-          <strong class="text-orange-900 block mb-2">
+        <li class="border-l-4 border-orange-500 bg-orange-50 p-4 rounded shadow-sm">
+          <strong class="text-orange-800 block mb-2">
             ${sekolah}
           </strong>
 
           <div class="text-sm text-gray-700 space-y-1">
-            <div>FASA 1 : <strong>${data[1]} UNIT</strong></div>
-            <div>FASA 2 : <strong>${data[2]} UNIT</strong></div>
+            <div>
+              FASA 1 :
+              <strong>${data[1].pc} PC</strong> |
+              <strong>${data[1].printer} PRINTER</strong>
+            </div>
+            <div>
+              FASA 2 :
+              <strong>${data[2].pc} PC</strong> |
+              <strong>${data[2].printer} PRINTER</strong>
+            </div>
           </div>
         </li>
       `;
@@ -853,11 +865,12 @@ function loadPeralatanPDT(email) {
 
   })
   .catch(err => {
-    console.error("Peralatan PDT Error:", err);
-    document.getElementById("senaraiPeralatanPDT").innerHTML =
+    console.error("PDT Error:", err);
+    document.getElementById("senaraiPDT").innerHTML =
       "<li class='text-red-600'>Gagal memuatkan data.</li>";
   });
 }
+
 
 
 /* ================= AUTH ================= */
@@ -874,7 +887,7 @@ firebase.auth().onAuthStateChanged(user => {
   loadM365(email);
   loadHartaModal(email); 
   loadPerantiGuru(email);
-  loadPeralatanPDT(email);
+  loadPDT(email);
 
 
   
