@@ -375,6 +375,25 @@
   </p>
 </div>
 
+<!-- ================= PERANTI GURU ================= -->
+ <section class="mt-6">
+  <div class="bg-white rounded-xl shadow p-6">
+
+    <h2 class="text-lg font-bold text-indigo-900 flex items-center gap-2">
+      👨‍🏫 Maklumat Peranti Guru
+    </h2>
+
+    <p class="text-sm text-gray-600 mb-3">
+      Peranti Sewaan Mengikut Fasa
+    </p>
+
+    <ul id="senaraiPerantiGuru"
+        class="space-y-3 text-sm">
+      <li class="italic text-gray-400">Memuatkan data...</li>
+    </ul>
+
+  </div>
+
 <div class="bg-white rounded-xl shadow p-6 h-full flex flex-col
             border-2 border-dashed border-red-300">
 
@@ -398,6 +417,7 @@
     * Maklumat akan dikemaskini dari semasa ke semasa
   </div>
 </div>
+
 
 </section>
 
@@ -459,6 +479,11 @@ const M365_SHEET_NAME = "Sheet1";
 // HARTA MODAL
 const HARTA_MODAL_SHEET_ID = "1RoNePKW1on5rZWRM56d4THRh_9yzUsD4oFH0AID0oMo";
 const HARTA_MODAL_SHEET_NAME = "DASHBOARD_KESELURUHAN";
+
+// PERANTI GURU
+const PERANTI_GURU_SHEET_ID = "1cZCpT9C4sE0VBi6hJX7x5OsljmKdFOCSSIw7j_6j3eo";
+const PERANTI_GURU_SHEET_NAME = "Sheet1";
+
 
 /* ================= LOAD INTERNET ================= */
 function loadInternet(email) {
@@ -630,6 +655,55 @@ list.innerHTML += `
     });
 }
 
+/* ================= LOAD PERANTI GURU ================= */
+function loadPerantiGuru(email) {
+
+  const url = `https://opensheet.elk.sh/${PERANTI_GURU_SHEET_ID}/${PERANTI_GURU_SHEET_NAME}`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+
+      const list = document.getElementById("senaraiPerantiGuru");
+      list.innerHTML = "";
+
+      const emailLogin = email.toLowerCase().trim();
+
+      const senarai = data.filter(row =>
+        row.email &&
+        row.email.toLowerCase().trim() === emailLogin
+      );
+
+      if (senarai.length === 0) {
+        list.innerHTML =
+          "<li class='italic text-gray-400'>Tiada data peranti guru untuk sekolah seliaan anda.</li>";
+        return;
+      }
+
+      senarai.forEach(row => {
+
+        const sekolah = row["NAMA SEKOLAH"] ?? "-";
+        const fasa = row["FASA"] ?? "-";
+        const jumlah = row["JUMLAH"] ?? 0;
+
+        list.innerHTML += `
+          <li class="border-l-4 border-indigo-500 bg-indigo-50 p-3 rounded">
+            <strong class="text-indigo-900">${sekolah}</strong><br>
+            <span class="text-xs text-gray-700">
+              Fasa ${fasa} : <strong>${jumlah}</strong> unit
+            </span>
+          </li>
+        `;
+      });
+
+    })
+    .catch(err => {
+      console.error("Peranti Guru Error:", err);
+      document.getElementById("senaraiPerantiGuru").innerHTML =
+        "<li class='text-red-600'>Gagal memuatkan data.</li>";
+    });
+}
+
 
 /* ================= AUTH ================= */
 firebase.auth().onAuthStateChanged(user => {
@@ -644,6 +718,8 @@ firebase.auth().onAuthStateChanged(user => {
   loadInternet(email);
   loadM365(email);
   loadHartaModal(email); // ✅ TAMBAH BARIS INI
+  loadPerantiGuru(email);
+
   
 
  // 🔐 AKSES ADMIN
