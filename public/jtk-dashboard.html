@@ -658,75 +658,59 @@ list.innerHTML += `
 /* ================= LOAD PERANTI GURU ================= */
 function loadPerantiGuru(email) {
 
-  const url =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRm9HW65sm2Lc-DfsD-GlkN2Juii7G4ilL-s7dy14iI2fqwLDFon96-7zgQGPr3p7acKzCxFyTF45iL/pubhtml";
+  const emailLogin = email.toLowerCase().replace(/\s+/g, "");
 
-  fetch(url)
-    .then(res => {
-      if (!res.ok) {
-        throw new Error("Sheet tidak dijumpai / nama sheet salah");
-      }
-      return res.json();
-    })
-    .then(data => {
+  const urlFasa1 =
+    `https://opensheet.elk.sh/${PERANTI_GURU_SHEET_ID}/FASA 1`;
 
-      console.log("DATA PERANTI GURU:", data);
+  const urlFasa2 =
+    `https://opensheet.elk.sh/${PERANTI_GURU_SHEET_ID}/FASA 2`;
 
-      const list = document.getElementById("senaraiPerantiGuru");
-      list.innerHTML = "";
+  Promise.all([
+    fetch(urlFasa1).then(r => r.json()),
+    fetch(urlFasa2).then(r => r.json())
+  ])
+  .then(([data1, data2]) => {
 
-      if (!Array.isArray(data)) {
-        throw new Error("Format data bukan array");
-      }
+    const dataGabung = [...data1, ...data2];
 
-      const emailLogin = email.toLowerCase().replace(/\s+/g, "");
+    const list = document.getElementById("senaraiPerantiGuru");
+    list.innerHTML = "";
 
-      const senarai = data.filter(row =>
-        row.email &&
-        row.email.toLowerCase().replace(/\s+/g, "") === emailLogin
-      );
+    const senarai = dataGabung.filter(row =>
+      row.email &&
+      row.email.toLowerCase().replace(/\s+/g, "") === emailLogin
+    );
 
-      if (senarai.length === 0) {
-        list.innerHTML =
-          "<li class='italic text-gray-400'>Tiada data peranti guru untuk sekolah seliaan anda.</li>";
-        return;
-      }
+    if (senarai.length === 0) {
+      list.innerHTML =
+        "<li class='italic text-gray-400'>Tiada data peranti guru untuk sekolah seliaan anda.</li>";
+      return;
+    }
 
-      senarai.forEach(row => {
+    senarai.forEach(row => {
 
-        const sekolah =
-          row["NAMA SEKOLAH"] ||
-          row["Nama Sekolah"] ||
-          "-";
+      const sekolah = row["NAMA SEKOLAH"] ?? "-";
+      const fasa = row["FASA"] ?? "-";
+      const jumlah = Number(row["JUMLAH"] ?? 0);
 
-        const fasa =
-          row["FASA"] ||
-          row["Fasa"] ||
-          "-";
-
-        const jumlah =
-          Number(row["JUMLAH"] ||
-                 row["Jumlah"] ||
-                 0);
-
-        list.innerHTML += `
-          <li class="border-l-4 border-indigo-500 bg-indigo-50 p-3 rounded">
-            <strong class="text-indigo-900">${sekolah}</strong><br>
-            <span class="text-xs text-gray-700">
-              Fasa ${fasa} : <strong>${jumlah}</strong> unit
-            </span>
-          </li>
-        `;
-      });
-
-    })
-    .catch(err => {
-      console.error("Peranti Guru Error:", err);
-      document.getElementById("senaraiPerantiGuru").innerHTML =
-        "<li class='text-red-600'>Gagal memuatkan data.</li>";
+      list.innerHTML += `
+        <li class="border-l-4 border-indigo-500 bg-indigo-50 p-3 rounded">
+          <strong class="text-indigo-900">${sekolah}</strong><br>
+          <span class="text-xs text-gray-700">
+            Fasa ${fasa} : <strong>${jumlah}</strong> unit
+          </span>
+        </li>
+      `;
     });
-}
 
+  })
+  .catch(err => {
+    console.error("Peranti Guru Error:", err);
+    document.getElementById("senaraiPerantiGuru").innerHTML =
+      "<li class='text-red-600'>Gagal memuatkan data.</li>";
+  });
+}
 
 
 /* ================= AUTH ================= */
