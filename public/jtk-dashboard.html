@@ -913,13 +913,13 @@ function loadPeralatanPDP(email) {
 
         const laptop = Number(row["JUMLAH LAPTOP"] ?? 0);
         const printer = Number(row["JUMLAH PRINTER"] ?? 0);
-        const cart = Number(row["JUMLAH CART"] ?? 0);
+        const cart = Number(row["JUMLAH LCD"] ?? 0);
 
         if (laptop === 0 && printer === 0 && cart === 0) {
           ikutSekolah[sekolah][nomborFasa] = "TIDAK TERLIBAT";
         } else {
           ikutSekolah[sekolah][nomborFasa] =
-            `${laptop} LAPTOP | ${printer} PRINTER | ${cart} CART`;
+            `${laptop} LAPTOP | ${printer} PRINTER | ${cart} LCD`;
         }
 
       });
