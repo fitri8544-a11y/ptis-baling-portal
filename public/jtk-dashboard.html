@@ -783,19 +783,21 @@ function loadPerantiGuru(email) {
       "<li class='text-red-600'>Gagal memuatkan data.</li>";
   });
 }
+
 /* ================= LOAD PERALATAN PDT ================= */
-function loadPDT(email) {
+function loadPeralatanPDT(email) {
 
   Promise.all([
-    fetch(`https://opensheet.elk.sh/${PDT_SHEET_ID}/FASA 1`).then(r => r.json()),
-    fetch(`https://opensheet.elk.sh/${PDT_SHEET_ID}/FASA 2`).then(r => r.json())
+    fetch(`https://opensheet.elk.sh/${PDT_SHEET_ID}/FASA%201`).then(r => r.json()),
+    fetch(`https://opensheet.elk.sh/${PDT_SHEET_ID}/FASA%202`).then(r => r.json())
   ])
   .then(([fasa1, fasa2]) => {
 
-    const list = document.getElementById("senaraiPDT");
+    const list = document.getElementById("senaraiPeralatanPDT");
     list.innerHTML = "";
 
     const emailLogin = email.toLowerCase().trim();
+
     const dataGabung = [...fasa1, ...fasa2];
 
     const tapisan = dataGabung.filter(row =>
@@ -814,8 +816,11 @@ function loadPDT(email) {
     tapisan.forEach(row => {
 
       const sekolah = row["NAMA SEKOLAH"]?.trim() || "-";
+
+      // Extract nombor fasa
       const fasa = row["FASA"]?.toString().replace(/\D/g, "");
 
+      // Cari kolum JUMLAH secara dinamik (elak space tersembunyi)
       const jumlahKey = Object.keys(row).find(
         k => k.trim().toUpperCase() === "JUMLAH"
       );
@@ -848,13 +853,11 @@ function loadPDT(email) {
 
   })
   .catch(err => {
-    console.error("PDT Error:", err);
-    document.getElementById("senaraiPDT").innerHTML =
+    console.error("Peralatan PDT Error:", err);
+    document.getElementById("senaraiPeralatanPDT").innerHTML =
       "<li class='text-red-600'>Gagal memuatkan data.</li>";
   });
 }
-
-
 
 
 /* ================= AUTH ================= */
@@ -871,7 +874,7 @@ firebase.auth().onAuthStateChanged(user => {
   loadM365(email);
   loadHartaModal(email); 
   loadPerantiGuru(email);
-  loadPDT(email);
+  loadPeralatanPDT(email);
 
 
   
