@@ -531,6 +531,10 @@ const PERANTI_GURU_SHEET_NAME = "FASA 1";
 const PDT_SHEET_ID = "1NhXLtUSmMjpb8kecoRZtM2MB26wddol6A25_J7ukfjQ";
 const PDT_SHEET_NAME = "Sheet1"; // tukar jika nama tab lain
 
+// PERALATAN PDP
+const PDP_SHEET_ID = "1GYx7PVEmjKpiaTYDdSxUn-MySj0mSpqgVgoDwLj_noQ";
+
+
 
 
 /* ================= LOAD INTERNET ================= */
@@ -871,6 +875,98 @@ function loadPDT(email) {
   });
 }
 
+/* ================= LOAD PERALATAN PDP ================= */
+function loadPeralatanPDP(email) {
+
+  Promise.all([
+    fetch(`https://opensheet.elk.sh/${PDP_SHEET_ID}/FASA 1`).then(r => r.json()),
+    fetch(`https://opensheet.elk.sh/${PDP_SHEET_ID}/FASA 2`).then(r => r.json()),
+    fetch(`https://opensheet.elk.sh/${PDP_SHEET_ID}/FASA 3`).then(r => r.json())
+  ])
+  .then(([fasa1, fasa2, fasa3]) => {
+
+    const list = document.getElementById("senaraiPeralatanPDP");
+    list.innerHTML = "";
+
+    const emailLogin = email.toLowerCase().trim();
+    const ikutSekolah = {};
+
+    function prosesData(data, nomborFasa) {
+
+      data.forEach(row => {
+
+        if (!row.email) return;
+        if (row.email.toLowerCase().trim() !== emailLogin) return;
+
+        const sekolah = row["NAMA SEKOLAH"]?.trim() || "-";
+
+        if (!ikutSekolah[sekolah]) {
+          ikutSekolah[sekolah] = {
+            1: "TIDAK TERLIBAT",
+            2: "TIDAK TERLIBAT",
+            3: "TIDAK TERLIBAT"
+          };
+        }
+
+        if (row["JENAMA LAPTOP"] === "TIDAK TERLIBAT") {
+          ikutSekolah[sekolah][nomborFasa] = "TIDAK TERLIBAT";
+        } else {
+
+          const laptop = Number(row["JUMLAH"] || 0);
+          const printer = Number(row["JUMLAH"] || 0); // jika ada kolum printer berasingan, tukar sini
+          const cart = Number(row["CHARGING CART"] || 0);
+
+          ikutSekolah[sekolah][nomborFasa] =
+            `${laptop} LAPTOP | ${printer} PRINTER | ${cart} CART`;
+        }
+
+      });
+    }
+
+    prosesData(fasa1, 1);
+    prosesData(fasa2, 2);
+    prosesData(fasa3, 3);
+
+    if (Object.keys(ikutSekolah).length === 0) {
+      list.innerHTML =
+        "<li class='italic text-gray-400'>Tiada data peralatan PdP untuk sekolah seliaan anda.</li>";
+      return;
+    }
+
+    Object.entries(ikutSekolah).forEach(([sekolah, data]) => {
+
+      list.innerHTML += `
+        <li class="border-l-4 border-blue-500 bg-blue-50 p-4 rounded shadow-sm">
+          <strong class="text-blue-800 block mb-2">
+            ${sekolah}
+          </strong>
+
+          <div class="text-sm text-gray-700 space-y-1">
+            <div>
+              FASA 1 :
+              <strong>${data[1]}</strong>
+            </div>
+            <div>
+              FASA 2 :
+              <strong>${data[2]}</strong>
+            </div>
+            <div>
+              FASA 3 :
+              <strong>${data[3]}</strong>
+            </div>
+          </div>
+        </li>
+      `;
+    });
+
+  })
+  .catch(err => {
+    console.error("PDP Error:", err);
+    document.getElementById("senaraiPeralatanPDP").innerHTML =
+      "<li class='text-red-600'>Gagal memuatkan data.</li>";
+  });
+}
+
 
 
 /* ================= AUTH ================= */
@@ -888,6 +984,7 @@ firebase.auth().onAuthStateChanged(user => {
   loadHartaModal(email); 
   loadPerantiGuru(email);
   loadPDT(email);
+  loadPeralatanPDP(email);
 
 
   
