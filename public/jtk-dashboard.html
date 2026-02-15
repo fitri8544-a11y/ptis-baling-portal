@@ -677,29 +677,64 @@ function loadPerantiGuru(email) {
     const list = document.getElementById("senaraiPerantiGuru");
     list.innerHTML = "";
 
-    const senarai = dataGabung.filter(row =>
-      row.email &&
-      row.email.toLowerCase().replace(/\s+/g, "") === emailLogin
-    );
+    // 🔥 GROUP IKUT SEKOLAH
+    const sekolahMap = {};
 
-    if (senarai.length === 0) {
+    dataGabung.forEach(row => {
+
+      if (!row.email) return;
+
+      if (row.email.toLowerCase().replace(/\s+/g, "") !== emailLogin)
+        return;
+
+      const sekolah = row["NAMA SEKOLAH"] ?? "-";
+      const fasa = row["FASA"] ?? "-";
+      const jumlah = Number(
+        row["JUMLAH"] ??
+        row["JUMLAH UNIT"] ??
+        0
+      );
+
+      if (!sekolahMap[sekolah]) {
+        sekolahMap[sekolah] = {
+          "1": 0,
+          "2": 0
+        };
+      }
+
+      if (fasa == "1") sekolahMap[sekolah]["1"] += jumlah;
+      if (fasa == "2") sekolahMap[sekolah]["2"] += jumlah;
+    });
+
+    if (Object.keys(sekolahMap).length === 0) {
       list.innerHTML =
         "<li class='italic text-gray-400'>Tiada data peranti guru untuk sekolah seliaan anda.</li>";
       return;
     }
 
-    senarai.forEach(row => {
-
-      const sekolah = row["NAMA SEKOLAH"] ?? "-";
-      const fasa = row["FASA"] ?? "-";
-      const jumlah = Number(row["JUMLAH"] ?? 0);
+    // 🎨 PAPAR SECARA PROFESIONAL
+    Object.entries(sekolahMap).forEach(([sekolah, fasaData]) => {
 
       list.innerHTML += `
-        <li class="border-l-4 border-indigo-500 bg-indigo-50 p-3 rounded">
-          <strong class="text-indigo-900">${sekolah}</strong><br>
-          <span class="text-xs text-gray-700">
-            Fasa ${fasa} : <strong>${jumlah}</strong> unit
-          </span>
+        <li class="border-l-4 border-indigo-600 bg-indigo-50 p-4 rounded shadow-sm">
+          <strong class="text-indigo-900 block mb-2 uppercase">
+            ${sekolah}
+          </strong>
+
+          <div class="text-sm text-gray-700 space-y-1">
+            <div>
+              FASA 1 :
+              <span class="font-semibold text-indigo-800">
+                ${fasaData["1"]} UNIT
+              </span>
+            </div>
+            <div>
+              FASA 2 :
+              <span class="font-semibold text-indigo-800">
+                ${fasaData["2"]} UNIT
+              </span>
+            </div>
+          </div>
         </li>
       `;
     });
