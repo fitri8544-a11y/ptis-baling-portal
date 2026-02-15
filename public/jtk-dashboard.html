@@ -685,16 +685,16 @@ function loadPerantiGuru(email) {
       return;
     }
 
-    const ikutSekolah = {};
+    const jumlah =
+  Number(
+    row["JUMLAH"] ??
+    row["JUMLAH "] ??
+    row["Jumlah"] ??
+    Object.keys(row).find(k => k.trim() === "JUMLAH") &&
+    row[Object.keys(row).find(k => k.trim() === "JUMLAH")] ??
+    0
+  );
 
-    tapisan.forEach(row => {
-      const sekolah = row["NAMA SEKOLAH"]?.trim();
-      const fasa = row["FASA"]?.toString().trim();
-      const jumlah = Number(row["JUMLAH"] ?? 0);
-
-      if (!ikutSekolah[sekolah]) {
-        ikutSekolah[sekolah] = { 1: 0, 2: 0 };
-      }
 
       ikutSekolah[sekolah][fasa] = jumlah;
     });
