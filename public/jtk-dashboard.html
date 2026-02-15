@@ -653,7 +653,6 @@ list.innerHTML += `
 }
 
 /* ================= LOAD PERANTI GURU ================= */
-/* ================= LOAD PERANTI GURU ================= */
 function loadPerantiGuru(email) {
 
   const emailLogin = email.toLowerCase().trim();
@@ -667,64 +666,50 @@ function loadPerantiGuru(email) {
     const list = document.getElementById("senaraiPerantiGuru");
     list.innerHTML = "";
 
-    const dataGabung = [...fasa1, ...fasa2];
-
-    if (!Array.isArray(dataGabung) || dataGabung.length === 0) {
-      list.innerHTML =
-        "<li class='italic text-gray-400'>Tiada data dijumpai dalam sheet.</li>";
-      return;
-    }
-
-    // 🔍 AUTO DETECT NAMA COLUMN EMAIL
-    const emailKey = Object.keys(dataGabung[0]).find(
-      k => k.trim().toLowerCase() === "email"
-    );
-
-    // 🔍 AUTO DETECT COLUMN JUMLAH
-    const jumlahKey = Object.keys(dataGabung[0]).find(
-      k => k.trim().toUpperCase() === "JUMLAH"
-    );
-
-    if (!emailKey || !jumlahKey) {
-      console.error("Kolum EMAIL atau JUMLAH tidak dijumpai.");
-      list.innerHTML =
-        "<li class='text-red-600'>Struktur sheet tidak betul.</li>";
-      return;
-    }
-
-    // ✅ TAPIS IKUT EMAIL LOGIN
-    const tapisan = dataGabung.filter(row =>
-      row[emailKey] &&
-      row[emailKey].toLowerCase().trim() === emailLogin
-    );
-
-    if (tapisan.length === 0) {
-      list.innerHTML =
-        "<li class='italic text-gray-400'>Tiada data peranti guru untuk sekolah seliaan anda.</li>";
-      return;
-    }
-
     const ikutSekolah = {};
 
-    tapisan.forEach(row => {
+    /* ===== PROSES FASA 1 ===== */
+    fasa1.forEach(row => {
+
+      if (!row.email) return;
+      if (row.email.toLowerCase().trim() !== emailLogin) return;
 
       const sekolah = row["NAMA SEKOLAH"]?.trim() || "-";
-
-      // Ambil nombor sahaja dari FASA (contoh: "FASA 1" → "1")
-      const fasa = row["FASA"]?.toString().replace(/\D/g, "");
-
-      const jumlah = Number(row[jumlahKey] || 0);
+      const jumlah = Number(row["JUMLAH"] || 0);
 
       if (!ikutSekolah[sekolah]) {
         ikutSekolah[sekolah] = { 1: 0, 2: 0 };
       }
 
-      if (fasa === "1") ikutSekolah[sekolah][1] = jumlah;
-      if (fasa === "2") ikutSekolah[sekolah][2] = jumlah;
+      ikutSekolah[sekolah][1] = jumlah;
     });
 
-    // 🎨 PAPAR PROFESSIONAL FORMAT
-    Object.entries(ikutSekolah).forEach(([sekolah, data]) => {
+    /* ===== PROSES FASA 2 ===== */
+    fasa2.forEach(row => {
+
+      if (!row.email) return;
+      if (row.email.toLowerCase().trim() !== emailLogin) return;
+
+      const sekolah = row["NAMA SEKOLAH"]?.trim() || "-";
+      const jumlah = Number(row["JUMLAH"] || 0);
+
+      if (!ikutSekolah[sekolah]) {
+        ikutSekolah[sekolah] = { 1: 0, 2: 0 };
+      }
+
+      ikutSekolah[sekolah][2] = jumlah;
+    });
+
+    /* ===== PAPAR ===== */
+    const entries = Object.entries(ikutSekolah);
+
+    if (entries.length === 0) {
+      list.innerHTML =
+        "<li class='italic text-gray-400'>Tiada data peranti guru untuk sekolah seliaan anda.</li>";
+      return;
+    }
+
+    entries.forEach(([sekolah, data]) => {
 
       list.innerHTML += `
         <li class="border-l-4 border-indigo-600 bg-indigo-50 p-4 rounded shadow-sm">
