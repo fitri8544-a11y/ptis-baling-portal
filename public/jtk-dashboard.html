@@ -911,16 +911,18 @@ function loadPeralatanPDP(email) {
           };
         }
 
-        const laptop = Number(row["JUMLAH LAPTOP"] ?? 0);
-        const printer = Number(row["JUMLAH PRINTER"] ?? 0);
-        const cart = Number(row["JUMLAH LCD"] ?? 0);
+    const laptop = Number(row["JUMLAH LAPTOP"] ?? 0);
+    const printer = Number(row["JUMLAH PRINTER"] ?? 0);
+    const lcd = Number(row["JUMLAH LCD"] ?? 0);
+    const cart = Number(row["JUMLAH CHARGING CART"] ?? 0);
 
-        if (laptop === 0 && printer === 0 && cart === 0) {
-          ikutSekolah[sekolah][nomborFasa] = "TIDAK TERLIBAT";
+        if (laptop === 0 && printer === 0 && lcd === 0 && cart === 0) {
+            ikutSekolah[sekolah][nomborFasa] = "TIDAK TERLIBAT";
         } else {
-          ikutSekolah[sekolah][nomborFasa] =
-            `${laptop} LAPTOP | ${printer} PRINTER | ${cart} LCD`;
-        }
+            ikutSekolah[sekolah][nomborFasa] =
+            `${laptop} LAPTOP | ${printer} PRINTER | ${lcd} LCD | ${cart} CART`;
+}
+
 
       });
 
