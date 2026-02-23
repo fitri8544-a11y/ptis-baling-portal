@@ -918,11 +918,12 @@ function loadPDT(email) {
 function loadPeralatanPDP(email) {
 
   Promise.all([
-    fetch(`https://opensheet.elk.sh/${PDP_SHEET_ID}/FASA 1`).then(r => r.json()),
-    fetch(`https://opensheet.elk.sh/${PDP_SHEET_ID}/FASA 2`).then(r => r.json()),
-    fetch(`https://opensheet.elk.sh/${PDP_SHEET_ID}/FASA 3`).then(r => r.json())
-  ])
-  .then(([fasa1, fasa2, fasa3,]) => {
+  fetch(`https://opensheet.elk.sh/${PDP_SHEET_ID}/FASA 1`).then(r => r.json()),
+  fetch(`https://opensheet.elk.sh/${PDP_SHEET_ID}/FASA 2`).then(r => r.json()),
+  fetch(`https://opensheet.elk.sh/${PDP_SHEET_ID}/FASA 3`).then(r => r.json()),
+  fetch(`https://opensheet.elk.sh/${PDP_SHEET_ID}/FASA 4`).then(r => r.json())
+])
+.then(([fasa1, fasa2, fasa3, fasa4]) => {
 
     const list = document.getElementById("senaraiPeralatanPDP");
     list.innerHTML = "";
@@ -939,11 +940,11 @@ function loadPeralatanPDP(email) {
 
         const sekolah = row["NAMA SEKOLAH"]?.trim() || "-";
 
-        if (!ikutSekolah[sekolah]) {
-          ikutSekolah[sekolah] = {
-            1: "TIDAK TERLIBAT",
-            2: "TIDAK TERLIBAT",
-            3: "TIDAK TERLIBAT"
+        if ikutSekolah[sekolah] = {
+              1: "TIDAK TERLIBAT",
+              2: "TIDAK TERLIBAT",
+              3: "TIDAK TERLIBAT",
+              4: "TIDAK TERLIBAT"
           };
         }
 
@@ -967,6 +968,7 @@ function loadPeralatanPDP(email) {
     prosesData(fasa1, 1);
     prosesData(fasa2, 2);
     prosesData(fasa3, 3);
+    prosesData(fasa4, 4);
 
     if (Object.keys(ikutSekolah).length === 0) {
       list.innerHTML =
@@ -986,6 +988,7 @@ function loadPeralatanPDP(email) {
             <div>FASA 1 : <strong>${data[1]}</strong></div>
             <div>FASA 2 : <strong>${data[2]}</strong></div>
             <div>FASA 3 : <strong>${data[3]}</strong></div>
+            <div>FASA 4 : <strong>${data[4]}</strong></div>
           </div>
         </li>
       `;
