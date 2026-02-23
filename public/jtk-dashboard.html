@@ -1011,6 +1011,17 @@ function loadPeralatanPDP(email) {
 
 
 
+/* ================= NAMA PAPARAN CUSTOM ================= */
+const NAMA_CUSTOM = {
+  "fitrieusop": "FITRI",
+  "mohmadishak": "ISHAK",
+  "harisrosli": "HARIS",
+  "yusminudin": "MIE",
+  "dianasaad": "NANA",
+  "dikneswary": "EMY"
+};
+
+
 /* ================= AUTH ================= */
 firebase.auth().onAuthStateChanged(user => {
 
@@ -1030,7 +1041,7 @@ firebase.auth().onAuthStateChanged(user => {
     const sekarang = new Date();
     const jam = sekarang.getHours();
 
-    let salam = "Selamat Datang";
+    let salam;
 
     if (jam < 12) {
       salam = "Selamat Pagi";
@@ -1042,9 +1053,13 @@ firebase.auth().onAuthStateChanged(user => {
       salam = "Selamat Malam";
     }
 
+    // Ambil username sebelum @
+    const username = email.split("@")[0].toLowerCase();
+
+    // Guna nama custom jika ada, jika tiada guna default
     const namaPaparan =
-      user.displayName ||
-      email.split("@")[0].replace(".", " ").toUpperCase();
+      NAMA_CUSTOM[username] ||
+      username.replace(".", " ").toUpperCase();
 
     ucapanBox.innerHTML = `
       ${salam}, 
@@ -1070,6 +1085,7 @@ firebase.auth().onAuthStateChanged(user => {
   } else {
     console.warn("Pengguna biasa:", email);
   }
+
 });
 
 
