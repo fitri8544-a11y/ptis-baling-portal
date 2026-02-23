@@ -1008,15 +1008,6 @@ function loadPeralatanPDP(email) {
   });
 }
 
-/* ================= ADMIN EMAIL ================= */
-const ADMIN_EMAILS = [
-  "fitrieusop@moe.gov.my",
-  "harisrosli@moe.gov.my",
-  "mohmadishak@moe.gov.my",
-  "yusminudin@moe.gov.my",
-  "dianasaad@moe.gov.my",
-  "dikneswarysubaiah@moe.gov.my"
-];
 
 /* ================= NAMA PAPARAN CUSTOM ================= */
 const NAMA_CUSTOM = {
@@ -1025,7 +1016,7 @@ const NAMA_CUSTOM = {
   "harisrosli": "Haris",
   "yusminudin": "Mie",
   "dianasaad": "Nana",
-  "dikneswarysubaiah": "Emy"
+  "dikneswary": "Emy"
 };
 
 
@@ -1064,9 +1055,7 @@ firebase.auth().onAuthStateChanged(user => {
   });
 
   /* ================= ROLE BADGE ================= */
-  const isAdmin = ADMIN_EMAILS.includes(email);
-
-  const role = isAdmin
+  const role = ADMIN_EMAILS.includes(email)
     ? `<span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full ml-2">
          Admin JTK
        </span>`
@@ -1074,7 +1063,7 @@ firebase.auth().onAuthStateChanged(user => {
          Ahli Pasukan
        </span>`;
 
-  /* ================= PAPAR UCAPAN ================= */
+  /* ================= PAPAR KE DASHBOARD ================= */
   const ucapanBox = document.getElementById("ucapanSelamatDatang");
 
   if (ucapanBox) {
@@ -1101,6 +1090,7 @@ firebase.auth().onAuthStateChanged(user => {
       </div>
     `;
 
+    // Fade-in animation
     setTimeout(() => {
       ucapanBox.classList.remove("opacity-0");
     }, 100);
@@ -1113,14 +1103,6 @@ firebase.auth().onAuthStateChanged(user => {
   loadPerantiGuru(email);
   loadPDT(email);
   loadPeralatanPDP(email);
-
-  /* ================= AKSES ADMIN (INTUNE) ================= */
-  if (isAdmin) {
-    const intuneCard = document.getElementById("intuneCard");
-    if (intuneCard) {
-      intuneCard.classList.remove("hidden");
-    }
-  }
 
 });
 
