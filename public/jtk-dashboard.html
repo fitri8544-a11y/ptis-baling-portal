@@ -34,7 +34,7 @@
 <main class="max-w-7xl mx-auto p-6 space-y-10">
 
   <div id="ucapanSelamatDatang"
-     class="mb-4 text-sm font-semibold text-gray-700">
+     class="mb-6 opacity-0 transition duration-700 ease-in-out">
 </div>
 
   <!-- ================= AKSES PANTAS ================= -->
@@ -1013,16 +1013,16 @@ function loadPeralatanPDP(email) {
 
 /* ================= NAMA PAPARAN CUSTOM ================= */
 const NAMA_CUSTOM = {
-  "fitrieusop": "FITRI",
-  "mohmadishak": "ISHAK",
-  "harisrosli": "HARIS",
-  "yusminudin": "MIE",
-  "dianasaad": "NANA",
-  "dikneswarysubaiah": "EMY"
+  "fitrieusop": "Fitri",
+  "mohmadishak": "Ishak",
+  "harisrosli": "Haris",
+  "yusminudin": "Mie",
+  "dianasaad": "Nana",
+  "dikneswary": "Emy"
 };
 
 
-/* ================= AUTH ================= */
+/* ================= AUTH PREMIUM ================= */
 firebase.auth().onAuthStateChanged(user => {
 
   if (!user) {
@@ -1031,42 +1031,71 @@ firebase.auth().onAuthStateChanged(user => {
   }
 
   const email = user.email.toLowerCase().trim();
-  console.log("Email login:", email);
+  const username = email.split("@")[0].toLowerCase();
 
-  /* ================= UCAPAN SELAMAT DATANG ================= */
+  const namaPaparan =
+    NAMA_CUSTOM[username] ||
+    username.replace(".", " ")
+            .replace(/\b\w/g, c => c.toUpperCase());
+
+  /* ================= UCAPAN IKUT WAKTU ================= */
+  const sekarang = new Date();
+  const jam = sekarang.getHours();
+
+  let salam;
+  if (jam < 12) salam = "Selamat Pagi";
+  else if (jam < 15) salam = "Selamat Tengah Hari";
+  else if (jam < 19) salam = "Selamat Petang";
+  else salam = "Selamat Malam";
+
+  /* ================= TARIKH HARI INI ================= */
+  const tarikh = sekarang.toLocaleDateString("ms-MY", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+
+  /* ================= ROLE BADGE ================= */
+  const role = ADMIN_EMAILS.includes(email)
+    ? `<span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full ml-2">
+         Admin JTK
+       </span>`
+    : `<span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full ml-2">
+         Ahli Pasukan
+       </span>`;
+
+  /* ================= PAPAR KE DASHBOARD ================= */
   const ucapanBox = document.getElementById("ucapanSelamatDatang");
 
   if (ucapanBox) {
 
-    const sekarang = new Date();
-    const jam = sekarang.getHours();
-
-    let salam;
-
-    if (jam < 12) {
-      salam = "Selamat Pagi";
-    } else if (jam < 15) {
-      salam = "Selamat Tengah Hari";
-    } else if (jam < 19) {
-      salam = "Selamat Petang";
-    } else {
-      salam = "Selamat Malam";
-    }
-
-    // Ambil username sebelum @
-    const username = email.split("@")[0].toLowerCase();
-
-    // Guna nama custom jika ada, jika tiada guna default
-    const namaPaparan =
-      NAMA_CUSTOM[username] ||
-      username.replace(".", " ").toUpperCase();
-
     ucapanBox.innerHTML = `
-      ${salam}, 
-      <span class="text-blue-700 font-bold">
-        ${namaPaparan}
-      </span> 👋
+      <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-5">
+
+        <div class="flex justify-between items-center flex-wrap gap-2">
+
+          <div>
+            <h2 class="text-lg font-semibold text-gray-800">
+              ${salam}, 
+              <span class="text-blue-700 font-bold">${namaPaparan}</span> 👋
+              ${role}
+            </h2>
+
+            <p class="text-sm text-gray-500 mt-1 capitalize">
+              ${tarikh}
+            </p>
+          </div>
+
+        </div>
+
+      </div>
     `;
+
+    // Fade-in animation
+    setTimeout(() => {
+      ucapanBox.classList.remove("opacity-0");
+    }, 100);
   }
 
   /* ================= LOAD DATA DASHBOARD ================= */
@@ -1076,15 +1105,6 @@ firebase.auth().onAuthStateChanged(user => {
   loadPerantiGuru(email);
   loadPDT(email);
   loadPeralatanPDP(email);
-
-  /* ================= AKSES ADMIN ================= */
-  if (ADMIN_EMAILS.includes(email)) {
-    document.getElementById("adminSection")?.classList.remove("hidden");
-    document.getElementById("intuneCard")?.classList.remove("hidden");
-    console.log("Akses admin diberi:", email);
-  } else {
-    console.warn("Pengguna biasa:", email);
-  }
 
 });
 
