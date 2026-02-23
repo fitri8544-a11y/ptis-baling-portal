@@ -940,11 +940,12 @@ function loadPeralatanPDP(email) {
 
         const sekolah = row["NAMA SEKOLAH"]?.trim() || "-";
 
-        if ikutSekolah[sekolah] = {
-              1: "TIDAK TERLIBAT",
-              2: "TIDAK TERLIBAT",
-              3: "TIDAK TERLIBAT",
-              4: "TIDAK TERLIBAT"
+        if (!ikutSekolah[sekolah]) {
+          ikutSekolah[sekolah] = {
+            1: "TIDAK TERLIBAT",
+            2: "TIDAK TERLIBAT",
+            3: "TIDAK TERLIBAT",
+            4: "TIDAK TERLIBAT"
           };
         }
 
