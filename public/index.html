@@ -591,8 +591,9 @@ footer .max-w-7xl {
 
 <!-- BUTTON -->
 <div class="chatbot-btn" onclick="bukaChatbot()">
-  <div class="chatbot-text">
-    Semoga Ramadan anda diberkati 🌙 Nak tanya apa-apa? Tekan sini 🤖
+  <div class="chatbot-text" id="chatbotText">
+    Salam Ramadan 🌙 <br>
+    Perlukan bantuan? Klik untuk bertanya.
   </div>
   <div class="chatbot-icon">
     🤖
@@ -782,6 +783,29 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  const text = document.getElementById("chatbotText");
+  const hour = new Date().getHours();
+
+  if (hour >= 6 && hour < 18) {
+    // Waktu siang
+    text.innerHTML = `
+      Selamat Menjalani Ibadah Puasa 🌤️<br>
+      Perlukan bantuan? Klik untuk bertanya.
+    `;
+  } else {
+    // Waktu malam
+    text.innerHTML = `
+      Selamat Berbuka & Salam Tarawih 🌙<br>
+      Ada pertanyaan? Saya sedia membantu.
+    `;
+  }
+
 });
 </script>
 
