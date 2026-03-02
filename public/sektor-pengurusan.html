@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
+  <link rel="stylesheet" href="css/style.css">
   <meta charset="UTF-8">
   <title>Sektor Pengurusan Maklumat</title>
   <link rel="icon" href="/assets/favicon.png" type="image/png">
@@ -367,14 +368,18 @@
 }
 </style>
 
-<!-- BUTTON -->
-<div class="chatbot-btn" onclick="bukaChatbot()">
-  <div class="chatbot-text">
-    Perlukan bantuan? Klik saya 💬
+<!-- ================= RAMADAN CHATBOT BUTTON ================= -->
+<div class="chatbot-btn" onclick="bukaChatbot()" id="chatbotBtn">
+  
+  <div class="chatbot-text" id="chatbotText">
+    Salam Ramadan 🌙 <br>
+    Perlukan bantuan? Klik untuk bertanya.
   </div>
+
   <div class="chatbot-icon">
     🤖
   </div>
+
 </div>
 
 <!-- MODAL CHATBOT -->
@@ -422,6 +427,36 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  const text = document.getElementById("chatbotText");
+  const btn = document.getElementById("chatbotBtn");
+  const hour = new Date().getHours();
+
+  if (hour >= 6 && hour < 18) {
+
+    btn.classList.add("chatbot-ramadan-day");
+
+    text.innerHTML = `
+      Selamat Menjalani Ibadah Puasa 🌤️<br>
+      Perlukan bantuan? Klik untuk bertanya.
+    `;
+
+  } else {
+
+    btn.classList.add("chatbot-ramadan-night");
+
+    text.innerHTML = `
+      Selamat Berbuka & Salam Tarawih 🌙<br>
+      Ada pertanyaan? Saya sedia membantu.
+    `;
+
+  }
+
 });
 </script>
 
