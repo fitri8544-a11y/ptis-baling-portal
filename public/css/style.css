@@ -20,6 +20,13 @@
   background: linear-gradient(135deg, #0f766e, #059669);
 }
 
+.chatbot-text {
+  background: rgba(255,255,255,0.15);
+  padding: 8px 14px;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
+
 .chatbot-ramadan-night {
   background: linear-gradient(135deg, #1e3a8a, #4338ca);
   box-shadow: 0 0 20px rgba(99,102,241,0.6);
