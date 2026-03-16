@@ -59,6 +59,9 @@
 
   <div class="moon">🌙</div>
 
+  <div class="pelita pelita1">🏮</div>
+  <div class="pelita pelita2">🏮</div>
+
   <div class="raya-container">
     <span class="ketupat">🟩</span>
     <span class="ketupat">🟩</span>
@@ -865,8 +868,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 /* ================= EFFECT HARI RAYA ================= */
 
-/* ================= BACKGROUND RAYA ================= */
-
 .raya-bg{
   position:fixed;
   top:0;
@@ -877,24 +878,50 @@ document.addEventListener("DOMContentLoaded", function() {
   z-index:0;
 }
 
-/* ================= BULAN ================= */
+/* BULAN */
 
 .moon{
   position:absolute;
   top:40px;
-  right:60px;
+  right:80px;
   font-size:50px;
   animation:moonFloat 6s ease-in-out infinite;
-  opacity:0.8;
 }
 
 @keyframes moonFloat{
-  0%{ transform:translateY(0); }
-  50%{ transform:translateY(-10px); }
-  100%{ transform:translateY(0); }
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+  100%{transform:translateY(0);}
 }
 
-/* ================= KETUPAT ================= */
+/* PELITA */
+
+.pelita{
+  position:absolute;
+  font-size:34px;
+  animation:pelitaGlow 2s infinite alternate;
+}
+
+.pelita1{
+  top:120px;
+  left:60px;
+}
+
+.pelita2{
+  top:180px;
+  right:120px;
+}
+
+@keyframes pelitaGlow{
+  from{
+    filter:drop-shadow(0 0 2px orange);
+  }
+  to{
+    filter:drop-shadow(0 0 10px gold);
+  }
+}
+
+/* KETUPAT */
 
 .raya-container{
   position:absolute;
@@ -902,7 +929,6 @@ document.addEventListener("DOMContentLoaded", function() {
   left:0;
   width:100%;
   height:100%;
-  overflow:hidden;
 }
 
 .ketupat{
@@ -912,22 +938,65 @@ document.addEventListener("DOMContentLoaded", function() {
   animation:jatuhKetupat 12s linear infinite;
 }
 
-.ketupat:nth-child(1){ left:10%; animation-duration:9s;}
-.ketupat:nth-child(2){ left:30%; animation-duration:11s;}
-.ketupat:nth-child(3){ left:50%; animation-duration:8s;}
-.ketupat:nth-child(4){ left:70%; animation-duration:12s;}
-.ketupat:nth-child(5){ left:90%; animation-duration:10s;}
+.ketupat:nth-child(1){left:10%;animation-duration:9s;}
+.ketupat:nth-child(2){left:30%;animation-duration:11s;}
+.ketupat:nth-child(3){left:50%;animation-duration:8s;}
+.ketupat:nth-child(4){left:70%;animation-duration:12s;}
+.ketupat:nth-child(5){left:90%;animation-duration:10s;}
 
 @keyframes jatuhKetupat{
-  0%{
-    transform:translateY(-50px) rotate(0deg);
-  }
-  100%{
-    transform:translateY(110vh) rotate(360deg);
-  }
+  0%{transform:translateY(-50px) rotate(0deg);}
+  100%{transform:translateY(110vh) rotate(360deg);}
 }
 
 </style>
+
+/* ================= POPUP UCAPAN HARI RAYA ================= */
+
+<div id="rayaPopup" class="raya-popup">
+  <div class="raya-box">
+    <h2>🌙 Selamat Hari Raya Aidilfitri</h2>
+    <p>
+      Maaf Zahir dan Batin daripada<br>
+      Pasukan Teknikal ICT Sekolah Daerah Baling
+    </p>
+    <button onclick="tutupRaya()">Tutup</button>
+  </div>
+</div>
+
+<style>
+.raya-popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.raya-box{
+  background:white;
+  padding:30px;
+  border-radius:12px;
+  text-align:center;
+  max-width:350px;
+}
+
+.raya-box button{
+  margin-top:15px;
+  background:#1e40af;
+  color:white;
+  padding:8px 16px;
+  border-radius:6px;
+}
+</style>
+
+<script>
+function tutupRaya(){
+  document.getElementById("rayaPopup").style.display="none";
+}
+</script>
 
 </body>
 </html>
