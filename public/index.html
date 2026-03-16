@@ -74,9 +74,7 @@
 
 <!-- ================= HEADER ================= -->
 <header class="header-raya text-white">
-<div class="ketupat-header">
-  🟩 🟩 🟩
-</div>
+
 
   <!-- BAR ATAS: LOGO + TAJUK -->
   <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 p-4 md:p-6 max-w-7xl mx-auto">
@@ -1040,25 +1038,6 @@ function tutupRaya(){
   from{background-position:0 0,0 0,0 0;}
   to{background-position:200px 200px,-200px 200px,200px -200px;}
 }
-</style>
-
-/* KETUPAT HEADER */
-
-<style>
-ketupat-header{
-  position:absolute;
-  top:10px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:26px;
-  animation:ketupatSwing 3s ease-in-out infinite;
-}
-
-@keyframes ketupatSwing{
-  0%{transform:translateX(-50%) rotate(-5deg);}
-  50%{transform:translateX(-50%) rotate(5deg);}
-  100%{transform:translateX(-50%) rotate(-5deg);}
-}  
 </style>
 
 </body>
