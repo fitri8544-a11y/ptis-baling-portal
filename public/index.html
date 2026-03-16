@@ -53,13 +53,20 @@
 
 <body class="bg-gray-100">
 
-<!-- EFFECT HARI RAYA -->
-<div class="raya-container">
-  <span class="ketupat">🟩</span>
-  <span class="ketupat">🟩</span>
-  <span class="ketupat">🟩</span>
-  <span class="ketupat">🟩</span>
-  <span class="ketupat">🟩</span>
+<!-- ================= EFFECT HARI RAYA ================= -->
+
+<div class="raya-bg">
+
+  <div class="moon">🌙</div>
+
+  <div class="raya-container">
+    <span class="ketupat">🟩</span>
+    <span class="ketupat">🟩</span>
+    <span class="ketupat">🟩</span>
+    <span class="ketupat">🟩</span>
+    <span class="ketupat">🟩</span>
+  </div>
+
 </div>
 
 <!-- ================= HEADER ================= -->
@@ -858,28 +865,57 @@ document.addEventListener("DOMContentLoaded", function() {
 
 /* ================= EFFECT HARI RAYA ================= */
 
-.raya-container{
+/* ================= BACKGROUND RAYA ================= */
+
+.raya-bg{
   position:fixed;
   top:0;
   left:0;
   width:100%;
   height:100%;
   pointer-events:none;
+  z-index:0;
+}
+
+/* ================= BULAN ================= */
+
+.moon{
+  position:absolute;
+  top:40px;
+  right:60px;
+  font-size:50px;
+  animation:moonFloat 6s ease-in-out infinite;
+  opacity:0.8;
+}
+
+@keyframes moonFloat{
+  0%{ transform:translateY(0); }
+  50%{ transform:translateY(-10px); }
+  100%{ transform:translateY(0); }
+}
+
+/* ================= KETUPAT ================= */
+
+.raya-container{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
   overflow:hidden;
-  z-index:999;
 }
 
 .ketupat{
   position:absolute;
   top:-40px;
-  font-size:24px;
-  animation:jatuhKetupat 10s linear infinite;
+  font-size:22px;
+  animation:jatuhKetupat 12s linear infinite;
 }
 
 .ketupat:nth-child(1){ left:10%; animation-duration:9s;}
-.ketupat:nth-child(2){ left:30%; animation-duration:12s;}
+.ketupat:nth-child(2){ left:30%; animation-duration:11s;}
 .ketupat:nth-child(3){ left:50%; animation-duration:8s;}
-.ketupat:nth-child(4){ left:70%; animation-duration:11s;}
+.ketupat:nth-child(4){ left:70%; animation-duration:12s;}
 .ketupat:nth-child(5){ left:90%; animation-duration:10s;}
 
 @keyframes jatuhKetupat{
