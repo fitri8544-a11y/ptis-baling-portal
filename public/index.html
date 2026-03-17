@@ -1015,5 +1015,53 @@ ketupat-header{
 }  
 </style>
 
+<!-- ================= POPUP POSTER RAYA ================= -->
+
+<div id="posterRaya" class="poster-overlay">
+  <div class="poster-box">
+
+    <img src="/mnt/data/PTISKK.png" alt="Poster Hari Raya" class="poster-img">
+
+    <button onclick="tutupPoster()" class="poster-close">TUTUP</button>
+
+  </div>
+</div>
+
+/* ================= POPUP POSTER ================= */
+<style> 
+.poster-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:99999;
+}
+
+.poster-box{
+  max-width:420px;
+  width:90%;
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 10px 40px rgba(0,0,0,0.4);
+  text-align:center;
+}
+
+.poster-img{
+  width:100%;
+  height:auto;
+}
+
+.poster-close{
+  width:100%;
+  padding:12px;
+  background:#1e40af;
+  color:white;
+  font-weight:bold;
+}
+</style>
+
 </body>
 </html>
