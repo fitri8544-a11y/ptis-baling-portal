@@ -1020,7 +1020,7 @@ ketupat-header{
 <div id="posterRaya" class="poster-overlay">
   <div class="poster-box">
 
-    <img src="/mnt/data/PTISKK.png" alt="Poster Hari Raya" class="poster-img">
+    <img src="/assets/poster-raya.png" alt="Poster Hari Raya" class="poster-img">
 
     <button onclick="tutupPoster()" class="poster-close">TUTUP</button>
 
@@ -1062,6 +1062,21 @@ ketupat-header{
   font-weight:bold;
 }
 </style>
+
+<script>
+function tutupPoster(){
+  document.getElementById("posterRaya").style.display = "none";
+}
+
+/* OPTIONAL: papar sekali sahaja */
+window.onload = function(){
+  if(localStorage.getItem("rayaShown")){
+    document.getElementById("posterRaya").style.display = "none";
+  } else {
+    localStorage.setItem("rayaShown","true");
+  }
+}
+</script>
 
 </body>
 </html>
