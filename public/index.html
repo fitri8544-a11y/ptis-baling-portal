@@ -1020,22 +1020,32 @@ ketupat-header{
 <div id="rayaPopup" class="raya-overlay">
   <div class="raya-box">
 
-    <img src="/assets/poster-raya.png" class="raya-img">
+```
+<img src="/assets/poster-raya.png" class="raya-img">
 
-    <button onclick="tutupRaya()" class="raya-close">
-      ✕ Tutup
-    </button>
+<button onclick="tutupRaya()" class="raya-close">
+  ✕ Tutup
+</button>
+```
 
   </div>
 </div>
 
 <!-- AUDIO RAYA -->
+
 <audio id="laguRaya" loop>
   <source src="/assets/lagu-raya.mp3" type="audio/mpeg">
 </audio>
 
+<!-- BUTTON LAGU -->
+
+<button onclick="mainLagu()" class="btn-lagu">
+  🔊 Lagu Raya
+</button>
+
 <style>
-/* ================= POPUP PREMIUM ================= */
+
+/* ================= POPUP ================= */
 
 .raya-overlay{
   position:fixed;
@@ -1077,7 +1087,23 @@ ketupat-header{
   cursor:pointer;
 }
 
-/* ANIMASI */
+/* ================= BUTTON LAGU ================= */
+
+.btn-lagu{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  background:#16a34a;
+  color:white;
+  padding:10px 14px;
+  border-radius:999px;
+  font-size:12px;
+  z-index:9999;
+  box-shadow:0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* ================= ANIMASI ================= */
+
 @keyframes zoomIn{
   from{transform:scale(0.7);opacity:0;}
   to{transform:scale(1);opacity:1;}
@@ -1088,25 +1114,42 @@ ketupat-header{
   to{opacity:1;}
 }
 
-/* ================= CONFETTI ================= */
+/* ================= BINTANG ================= */
 
-.confetti{
+.star{
   position:fixed;
   top:0;
-  width:8px;
-  height:8px;
-  background:gold;
-  animation:fall 5s linear infinite;
+  font-size:14px;
+  animation:fallStar linear infinite;
   z-index:9999;
 }
 
-@keyframes fall{
+/* ================= KETUPAT ================= */
+
+.ketupat-fall{
+  position:fixed;
+  top:0;
+  font-size:18px;
+  animation:fallKetupat linear infinite;
+  z-index:9999;
+}
+
+@keyframes fallStar{
   from{transform:translateY(-10px);}
   to{transform:translateY(110vh);}
 }
+
+@keyframes fallKetupat{
+  from{transform:translateY(-10px) rotate(0deg);}
+  to{transform:translateY(110vh) rotate(360deg);}
+}
+
 </style>
 
 <script>
+
+/* ================= TUTUP POPUP ================= */
+
 function tutupRaya(){
   const popup = document.getElementById("rayaPopup");
   if(popup) popup.style.display = "none";
@@ -1115,19 +1158,29 @@ function tutupRaya(){
   if(lagu) lagu.pause();
 }
 
-/* ================= FIX AUTOPLAY ================= */
-/* Lagu akan main bila user klik mana-mana */
+/* ================= MAIN LAGU ================= */
+
+function mainLagu(){
+  const lagu = document.getElementById("laguRaya");
+
+  if(lagu){
+    lagu.volume = 0.3;
+    lagu.play().catch(()=>{});
+  }
+}
+
+/* ================= AUTOPLAY FIX ================= */
 
 document.addEventListener("click", function() {
   const lagu = document.getElementById("laguRaya");
 
   if (lagu && lagu.paused) {
     lagu.volume = 0.3;
-    lagu.play().catch(err => console.log("Audio blocked:", err));
+    lagu.play().catch(()=>{});
   }
 }, { once: true });
 
-/* ================= AUTO CONTROL ================= */
+/* ================= LOAD CONTROL ================= */
 
 window.addEventListener("load", () => {
 
@@ -1136,27 +1189,38 @@ window.addEventListener("load", () => {
   // hanya sekali sahaja
   if(localStorage.getItem("raya2026")){
     if(popup) popup.style.display = "none";
-    return;
+  } else {
+    localStorage.setItem("raya2026","true");
+
+    // auto tutup
+    setTimeout(()=>{
+      if(popup) popup.style.display = "none";
+    },8000);
   }
 
-  localStorage.setItem("raya2026","true");
+  // ================= BINTANG =================
+  for(let i=0;i<15;i++){
+    let star = document.createElement("div");
+    star.className="star";
+    star.innerHTML="⭐";
+    star.style.left = Math.random()*100 + "vw";
+    star.style.animationDuration = (3 + Math.random()*3) + "s";
+    document.body.appendChild(star);
+  }
 
-  // AUTO TUTUP selepas 8 saat
-  setTimeout(()=>{
-    if(popup) popup.style.display = "none";
-  },8000);
-
-  // CONFETTI
-  for(let i=0;i<20;i++){
-    let conf = document.createElement("div");
-    conf.className="confetti";
-    conf.style.left = Math.random()*100 + "vw";
-    conf.style.animationDuration = (3 + Math.random()*3) + "s";
-    document.body.appendChild(conf);
+  // ================= KETUPAT =================
+  for(let i=0;i<10;i++){
+    let ketupat = document.createElement("div");
+    ketupat.className="ketupat-fall";
+    ketupat.innerHTML="🟩";
+    ketupat.style.left = Math.random()*100 + "vw";
+    ketupat.style.animationDuration = (4 + Math.random()*4) + "s";
+    document.body.appendChild(ketupat);
   }
 
 });
 </script>
+
 
 </body>
 </html>
