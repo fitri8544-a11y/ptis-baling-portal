@@ -1015,7 +1015,7 @@ ketupat-header{
 }  
 </style>
 
-<!-- ================= RAYA PREMIUM ================= -->
+<!-- ================= RAYA PREMIUM FINAL ================= -->
 
 <div id="rayaPopup" class="raya-overlay">
   <div class="raya-box">
@@ -1108,37 +1108,42 @@ ketupat-header{
 
 <script>
 function tutupRaya(){
-  document.getElementById("rayaPopup").style.display = "none";
+  const popup = document.getElementById("rayaPopup");
+  if(popup) popup.style.display = "none";
 
   const lagu = document.getElementById("laguRaya");
-  lagu.pause();
+  if(lagu) lagu.pause();
 }
 
-/* AUTO CONTROL */
+/* ================= FIX AUTOPLAY ================= */
+/* Lagu akan main bila user klik mana-mana */
+
+document.addEventListener("click", function() {
+  const lagu = document.getElementById("laguRaya");
+
+  if (lagu && lagu.paused) {
+    lagu.volume = 0.3;
+    lagu.play().catch(err => console.log("Audio blocked:", err));
+  }
+}, { once: true });
+
+/* ================= AUTO CONTROL ================= */
+
 window.addEventListener("load", () => {
 
   const popup = document.getElementById("rayaPopup");
-  const lagu = document.getElementById("laguRaya");
 
   // hanya sekali sahaja
   if(localStorage.getItem("raya2026")){
-    popup.style.display = "none";
+    if(popup) popup.style.display = "none";
     return;
   }
 
   localStorage.setItem("raya2026","true");
 
-  // main lagu (browser mungkin block → kita paksa klik)
-  setTimeout(()=>{
-    lagu.volume = 0.3;
-    lagu.play().catch(()=>{
-      console.log("Autoplay blocked, tunggu interaksi user");
-    });
-  },500);
-
   // AUTO TUTUP selepas 8 saat
   setTimeout(()=>{
-    popup.style.display = "none";
+    if(popup) popup.style.display = "none";
   },8000);
 
   // CONFETTI
