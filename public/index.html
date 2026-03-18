@@ -1155,7 +1155,12 @@ function tutupRaya(){
   if(popup) popup.style.display = "none";
 
   const lagu = document.getElementById("laguRaya");
-  if(lagu) lagu.pause();
+
+  // MAIN LAGU SELEPAS USER INTERACT
+  if(lagu){
+    lagu.volume = 0.3;
+    lagu.play().catch(()=>{});
+  }
 }
 
 /* ================= MAIN LAGU ================= */
