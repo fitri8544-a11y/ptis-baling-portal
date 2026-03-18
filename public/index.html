@@ -1015,68 +1015,142 @@ ketupat-header{
 }  
 </style>
 
-<!-- ================= POPUP POSTER RAYA ================= -->
+<!-- ================= RAYA PREMIUM ================= -->
 
-<div id="posterRaya" class="poster-overlay">
-  <div class="poster-box">
+<div id="rayaPopup" class="raya-overlay">
+  <div class="raya-box">
 
-    <img src="/assets/poster-raya.png" alt="Poster Hari Raya" class="poster-img">
+    <img src="/assets/poster-raya.png" class="raya-img">
 
-    <button onclick="tutupPoster()" class="poster-close">TUTUP</button>
+    <button onclick="tutupRaya()" class="raya-close">
+      ✕ Tutup
+    </button>
 
   </div>
 </div>
 
-<style> 
-/* ================= POPUP POSTER ================= */
+<!-- AUDIO RAYA -->
+<audio id="laguRaya" loop>
+  <source src="/assets/lagu-raya.mp3" type="audio/mpeg">
+</audio>
 
-.poster-overlay{
+<style>
+/* ================= POPUP PREMIUM ================= */
+
+.raya-overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.6);
+  background:rgba(0,0,0,0.75);
   display:flex;
   justify-content:center;
   align-items:center;
   z-index:99999;
+  animation:fadeIn 0.6s ease;
 }
 
-.poster-box{
-  max-width:420px;
+.raya-box{
   width:90%;
-  background:white;
-  border-radius:12px;
+  max-width:420px;
+  border-radius:14px;
   overflow:hidden;
-  box-shadow:0 10px 40px rgba(0,0,0,0.4);
-  text-align:center;
+  box-shadow:0 15px 50px rgba(0,0,0,0.6);
+  animation:zoomIn 0.6s ease;
+  background:white;
+  position:relative;
 }
 
-.poster-img{
+.raya-img{
   width:100%;
-  height:auto;
+  display:block;
 }
 
-.poster-close{
-  width:100%;
-  padding:12px;
+.raya-close{
+  position:absolute;
+  top:10px;
+  right:10px;
   background:#1e40af;
   color:white;
-  font-weight:bold;
+  border:none;
+  padding:6px 12px;
+  border-radius:6px;
+  font-size:12px;
+  cursor:pointer;
+}
+
+/* ANIMASI */
+@keyframes zoomIn{
+  from{transform:scale(0.7);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+/* ================= CONFETTI ================= */
+
+.confetti{
+  position:fixed;
+  top:0;
+  width:8px;
+  height:8px;
+  background:gold;
+  animation:fall 5s linear infinite;
+  z-index:9999;
+}
+
+@keyframes fall{
+  from{transform:translateY(-10px);}
+  to{transform:translateY(110vh);}
 }
 </style>
 
 <script>
-function tutupPoster(){
-  document.getElementById("posterRaya").style.display = "none";
+function tutupRaya(){
+  document.getElementById("rayaPopup").style.display = "none";
+
+  const lagu = document.getElementById("laguRaya");
+  lagu.pause();
 }
 
-/* OPTIONAL: papar sekali sahaja */
-window.onload = function(){
-  if(localStorage.getItem("rayaShown")){
-    document.getElementById("posterRaya").style.display = "none";
-  } else {
-    localStorage.setItem("rayaShown","true");
+/* AUTO CONTROL */
+window.addEventListener("load", () => {
+
+  const popup = document.getElementById("rayaPopup");
+  const lagu = document.getElementById("laguRaya");
+
+  // hanya sekali sahaja
+  if(localStorage.getItem("raya2026")){
+    popup.style.display = "none";
+    return;
   }
-}
+
+  localStorage.setItem("raya2026","true");
+
+  // main lagu (browser mungkin block → kita paksa klik)
+  setTimeout(()=>{
+    lagu.volume = 0.3;
+    lagu.play().catch(()=>{
+      console.log("Autoplay blocked, tunggu interaksi user");
+    });
+  },500);
+
+  // AUTO TUTUP selepas 8 saat
+  setTimeout(()=>{
+    popup.style.display = "none";
+  },8000);
+
+  // CONFETTI
+  for(let i=0;i<20;i++){
+    let conf = document.createElement("div");
+    conf.className="confetti";
+    conf.style.left = Math.random()*100 + "vw";
+    conf.style.animationDuration = (3 + Math.random()*3) + "s";
+    document.body.appendChild(conf);
+  }
+
+});
 </script>
 
 </body>
