@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<title>DISPLAY PTIS</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body { overflow: hidden; }
+
+/* SLIDE */
+.slide {
+  display: none;
+  width: 100%;
+}
+
+.slide.active {
+  display: flex; /* penting untuk welcome */
+}
+
+/* ANIMASI */
+.fade {
+  animation: fade 1s ease-in-out;
+}
+@keyframes fade {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes scrollUp {
+  0% { transform: translateY(100%); }
+  100% { transform: translateY(-100%); }
+}
+
+.scroll-container {
+  overflow: hidden;
+  height: 200px;
+  position: relative;
+}
+
+.scroll-content {
+  position: absolute;
+  width: 100%;
+  animation: scrollUp 20s linear infinite;
+}
+
+/* ANIMATION MASUK */
+.card-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 0.8s ease forwards;
+}
+
+.card-animate:nth-child(1) { animation-delay: 0.2s; }
+.card-animate:nth-child(2) { animation-delay: 0.4s; }
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* HOVER GLOW */
+.card-hover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0,255,255,0.5);
+  transition: 0.3s;
+}
+</style>
+
+</head>
+
+<body class="bg-gradient-to-br from-blue-900 to-gray-900 text-white">
+
+<!-- HEADER -->
+<div class="h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500"></div>
+
+<div class="flex justify-between items-center px-10 py-6 bg-black/30 backdrop-blur">
+
+  <!-- KIRI -->
+  <div class="flex items-center gap-4">
+
+    <div class="bg-blue-700/50 p-3 rounded-xl shadow-lg">
+      <img src="assets/tv-icon.png" class="w-7 h-7">
+    </div>
+
+    <div>
+      <h1 class="text-3xl font-bold tracking-wide">
+        PTIS ZON KUALA KETIL
+      </h1>
+      <p class="text-xs text-gray-300">
+        Sistem Paparan Digital ICT
+      </p>
+    </div>
+
+  </div>
+
+  <!-- KANAN -->
+  <div class="text-right">
+    <div id="clock" class="text-3xl font-bold"></div>
+    <div id="date" class="text-sm text-gray-300"></div>
+  </div>
+
+</div>
+
+<!-- CONTENT -->
+<div class="h-[calc(100vh-100px)] p-10">
+
+<!-- SLIDE 0: WELCOME -->
+<div class="slide active fade flex flex-col justify-center items-center text-center">
+
+  <h1 class="text-5xl font-bold mb-4">
+    SELAMAT DATANG
+  </h1>
+
+  <h2 class="text-3xl text-yellow-300 font-semibold mb-6">
+    KE COE KUALA KETIL
+  </h2>
+
+  <p class="text-lg text-gray-300 mb-8">
+    Pasukan Teknikal ICT Sekolah Daerah Baling
+  </p>
+
+  <!-- INFO DASHBOARD -->
+  <div class="grid grid-cols-2 gap-6 text-center max-w-xl mx-auto">
+
+    <div class="bg-white/10 p-6 rounded-xl shadow-lg card-animate card-hover">
+      <p class="text-sm text-gray-300">🏫 Sekolah</p>
+      <h3 class="text-3xl font-bold" id="jumlahSekolah">--</h3>
+    </div>
+
+    <div class="bg-white/10 p-6 rounded-xl shadow-lg card-animate card-hover">
+      <p class="text-sm text-gray-300">👨‍💻 Ahli JTK</p>
+      <h3 class="text-3xl font-bold" id="jumlahJTK">--</h3>
+    </div>
+
+  </div>
+
+<div class="mt-10 w-full max-w-4xl mx-auto text-center">
+
+  <h3 class="text-xl font-bold mb-4 text-left">📍 PERGERAKAN JTK</h3>
+
+  <div id="jtkList" class="space-y-3"></div>
+
+  </div>
+
+</div>
+
+
+  <!-- SLIDE 1: MAKLUMAN -->
+  <div class="slide fade">
+
+    <h2 class="text-2xl font-bold mb-6">📢 MAKLUMAN TERKINI</h2>
+
+    <div id="maklumanList" class="space-y-4 text-xl">
+      <div class="bg-white/10 p-4 rounded animate-pulse">Memuatkan makluman...</div>
+    </div>
+
+  </div>
+
+  <!-- SLIDE 2: STATUS PERALATAN -->
+  <div class="slide fade">
+
+    <h2 class="text-2xl font-bold mb-6">🖨️ STATUS PERALATAN</h2>
+
+    <div id="statusContainer" class="grid grid-cols-2 md:grid-cols-4 gap-6"></div>
+
+  </div>
+
+  <!-- SLIDE 3: QR -->
+  <div class="slide fade text-center">
+
+    <h2 class="text-2xl font-bold mb-6">📱 SCAN UNTUK PINJAM</h2>
+
+    <img src="assets/qr-form.png" class="mx-auto w-72 mb-4">
+
+    <p class="text-lg text-gray-300">
+      Scan QR untuk membuat tempahan peralatan ICT
+    </p>
+
+  </div>
+
+</div>
+
+<!-- ================= SCRIPT ================= -->
+
+<script>
+document.getElementById("jumlahSekolah").innerText = "22";
+document.getElementById("jumlahJTK").innerText = "6";
+
+// ================= JAM =================
+function updateClock() {
+  const now = new Date();
+
+  document.getElementById("clock").innerText =
+    now.toLocaleTimeString("ms-MY");
+
+  document.getElementById("date").innerText =
+    now.toLocaleDateString("ms-MY", {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ================= SLIDE AUTO =================
+let slides = document.querySelectorAll(".slide");
+let current = -1;
+
+let durations = [8000, 10000, 10000, 10000];
+
+function showSlides() {
+
+  current++;
+  if(current >= slides.length) current = 0;
+
+  slides.forEach((s, index) => {
+    if(index === current){
+      s.classList.add("active");
+      s.style.display = "block";    
+    } else {
+      s.classList.remove("active");
+      s.style.display = "none";
+    }
+  });
+
+  let delay = durations[current] || 10000;
+
+  setTimeout(showSlides, delay);
+}
+
+// 🔥 WAJIB ADA
+showSlides();
+
+
+// ================= MAKLUMAN =================
+fetch("https://opensheet.elk.sh/1rdmHCCrBplfxSRitiYVOaXoPled1UTMQt-yk4FZrH_A/Makluman")
+.then(res => res.json())
+.then(data => {
+
+  let html = "";
+
+  data.slice(0,5).forEach(item => {
+    html += `
+      <div class="bg-white/10 p-4 rounded">
+        ${item.TAJUK}
+      </div>
+    `;
+  });
+
+  document.getElementById("maklumanList").innerHTML = html;
+
+});
+
+// ================= STATUS PERALATAN (VERSI BARU) =================
+fetch("https://opensheet.elk.sh/1rdmHCCrBplfxSRitiYVOaXoPled1UTMQt-yk4FZrH_A/Status")
+.then(res => res.json())
+.then(data => {
+
+  let html = "";
+
+  data.forEach(item => {
+
+    let color = "text-green-400";
+
+    if(item.AVAILABLE == 0){
+      color = "text-red-400";
+    }
+
+    html += `
+      <div class="bg-white/10 p-6 rounded text-center">
+        <h3 class="text-lg font-bold mb-2">${item.ITEM}</h3>
+        <p>Total: ${item.TOTAL}</p>
+        <p>Dipinjam: ${item.DIPINJAM}</p>
+        <p class="${color} font-bold">Available: ${item.AVAILABLE}</p>
+      </div>
+    `;
+  });
+
+  document.getElementById("statusContainer").innerHTML = html;
+
+});
+
+// ================= JTK =================
+fetch("https://opensheet.elk.sh/1rdmHCCrBplfxSRitiYVOaXoPled1UTMQt-yk4FZrH_A/JTK")
+.then(res => res.json())
+.then(data => {
+
+  let html = "";
+
+  data.slice(0,6).forEach(item => {
+
+    let statusColor = "text-green-400";
+    let statusText = "DALAM PEJABAT";
+
+    if(item["DALAM PEJABAT / CUTI"] === "CUTI REHAT"){
+      statusColor = "text-red-400";
+      statusText = "CUTI";
+    }
+
+    html += `
+      <div class="bg-white/10 p-4 rounded grid grid-cols-4 text-sm items-center">
+        
+        <div class="font-bold">👤 ${item.NAMA}</div>
+
+        <div class="${statusColor} font-semibold">
+          ${statusText}
+        </div>
+
+        <div>🏫 ${item.SEKOLAH || "-"}</div>
+
+        <div class="text-yellow-300">
+          ${item.AKTIVITI || "-"}
+        </div>
+
+      </div>
+    `;
+  });
+
+  document.getElementById("jtkList").innerHTML = html;
+
+});
+
+
+// ================= AUTO REFRESH =================
+setInterval(() => {
+  location.reload();
+}, 300000); // 5 minit
+
+</script>
+
+<audio id="bgMusic" autoplay muted loop>
+  <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+window.onload = () => {
+  const music = document.getElementById("bgMusic");
+
+  setTimeout(() => {
+    music.muted = false;
+    music.play().catch(() => {
+      console.log("Autoplay blocked, waiting for click...");
+    });
+  }, 2000);
+};
+
+document.addEventListener("click", () => {
+  const music = document.getElementById("bgMusic");
+  if(music.paused){
+    music.play();
+  }
+});
+</script>
+
+</body>
+</html>
