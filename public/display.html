@@ -11,11 +11,10 @@ body { overflow: hidden; }
 /* SLIDE */
 .slide {
   display: none;
-  width: 100%;
 }
 
 .slide.active {
-  display: flex; /* penting untuk welcome */
+  display: flex;
 }
 
 /* ANIMASI */
@@ -34,15 +33,10 @@ body { overflow: hidden; }
 
 .scroll-container {
   overflow: hidden;
-  height: 200px;
+  height: 350px;
   position: relative;
 }
 
-.scroll-content {
-  position: absolute;
-  width: 100%;
-  animation: scrollUp 20s linear infinite;
-}
 
 /* ANIMATION MASUK */
 .card-animate {
@@ -79,22 +73,13 @@ body { overflow: hidden; }
 <div class="flex justify-between items-center px-10 py-6 bg-black/30 backdrop-blur">
 
   <!-- KIRI -->
-  <div class="flex items-center gap-4">
-
-    <div class="bg-blue-700/50 p-3 rounded-xl shadow-lg">
-      <img src="assets/tv-icon.png" class="w-7 h-7">
-    </div>
-
-    <div>
-      <h1 class="text-3xl font-bold tracking-wide">
-        PTIS ZON KUALA KETIL
-      </h1>
-      <p class="text-xs text-gray-300">
-        Sistem Paparan Digital ICT
-      </p>
-    </div>
-
+<div class="flex items-center gap-3">
+  <img src="assets/logo.png" class="h-14 md:h-16 object-contain">
+  <div>
+    <h1 class="font-bold text-lg">KEMENTERIAN PENDIDIKAN</h1>
+    <p class="text-sm text-gray-300">PEJABAT PENDIDIKAN DAERAH BALING</p>
   </div>
+</div>
 
   <!-- KANAN -->
   <div class="text-right">
@@ -104,73 +89,113 @@ body { overflow: hidden; }
 
 </div>
 
+
 <!-- CONTENT -->
 <div class="h-[calc(100vh-100px)] p-10">
 
-<!-- SLIDE 0: WELCOME -->
-<div class="slide active fade flex flex-col justify-center items-center text-center">
+  <!-- SLIDE 0: DASHBOARD -->
+  <div class="slide active fade h-full flex flex-col justify-center">
 
-  <h1 class="text-5xl font-bold mb-4">
+      <h1 class="text-5xl font-bold mb-4 text-center w-full">
     SELAMAT DATANG
   </h1>
 
-  <h2 class="text-3xl text-yellow-300 font-semibold mb-6">
+  <h2 class="text-3xl text-yellow-300 font-semibold mb-6 text-center w-full">
     KE COE KUALA KETIL
   </h2>
 
-  <p class="text-lg text-gray-300 mb-8">
+  <p class="text-lg text-gray-300 mb-8 text-center w-full">
     Pasukan Teknikal ICT Sekolah Daerah Baling
   </p>
+    
+  <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto w-full">
 
-  <!-- INFO DASHBOARD -->
-  <div class="grid grid-cols-2 gap-6 text-center max-w-xl mx-auto">
+<!-- MAKLUMAN -->
+<div>
+  <h2 class="text-2xl font-bold mb-6">📢 MAKLUMAN TERKINI</h2>
 
-    <div class="bg-white/10 p-6 rounded-xl shadow-lg card-animate card-hover">
-      <p class="text-sm text-gray-300">🏫 Sekolah</p>
-      <h3 class="text-3xl font-bold" id="jumlahSekolah">--</h3>
+  <div class="scroll-container">
+    <div id="maklumanList" class="space-y-4 text-lg">
+
+      <div class="bg-white/10 p-4 rounded animate-pulse">
+        Memuatkan makluman...
+      </div>
+
     </div>
-
-    <div class="bg-white/10 p-6 rounded-xl shadow-lg card-animate card-hover">
-      <p class="text-sm text-gray-300">👨‍💻 Ahli JTK</p>
-      <h3 class="text-3xl font-bold" id="jumlahJTK">--</h3>
-    </div>
-
   </div>
 
-<div class="mt-10 w-full max-w-4xl mx-auto text-center">
+</div> 
 
-  <h3 class="text-xl font-bold mb-4 text-left">📍 PERGERAKAN JTK</h3>
+      <!-- JTK -->
+      <div>
+        <h2 class="text-2xl font-bold mb-6">📍 PERGERAKAN JTK</h2>
 
-  <div id="jtkList" class="space-y-3"></div>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="bg-white/10 p-4 rounded-xl text-center">
+            <p class="text-sm text-gray-300">🏫 Sekolah</p>
+            <h3 class="text-2xl font-bold" id="jumlahSekolah">--</h3>
+          </div>
+
+          <div class="bg-white/10 p-4 rounded-xl text-center">
+            <p class="text-sm text-gray-300">👨‍💻 Ahli JTK</p>
+            <h3 class="text-2xl font-bold" id="jumlahJTK">--</h3>
+          </div>
+        </div>
+
+        <div id="jtkList" class="space-y-3"></div>
+      </div>
+
+    </div>
+
+  </div> <!-- tutup SLIDE 0 -->
+
+<!-- SLIDE 1: DASHBOARD SEKOLAH -->
+<div class="slide fade">
+
+  <div class="w-full px-10">
+
+    <!-- INFO -->
+    <div class="bg-white/10 p-6 rounded-xl mb-8 text-center shadow-lg">
+  
+  <h2 class="text-2xl md:text-3xl font-bold tracking-wide text-white">
+    SENARAI SEKOLAH
+  </h2>
+  
+  <p class="text-sm md:text-base text-gray-300 mt-2">
+    Zon Kuala Ketil · Pejabat Pendidikan Daerah Baling
+  </p>
+
+</div>
+
+    <!-- SENARAI -->
+    <div class="bg-white/10 p-6 rounded">
+
+      <h3 class="text-lg font-bold mb-4 text-green-300">🏫 Sekolah Menengah</h3>
+      <div id="listMenengah" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-8"></div>
+
+      <h3 class="text-lg font-bold mb-4 text-blue-300">🏫 Sekolah Rendah (SK)</h3>
+      <div id="listSK" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-8"></div>
+
+      <h3 class="text-lg font-bold mb-4 text-purple-300">🏫 SJKC</h3>
+      <div id="listSJKC" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-8"></div>
+
+      <h3 class="text-lg font-bold mb-4 text-orange-300">🏫 SJKT</h3>
+      <div id="listSJKT" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3"></div>
+
+    </div>
 
   </div>
 
 </div>
 
-
-  <!-- SLIDE 1: MAKLUMAN -->
+  <!-- SLIDE 1: STATUS -->
   <div class="slide fade">
-
-    <h2 class="text-2xl font-bold mb-6">📢 MAKLUMAN TERKINI</h2>
-
-    <div id="maklumanList" class="space-y-4 text-xl">
-      <div class="bg-white/10 p-4 rounded animate-pulse">Memuatkan makluman...</div>
-    </div>
-
-  </div>
-
-  <!-- SLIDE 2: STATUS PERALATAN -->
-  <div class="slide fade">
-
-    <h2 class="text-2xl font-bold mb-6">🖨️ STATUS PERALATAN</h2>
-
+    <h2 class="text-2xl font-bold mb-6">🖨️ STATUS PERALATAN COE KUALA KETIL</h2>
     <div id="statusContainer" class="grid grid-cols-2 md:grid-cols-4 gap-6"></div>
-
   </div>
 
-  <!-- SLIDE 3: QR -->
+  <!-- SLIDE 2: QR -->
   <div class="slide fade text-center">
-
     <h2 class="text-2xl font-bold mb-6">📱 SCAN UNTUK PINJAM</h2>
 
     <img src="assets/qr-form.png" class="mx-auto w-72 mb-4">
@@ -178,7 +203,6 @@ body { overflow: hidden; }
     <p class="text-lg text-gray-300">
       Scan QR untuk membuat tempahan peralatan ICT
     </p>
-
   </div>
 
 </div>
@@ -207,11 +231,11 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// ================= SLIDE AUTO =================
+// ================= SLIDE AUTO (VERSI STABIL) =================
 let slides = document.querySelectorAll(".slide");
 let current = -1;
 
-let durations = [8000, 10000, 10000, 10000];
+let durations = [8000, 10000, 10000];
 
 function showSlides() {
 
@@ -221,7 +245,7 @@ function showSlides() {
   slides.forEach((s, index) => {
     if(index === current){
       s.classList.add("active");
-      s.style.display = "block";    
+      s.style.display = "block";
     } else {
       s.classList.remove("active");
       s.style.display = "none";
@@ -233,7 +257,6 @@ function showSlides() {
   setTimeout(showSlides, delay);
 }
 
-// 🔥 WAJIB ADA
 showSlides();
 
 
@@ -242,17 +265,20 @@ fetch("https://opensheet.elk.sh/1rdmHCCrBplfxSRitiYVOaXoPled1UTMQt-yk4FZrH_A/Mak
 .then(res => res.json())
 .then(data => {
 
-  let html = "";
+let html = "";
 
-  data.slice(0,5).forEach(item => {
-    html += `
-      <div class="bg-white/10 p-4 rounded">
-        ${item.TAJUK}
-      </div>
-    `;
-  });
+data.slice(0,5).forEach(item => {
+  html += `
+    <div class="bg-white/10 p-4 rounded">
+      ${item.TAJUK}
+    </div>
+  `;
+});
 
-  document.getElementById("maklumanList").innerHTML = html;
+document.getElementById("maklumanList").innerHTML = html;
+
+// 🔥 TAMBAH INI
+maklumanLoaded = true;
 
 });
 
@@ -292,40 +318,139 @@ fetch("https://opensheet.elk.sh/1rdmHCCrBplfxSRitiYVOaXoPled1UTMQt-yk4FZrH_A/JTK
 
   let html = "";
 
-  data.slice(0,6).forEach(item => {
+  const unique = [];
+const seen = new Set();
 
-    let statusColor = "text-green-400";
-    let statusText = "DALAM PEJABAT";
+data.forEach(item => {
+  const nama = item.NAMA;
 
-    if(item["DALAM PEJABAT / CUTI"] === "CUTI REHAT"){
-      statusColor = "text-red-400";
-      statusText = "CUTI";
-    }
+  if (!seen.has(nama)) {
+    seen.add(nama);
+    unique.push(item);
+  }
+});
 
-    html += `
-      <div class="bg-white/10 p-4 rounded grid grid-cols-4 text-sm items-center">
-        
-        <div class="font-bold">👤 ${item.NAMA}</div>
+unique.slice(0,6).forEach(item => {
 
-        <div class="${statusColor} font-semibold">
-          ${statusText}
-        </div>
+    const status = (item["DALAM PEJABAT / CUTI"] || "").toUpperCase().trim();
+    const lokasi = item["LOKASI"] || "-";
 
-        <div>🏫 ${item.SEKOLAH || "-"}</div>
+let statusColor = "text-green-400";
+let statusText = "DALAM PEJABAT";
 
-        <div class="text-yellow-300">
-          ${item.AKTIVITI || "-"}
-        </div>
+if (status === "LUAR PEJABAT") {
+  statusColor = "text-yellow-400";
+  statusText = "LUAR PEJABAT";
+}
+else if (status === "CUTI REHAT") {
+  statusColor = "text-blue-400";
+  statusText = "CUTI REHAT";
+}
+else if (status === "CUTI SAKIT") {
+  statusColor = "text-red-400";
+  statusText = "CUTI SAKIT";
+}
 
-      </div>
-    `;
+html += `
+  <div class="bg-white/10 p-4 rounded grid grid-cols-4 text-sm items-center 
+              transition hover:bg-white/20">
+
+    <!-- NAMA -->
+    <div class="font-bold">👤 ${item.NAMA}</div>
+
+    <!-- STATUS -->
+    <div>
+      <span class="px-3 py-1 rounded-full text-xs font-semibold ${statusColor} bg-white/10">
+        ${statusText}
+      </span>
+    </div>
+
+    <!-- LOKASI -->
+    <div class="text-gray-300">
+      📍 ${lokasi}
+    </div>
+
+    <!-- AKTIVITI -->
+    <div class="text-yellow-300">
+      ${item.AKTIVITI || "-"}
+    </div>
+
+  </div>
+`;
+
   });
 
   document.getElementById("jtkList").innerHTML = html;
 
 });
 
+// ================= SEKOLAH DASHBOARD =================
+fetch("https://opensheet.elk.sh/1rdmHCCrBplfxSRitiYVOaXoPled1UTMQt-yk4FZrH_A/SEKOLAH")
+.then(res => res.json())
+.then(data => {
 
+  let menengah = "";
+  let sk = "";
+  let sjkc = "";
+  let sjkt = "";
+
+  data.forEach(item => {
+
+    const nama = item["NAMA SEKOLAH"] || "";
+    const kod = item["KOD SEKOLAH"] || "";
+
+    if(!nama) return;
+
+    let bg = "bg-white/10";
+    let badge = "bg-blue-500";
+
+    // 🔥 WARNA IKUT KATEGORI
+    if(nama.includes("MENENGAH")){
+      bg = "bg-green-500/10";
+      badge = "bg-green-500";
+    }
+    else if(nama.includes("(CINA)")){
+      bg = "bg-purple-500/10";
+      badge = "bg-purple-500";
+    }
+    else if(nama.includes("(TAMIL)")){
+      bg = "bg-orange-500/10";
+      badge = "bg-orange-500";
+    }
+    else{
+      bg = "bg-blue-500/10";
+      badge = "bg-blue-500";
+    }
+
+    const card = `
+      <div class="${bg} p-3 rounded flex justify-between items-center hover:scale-[1.02] transition">
+        <span>${nama}</span>
+        <span class="${badge} text-xs px-2 py-1 rounded">${kod}</span>
+      </div>
+    `;
+
+    // 🔥 SUSUNAN BETUL
+    if(nama.includes("MENENGAH")){
+      menengah += card;
+    }
+    else if(nama.includes("(CINA)")){
+      sjkc += card;
+    }
+    else if(nama.includes("(TAMIL)")){
+      sjkt += card;
+    }
+    else{
+      sk += card;
+    }
+
+  });
+
+  document.getElementById("listMenengah").innerHTML = menengah;
+  document.getElementById("listSK").innerHTML = sk;
+  document.getElementById("listSJKC").innerHTML = sjkc;
+  document.getElementById("listSJKT").innerHTML = sjkt;
+
+});
 // ================= AUTO REFRESH =================
 setInterval(() => {
   location.reload();
