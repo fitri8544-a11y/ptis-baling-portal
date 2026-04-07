@@ -96,9 +96,9 @@ body { overflow: hidden; }
   <!-- SLIDE 0: DASHBOARD -->
   <div class="slide active fade h-full flex flex-col justify-center">
 
-      <h1 class="text-5xl font-bold mb-4 text-center w-full">
-    SELAMAT DATANG
-  </h1>
+      <h1 id="tajukUtama" class="text-5xl font-bold mb-4 text-center w-full">
+  SELAMAT DATANG
+</h1>
 
   <h2 class="text-3xl text-yellow-300 font-semibold mb-6 text-center w-full">
     KE COE KUALA KETIL
@@ -520,6 +520,27 @@ function autoScroll() {
 }
 
 setInterval(autoScroll, 80);
+</script>
+
+<script>
+const texts = ["SELAMAT DATANG", "WELCOME"];
+let index = 0;
+
+setInterval(() => {
+  const el = document.getElementById("tajukUtama");
+
+  // fade out
+  el.style.opacity = 0;
+
+  setTimeout(() => {
+    index = (index + 1) % texts.length;
+    el.innerText = texts[index];
+
+    // fade in
+    el.style.opacity = 1;
+  }, 500);
+
+}, 3000); // tukar setiap 3 saat
 </script>
 
 </body>
