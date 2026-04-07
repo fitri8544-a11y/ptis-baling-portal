@@ -509,21 +509,6 @@ document.addEventListener("click", () => {
 </script>
 
 <script>
-function autoScroll() {
-  const el = document.getElementById("jtkScroll");
-  if (!el) return;
-
-  el.scrollTop += 1;
-
-  if (el.scrollTop >= el.scrollHeight - el.clientHeight) {
-    el.scrollTop = 0;
-  }
-}
-
-setInterval(autoScroll, 80);
-</script>
-
-<script>
 function getGreetingTexts() {
   const hour = new Date().getHours();
 
@@ -542,43 +527,46 @@ function getGreetingTexts() {
     timeGreeting = ["SELAMAT MALAM", "GOOD NIGHT"];
   }
 
-  // 🔥 GABUNG DENGAN WELCOME (SENTIASA ADA)
   return ["SELAMAT DATANG", "WELCOME", ...timeGreeting];
 }
 
 let texts = getGreetingTexts();
 
-let i = 0;
-let j = 0;
+let textIndex = 0;
+let charIndex = 0;
 let isDeleting = false;
 
 function typeEffect() {
   const el = document.getElementById("typingText");
-  const currentText = texts[i];
+  const currentText = texts[textIndex];
 
+  // ================= TYPE =================
   if (!isDeleting) {
-    el.innerText = currentText.substring(0, j++);
-  } else {
-    el.innerText = currentText.substring(0, j--);
+    el.innerText = currentText.substring(0, charIndex + 1);
+    charIndex++;
+
+    if (charIndex === currentText.length) {
+      isDeleting = true;
+      return setTimeout(typeEffect, 2000); // pause bila penuh
+    }
   }
 
-  let speed = isDeleting ? 40 : 70;
+  // ================= DELETE =================
+  else {
+    el.innerText = currentText.substring(0, charIndex - 1);
+    charIndex--;
 
-  if (!isDeleting && j === currentText.length) {
-    speed = 1500;
-    isDeleting = true;
+    if (charIndex === 0) {
+      isDeleting = false;
+      textIndex = (textIndex + 1) % texts.length;
+      return setTimeout(typeEffect, 500);
+    }
   }
 
-  else if (isDeleting && j === 0) {
-    isDeleting = false;
-    i = (i + 1) % texts.length;
-    speed = 400;
-  }
-
-  setTimeout(typeEffect, speed);
+  setTimeout(typeEffect, isDeleting ? 40 : 80);
 }
 
-// update setiap minit
+// update ikut masa
 setInterval(() => {
   texts = getGreetingTexts();
 }, 60000);
