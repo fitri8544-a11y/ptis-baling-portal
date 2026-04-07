@@ -96,8 +96,9 @@ body { overflow: hidden; }
   <!-- SLIDE 0: DASHBOARD -->
   <div class="slide active fade h-full flex flex-col justify-center">
 
-      <h1 id="tajukUtama" class="text-5xl font-bold mb-4 text-center w-full">
-  SELAMAT DATANG
+      <h1 class="text-5xl font-bold text-center bg-gradient-to-r from-yellow-300 to-white bg-clip-text text-transparent">
+  <span id="typingText"></span>
+  <span class="blinking">|</span>
 </h1>
 
   <h2 class="text-3xl text-yellow-300 font-semibold mb-6 text-center w-full">
@@ -523,24 +524,42 @@ setInterval(autoScroll, 80);
 </script>
 
 <script>
-const texts = ["SELAMAT DATANG", "WELCOME"];
-let index = 0;
+const texts = [
+  "SELAMAT DATANG",
+  "WELCOME",
+];
 
-setInterval(() => {
-  const el = document.getElementById("tajukUtama");
+let i = 0;        // text index
+let j = 0;        // char index
+let isDeleting = false;
 
-  // fade out
-  el.style.opacity = 0;
+function typeEffect() {
+  const currentText = texts[i];
+  const el = document.getElementById("typingText");
 
-  setTimeout(() => {
-    index = (index + 1) % texts.length;
-    el.innerText = texts[index];
+  if (!isDeleting) {
+    el.innerText = currentText.substring(0, j++);
+  } else {
+    el.innerText = currentText.substring(0, j--);
+  }
 
-    // fade in
-    el.style.opacity = 1;
-  }, 500);
+  let speed = isDeleting ? 50 : 80;
 
-}, 3000); // tukar setiap 3 saat
+  if (!isDeleting && j === currentText.length) {
+    speed = 1500; // pause
+    isDeleting = true;
+  }
+
+  else if (isDeleting && j === 0) {
+    isDeleting = false;
+    i = (i + 1) % texts.length;
+    speed = 500;
+  }
+
+  setTimeout(typeEffect, speed);
+}
+
+typeEffect();
 </script>
 
 </body>
