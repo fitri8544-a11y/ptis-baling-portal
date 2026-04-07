@@ -527,18 +527,23 @@ setInterval(autoScroll, 80);
 function getGreetingTexts() {
   const hour = new Date().getHours();
 
+  let timeGreeting = [];
+
   if (hour >= 5 && hour < 12) {
-    return ["SELAMAT PAGI", "GOOD MORNING"];
+    timeGreeting = ["SELAMAT PAGI", "GOOD MORNING"];
   }
   else if (hour >= 12 && hour < 15) {
-    return ["SELAMAT TENGAH HARI", "GOOD AFTERNOON"];
+    timeGreeting = ["SELAMAT TENGAH HARI", "GOOD AFTERNOON"];
   }
   else if (hour >= 15 && hour < 19) {
-    return ["SELAMAT PETANG", "GOOD EVENING"];
+    timeGreeting = ["SELAMAT PETANG", "GOOD EVENING"];
   }
   else {
-    return ["SELAMAT MALAM", "GOOD NIGHT"];
+    timeGreeting = ["SELAMAT MALAM", "GOOD NIGHT"];
   }
+
+  // 🔥 GABUNG DENGAN WELCOME (SENTIASA ADA)
+  return ["SELAMAT DATANG", "WELCOME", ...timeGreeting];
 }
 
 let texts = getGreetingTexts();
@@ -573,7 +578,7 @@ function typeEffect() {
   setTimeout(typeEffect, speed);
 }
 
-// update greeting setiap minit (jika tukar waktu)
+// update setiap minit
 setInterval(() => {
   texts = getGreetingTexts();
 }, 60000);
