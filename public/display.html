@@ -127,25 +127,28 @@ body { overflow: hidden; }
 </div> 
 
       <!-- JTK -->
-      <div>
-        <h2 class="text-2xl font-bold mb-6">📍 PERGERAKAN JTK HARI INI</h2>
+<div>
+  <h2 class="text-2xl font-bold mb-6">📍 PERGERAKAN JTK HARI INI</h2>
 
-        <div class="grid grid-cols-2 gap-4 mb-6">
-          <div class="bg-white/10 p-4 rounded-xl text-center">
-            <p class="text-sm text-gray-300">🏫 Jumlah Sekolah</p>
-            <h3 class="text-2xl font-bold" id="jumlahSekolah">--</h3>
-          </div>
-
-          <div class="bg-white/10 p-4 rounded-xl text-center">
-            <p class="text-sm text-gray-300">👨‍💻 Ahli JTK</p>
-            <h3 class="text-2xl font-bold" id="jumlahJTK">--</h3>
-          </div>
-        </div>
-
-        <div id="jtkList" class="space-y-3"></div>
-      </div>
-
+  <!-- (optional: boleh delete nanti) -->
+  <div class="grid grid-cols-2 gap-4 mb-6">
+    <div class="bg-white/10 p-4 rounded-xl text-center">
+      <p class="text-sm text-gray-300">🏫 Jumlah Sekolah</p>
+      <h3 class="text-2xl font-bold" id="jumlahSekolah">--</h3>
     </div>
+
+    <div class="bg-white/10 p-4 rounded-xl text-center">
+      <p class="text-sm text-gray-300">👨‍💻 Ahli JTK</p>
+      <h3 class="text-2xl font-bold" id="jumlahJTK">--</h3>
+    </div>
+  </div>
+
+  <!-- ✅ AUTO SCROLL WRAPPER -->
+  <div id="jtkScroll" class="space-y-3 h-[350px] overflow-hidden"></div>
+    <div id="jtkScroll" class="space-y-3 absolute w-full"></div>
+  </div>
+
+</div>
 
   </div> <!-- tutup SLIDE 0 -->
 
@@ -164,6 +167,36 @@ body { overflow: hidden; }
   <p class="text-sm md:text-base text-gray-300 mt-2">
     Zon Kuala Ketil · Pejabat Pendidikan Daerah Baling
   </p>
+
+</div>
+    
+    <!-- ================= RINGKASAN SEKOLAH ================= -->
+<div class="grid grid-cols-5 gap-6 mb-8">
+
+  <div class="bg-blue-100 text-blue-900 p-6 rounded-xl text-center">
+    <h3 id="totalSekolah" class="text-3xl font-bold">0</h3>
+    <p>Jumlah Sekolah</p>
+  </div>
+
+  <div class="bg-green-100 text-green-900 p-6 rounded-xl text-center">
+    <h3 id="totalMenengah" class="text-3xl font-bold">0</h3>
+    <p>Sekolah Menengah</p>
+  </div>
+
+  <div class="bg-yellow-100 text-yellow-900 p-6 rounded-xl text-center">
+    <h3 id="totalSK" class="text-3xl font-bold">0</h3>
+    <p>Sekolah Kebangsaan</p>
+  </div>
+
+  <div class="bg-purple-100 text-purple-900 p-6 rounded-xl text-center">
+    <h3 id="totalSJKC" class="text-3xl font-bold">0</h3>
+    <p>SJKC</p>
+  </div>
+
+  <div class="bg-orange-100 text-orange-900 p-6 rounded-xl text-center">
+    <h3 id="totalSJKT" class="text-3xl font-bold">0</h3>
+    <p>SJKT</p>
+  </div>
 
 </div>
 
@@ -380,7 +413,7 @@ html += `
 
   });
 
-  document.getElementById("jtkList").innerHTML = html;
+  document.getElementById("jtkScroll").innerHTML = html + html;
 
 });
 
@@ -389,68 +422,60 @@ fetch("https://opensheet.elk.sh/1rdmHCCrBplfxSRitiYVOaXoPled1UTMQt-yk4FZrH_A/SEK
 .then(res => res.json())
 .then(data => {
 
-  let menengah = "";
-  let sk = "";
-  let sjkc = "";
-  let sjkt = "";
+  const menengah = [];
+  const sk = [];
+  const sjkc = [];
+  const sjkt = [];
 
-  data.forEach(item => {
+  data.forEach(x => {
+    const nama = x["NAMA SEKOLAH"]?.toUpperCase() || "";
 
-    const nama = item["NAMA SEKOLAH"] || "";
-    const kod = item["KOD SEKOLAH"] || "";
-
-    if(!nama) return;
-
-    let bg = "bg-white/10";
-    let badge = "bg-blue-500";
-
-    // 🔥 WARNA IKUT KATEGORI
-    if(nama.includes("MENENGAH")){
-      bg = "bg-green-500/10";
-      badge = "bg-green-500";
+    if (nama.includes("(CINA)")) {
+      sjkc.push(x);
     }
-    else if(nama.includes("(CINA)")){
-      bg = "bg-purple-500/10";
-      badge = "bg-purple-500";
+    else if (nama.includes("(TAMIL)")) {
+      sjkt.push(x);
     }
-    else if(nama.includes("(TAMIL)")){
-      bg = "bg-orange-500/10";
-      badge = "bg-orange-500";
+    else if (nama.includes("MENENGAH")) {
+      menengah.push(x);
     }
-    else{
-      bg = "bg-blue-500/10";
-      badge = "bg-blue-500";
+    else if (nama.includes("KEBANGSAAN")) {
+      sk.push(x);
     }
-
-    const card = `
-      <div class="${bg} p-3 rounded flex justify-between items-center hover:scale-[1.02] transition">
-        <span>${nama}</span>
-        <span class="${badge} text-xs px-2 py-1 rounded">${kod}</span>
-      </div>
-    `;
-
-    // 🔥 SUSUNAN BETUL
-    if(nama.includes("MENENGAH")){
-      menengah += card;
-    }
-    else if(nama.includes("(CINA)")){
-      sjkc += card;
-    }
-    else if(nama.includes("(TAMIL)")){
-      sjkt += card;
-    }
-    else{
-      sk += card;
-    }
-
   });
 
-  document.getElementById("listMenengah").innerHTML = menengah;
-  document.getElementById("listSK").innerHTML = sk;
-  document.getElementById("listSJKC").innerHTML = sjkc;
-  document.getElementById("listSJKT").innerHTML = sjkt;
+  // ================= TEMPLATE CARD (KEKAL MACAM ANDA) =================
+  const card = (nama, kod, warna) => `
+    <div class="bg-white/10 p-3 rounded flex justify-between items-center hover:bg-white/20 transition">
+      <span class="text-sm">${nama}</span>
+      <span class="text-xs px-2 py-1 rounded ${warna}">
+        ${kod || "-"}
+      </span>
+    </div>
+  `;
+
+  // ================= PAPAR SENARAI =================
+  document.getElementById("listMenengah").innerHTML =
+    menengah.map(x => card(x["NAMA SEKOLAH"], x["KOD SEKOLAH"], "bg-green-500 text-white")).join("");
+
+  document.getElementById("listSK").innerHTML =
+    sk.map(x => card(x["NAMA SEKOLAH"], x["KOD SEKOLAH"], "bg-blue-500 text-white")).join("");
+
+  document.getElementById("listSJKC").innerHTML =
+    sjkc.map(x => card(x["NAMA SEKOLAH"], x["KOD SEKOLAH"], "bg-purple-500 text-white")).join("");
+
+  document.getElementById("listSJKT").innerHTML =
+    sjkt.map(x => card(x["NAMA SEKOLAH"], x["KOD SEKOLAH"], "bg-orange-500 text-white")).join("");
+
+  // ================= KIRAAN (INI YANG ANDA NAK) =================
+  document.getElementById("totalSekolah").innerText = data.length;
+  document.getElementById("totalMenengah").innerText = menengah.length;
+  document.getElementById("totalSK").innerText = sk.length;
+  document.getElementById("totalSJKC").innerText = sjkc.length;
+  document.getElementById("totalSJKT").innerText = sjkt.length;
 
 });
+
 // ================= AUTO REFRESH =================
 setInterval(() => {
   location.reload();
@@ -480,6 +505,21 @@ document.addEventListener("click", () => {
     music.play();
   }
 });
+</script>
+
+<script>
+function autoScroll() {
+  const el = document.getElementById("jtkScroll");
+  if (!el) return;
+
+  el.scrollTop += 1;
+
+  if (el.scrollTop >= el.scrollHeight - el.clientHeight) {
+    el.scrollTop = 0;
+  }
+}
+
+setInterval(autoScroll, 80);
 </script>
 
 </body>
