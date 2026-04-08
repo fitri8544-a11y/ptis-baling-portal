@@ -61,6 +61,25 @@ body { overflow: hidden; }
   box-shadow: 0 0 20px rgba(0,255,255,0.5);
   transition: 0.3s;
 }
+
+.ticker-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.ticker-text {
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%;
+  animation: tickerMove 50s linear infinite;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+@keyframes tickerMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
 </style>
 
 </head>
@@ -614,6 +633,44 @@ setInterval(() => {
 }, 60000);
 
 typeEffect();
+</script>
+
+<!-- ================= RUNNING TEXT TICKER ================= -->
+<div class="fixed bottom-0 left-0 w-full bg-blue-900 text-white z-50 overflow-hidden">
+
+  <div class="ticker-wrapper">
+    <div class="ticker-text">
+
+      📊 Data dipaparkan adalah secara masa nyata (real-time)  
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      💻 Sila hubungi Pasukan Teknikal ICT Sekolah untuk sebarang bantuan  
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      📅 Kemaskini sistem: <span id="tarikhTicker"></span>  
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      🚀 Sistem Dashboard PTIS sedang beroperasi dengan baik  
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+function updateTarikhTicker() {
+  const bulan = [
+    "Januari","Februari","Mac","April","Mei","Jun",
+    "Julai","Ogos","September","Oktober","November","Disember"
+  ];
+
+  const now = new Date();
+  const tarikh = now.getDate();
+  const bulanText = bulan[now.getMonth()];
+  const tahun = now.getFullYear();
+
+  document.getElementById("tarikhTicker").innerText =
+    tarikh + " " + bulanText + " " + tahun;
+}
+
+updateTarikhTicker();
 </script>
 
 </body>
