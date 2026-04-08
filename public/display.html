@@ -129,31 +129,83 @@ body { overflow: hidden; }
 
       <!-- JTK -->
 <div>
-  <h2 class="text-2xl font-bold mb-6">📍 PERGERAKAN JTK HARI INI</h2>
+        <h2 class="text-2xl font-bold mb-6">📍 PERGERAKAN JTK</h2>
 
-  <!-- (optional: boleh delete nanti) -->
-  <div class="grid grid-cols-2 gap-4 mb-6">
-    <div class="bg-white/10 p-4 rounded-xl text-center">
-      <p class="text-sm text-gray-300">🏫 Jumlah Sekolah</p>
-      <h3 class="text-2xl font-bold" id="jumlahSekolah">--</h3>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="bg-white/10 p-4 rounded-xl text-center">
+            <p class="text-sm text-gray-300">🏫 Sekolah</p>
+            <h3 class="text-2xl font-bold" id="jumlahSekolah">--</h3>
+          </div>
+
+          <div class="bg-white/10 p-4 rounded-xl text-center">
+            <p class="text-sm text-gray-300">👨‍💻 Ahli JTK</p>
+            <h3 class="text-2xl font-bold" id="jumlahJTK">--</h3>
+          </div>
+        </div>
+
+        <div id="jtkList" class="space-y-3"></div>
+      </div>
+
     </div>
 
-    <div class="bg-white/10 p-4 rounded-xl text-center">
-      <p class="text-sm text-gray-300">👨‍💻 Ahli JTK</p>
-      <h3 class="text-2xl font-bold" id="jumlahJTK">--</h3>
-    </div>
-  </div>
+  </div> <!-- tutup SLIDE 0 -->
 
-  <!-- ✅ AUTO SCROLL WRAPPER -->
-  <div id="jtkScroll" class="space-y-3 h-[350px] overflow-hidden"></div>
-    <div id="jtkScroll" class="space-y-3 absolute w-full"></div>
+  <!-- SLIDE 1: CARTA SEKTOR -->
+<div class="slide fade flex items-center justify-center">
+
+  <div class="w-full max-w-7xl mx-auto">
+
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-white">
+        📊 SEKTOR PEMBELAJARAN (USTP)
+      </h2>
+    </div>
+
+    <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl shadow-xl">
+
+      <img 
+        src="assets/organisasi-ustp.png"
+        alt="Carta Sektor"
+        class="w-full h-[75vh] object-contain rounded-lg"
+      >
+
+    </div>
+
   </div>
 
 </div>
 
-  </div> <!-- tutup SLIDE 0 -->
+<!-- SLIDE 2: CARTA ORGANISASI -->
+<div class="slide fade flex items-center justify-center">
 
-<!-- SLIDE 1: DASHBOARD SEKOLAH -->
+  <div class="w-full max-w-7xl mx-auto">
+
+    <!-- TAJUK -->
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold tracking-wide text-white">
+        📊 CARTA ORGANISASI
+      </h2>
+      <p class="text-gray-300 text-sm mt-1">
+        Pasukan Teknikal ICT Sekolah (PTIS) Daerah Baling
+      </p>
+    </div>
+
+    <!-- CONTAINER GAMBAR -->
+    <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl shadow-xl">
+
+      <img 
+        src="assets/carta-ahli-pasukan.png" 
+        alt="Carta Organisasi PTIS"
+        class="w-full h-[75vh] object-contain rounded-lg"
+      >
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- SLIDE 3: DASHBOARD SEKOLAH -->
 <div class="slide fade">
 
   <div class="w-full px-10">
@@ -222,7 +274,7 @@ body { overflow: hidden; }
 
 </div>
 
-  <!-- SLIDE 1: STATUS -->
+  <!-- SLIDE 4: STATUS -->
   <div class="slide fade">
     <h2 class="text-2xl font-bold mb-6">🖨️ STATUS PERALATAN COE KUALA KETIL</h2>
     <div id="statusContainer" class="grid grid-cols-2 md:grid-cols-4 gap-6"></div>
@@ -386,35 +438,25 @@ else if (status === "CUTI SAKIT") {
 }
 
 html += `
-  <div class="bg-white/10 p-4 rounded grid grid-cols-4 text-sm items-center 
-              transition hover:bg-white/20">
+      <div class="bg-white/10 p-4 rounded grid grid-cols-4 text-sm items-center">
+        
+        <div class="font-bold">👤 ${item.NAMA}</div>
 
-    <!-- NAMA -->
-    <div class="font-bold">👤 ${item.NAMA}</div>
+        <div class="${statusColor} font-semibold">
+          ${statusText}
+        </div>
 
-    <!-- STATUS -->
-    <div>
-      <span class="px-3 py-1 rounded-full text-xs font-semibold ${statusColor} bg-white/10">
-        ${statusText}
-      </span>
-    </div>
+        <div>🏫 ${item.SEKOLAH || "-"}</div>
 
-    <!-- LOKASI -->
-    <div class="text-gray-300">
-      📍 ${lokasi}
-    </div>
+        <div class="text-yellow-300">
+          ${item.AKTIVITI || "-"}
+        </div>
 
-    <!-- AKTIVITI -->
-    <div class="text-yellow-300">
-      ${item.AKTIVITI || "-"}
-    </div>
-
-  </div>
-`;
-
+      </div>
+    `;
   });
 
-  document.getElementById("jtkScroll").innerHTML = html + html;
+  document.getElementById("jtkList").innerHTML = html;
 
 });
 
