@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <title>Maklumat Sekolah - Zon Kuala Ketil</title>
+  <link rel="icon" href="/assets/favicon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<!-- HEADER -->
+<header class="bg-blue-900 text-white">
+
+  <div class="flex justify-between items-center p-6 max-w-7xl mx-auto">
+    <div class="flex items-center gap-4">
+      <img
+        src="/assets/logo.png"
+        alt="LOGO ICT"
+        class="h-12 w-12 object-contain bg-white rounded p-1">
+
+      <div>
+        <h1 class="font-bold text-xl">
+          PASUKAN TEKNIKAL ICT SEKOLAH DAERAH BALING
+        </h1>
+        <p class="text-sm">ZON KUALA KETIL</p>
+      </div>
+    </div>
+
+    <!-- KANAN: TARIKH -->
+    <div class="ml-auto text-right">
+      <span id="tarikhHari" class="text-xs text-blue-100"></span>
+    </div>
+
+  </div>
+
+ <!-- NAV -->
+  <nav class="bg-blue-800">
+    <ul class="flex justify-center items-center gap-6 py-3 text-sm font-semibold text-white">
+          <li><a href="/index.html" class="hover:underline">UTAMA</a></li>
+
+      <li>
+        <a href="/sektor-pengurusan.html" class="hover:underline">
+          SEKTOR PENGURUSAN MAKLUMAT
+        </a>
+      </li>
+
+      <!-- AHLI PASUKAN -->
+      <li class="relative group flex items-center">
+        <span class="cursor-pointer flex items-center gap-1 hover:underline select-none">
+          AHLI PASUKAN
+          <svg class="h-4 w-4 transition-transform group-hover:rotate-180"
+               fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </span>
+
+        <ul class="absolute left-0 top-full hidden group-hover:block
+                   bg-white text-blue-900 min-w-[260px]
+                   rounded shadow-lg border z-50">
+
+          <li><a href="/ahli-pasukan.html" class="block px-4 py-2 hover:bg-blue-100">
+            Carta Organisasi Pasukan
+          </a></li>
+
+          <li><a href="/skop-tugas-jtk.html" class="block px-4 py-2 hover:bg-blue-100">
+            Skop Tugas Juruteknik Komputer (JTK)
+          </a></li>
+
+          <li><a href="/maklumat-perhubungan.html" class="block px-4 py-2 hover:bg-blue-100">
+            Maklumat Perhubungan
+          </a></li>
+        </ul>
+      </li>
+
+      <!-- MAKLUMAT SEKOLAH -->
+<li class="relative group">
+
+  <button
+    type="button"
+    class="flex items-center gap-1 hover:underline select-none">
+
+    MAKLUMAT SEKOLAH
+
+    <svg class="h-4 w-4 transition-transform group-hover:rotate-180"
+         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </button>
+
+  <!-- SUBMENU -->
+  <ul
+    class="absolute left-0 top-full
+           hidden
+           group-hover:block
+           bg-white text-blue-900
+           min-w-[260px]
+           rounded shadow-lg border
+           z-50">
+
+    <li>
+      <a href="/maklumat-sekolah.html"
+         class="nav-link block px-4 py-2 hover:bg-blue-100 font-semibold">
+        Maklumat Keseluruhan
+      </a>
+    </li>
+
+    <li>
+      <a href="/peranan-guru-penyelaras-ict.html"
+         class="block px-4 py-2 hover:bg-blue-100">
+        Peranan Guru Penyelaras ICT
+      </a>
+    </li>
+
+  </ul>
+</li>
+
+      <li><a href="/syarikat-sewaan.html" class="nav-link hover:underline">MAKLUMAT SYARIKAT SEWAAN</a></li>  
+      <li><a href="/meja-perkhidmatan-isd.html" class="hover:underline">MEJA PERKHIDMATAN ISD</a></li>
+      <li><a href="/kabinet-borang.html" class="hover:underline">MUAT TURUN</a></li>
+
+    </ul>
+  </nav>
+
+</header>
