@@ -2,37 +2,37 @@
 <html lang="ms">
 <head>
   <meta charset="UTF-8">
-  <title>Maklumat Sekolah - Zon Kuala Ketil</title>
-  <link rel="icon" href="/assets/favicon.png">
+  <title>Skop Tugas JTK</title>
+
+  <link rel="icon" href="/assets/favicon.png" type="image/png">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-100">
 
-<!-- HEADER -->
+<!-- ================= HEADER ================= -->
 <header class="bg-blue-900 text-white">
 
   <div class="flex justify-between items-center p-6 max-w-7xl mx-auto">
     <div class="flex items-center gap-4">
-      <img
-        src="/assets/logo.png"
-        alt="LOGO ICT"
-        class="h-12 w-12 object-contain bg-white rounded p-1">
+      <img src="/assets/logo.png"
+           alt="LOGO ICT"
+           class="h-12 w-12 object-contain bg-white rounded p-1">
 
       <div>
-        <h1 class="font-bold text-xl">
+        <h1 class="text-xl font-bold">
           PASUKAN TEKNIKAL ICT SEKOLAH DAERAH BALING
         </h1>
         <p class="text-sm">ZON KUALA KETIL</p>
       </div>
     </div>
 
-    <!-- KANAN: TARIKH -->
-    <div class="ml-auto text-right">
-      <span id="tarikhHari" class="text-xs text-blue-100"></span>
-    </div>
+  <!-- KANAN: LOGIN + TARIKH -->
+<div class="ml-auto text-right">
+  <span id="tarikhHari" class="text-xs text-blue-100"></span>
+</div>
 
-  </div>
+</div>
 
   <!-- ================= NAVIGATION ================= -->
 <nav class="bg-blue-800">
@@ -125,7 +125,7 @@
     MAKLUMAT SYARIKAT SEWAAN
   </a>
 </li>
-   
+
     <li><a href="/meja-perkhidmatan-isd.html" class="hover:underline">
     MEJA PERKHIDMATAN ISD
   </a>
@@ -172,7 +172,7 @@
 
 <!-- ================= FOOTER ================= -->
 <footer class="bg-blue-900 text-white mt-12">
-  <div class="max-w-7xl mx-auto px-6 py-6 text-center text-sm">
+  <div class="text-center text-sm p-6">
     © 2026 PASUKAN TEKNIKAL ICT SEKOLAH DAERAH BALING<br>
     ZON KUALA KETIL
   </div>
@@ -352,17 +352,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const currentPath = window.location.pathname;
 
   document.querySelectorAll(".nav-link").forEach(link => {
-    const linkPath = new URL(link.href).pathname;
+    if (!link.href) return;
+
+    const linkPath = new URL(link.href, location.origin).pathname;
 
     if (linkPath === currentPath) {
-      link.classList.add("nav-active");
+      link.classList.add("nav-active", "submenu-active");
 
-      // Jika submenu → highlight parent dropdown
-      const parentDropdown = link.closest("li.relative.group");
-      if (parentDropdown) {
-        const parentBtn = parentDropdown.querySelector("button");
+      const submenu = link.closest("ul[data-parent]");
+      if (submenu) {
+        const parentId = submenu.dataset.parent;
+        const parentBtn = document.getElementById(parentId);
         parentBtn?.classList.add("nav-active");
-        link.classList.add("submenu-active");
       }
     }
   });

@@ -408,6 +408,73 @@
     document.getElementById("chatbotModal").style.display = "none";
   }
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  const textEl = document.getElementById("chatbotText");
+  const hour = new Date().getHours();
+
+  let messages = [];
+
+  // ================= UCAPAN IKUT MASA =================
+
+  if (hour >= 5 && hour < 12) {
+    messages = [
+      "Selamat Pagi ☀️",
+      "Ada yang boleh saya bantu hari ini?"
+    ];
+  }
+
+  else if (hour >= 12 && hour < 18) {
+    messages = [
+      "Selamat Petang 🌤️",
+      "Semoga urusan anda dipermudahkan.",
+      "Perlukan bantuan berkaitan ICT?"
+    ];
+  }
+
+  else {
+    messages = [
+      "Selamat Malam 🌙",
+      "Saya sedia membantu anda."
+    ];
+  }
+
+  // TAMBAH UCAPAN RAYA
+  messages.push("🌙 Selamat Hari Raya Aidilfitri");
+  messages.push("Maaf Zahir & Batin");
+
+  // ================= TYPING EFFECT =================
+
+  let msgIndex = 0;
+  let charIndex = 0;
+
+  function typeEffect() {
+    if (!textEl) return;
+
+    if (charIndex < messages[msgIndex].length) {
+      textEl.innerHTML += messages[msgIndex].charAt(charIndex);
+      charIndex++;
+      setTimeout(typeEffect, 30);
+    } else {
+      setTimeout(nextMessage, 2000);
+    }
+  }
+
+  function nextMessage() {
+    msgIndex = (msgIndex + 1) % messages.length;
+    charIndex = 0;
+    textEl.innerHTML = "";
+    typeEffect();
+  }
+
+  // START
+  textEl.innerHTML = "";
+  typeEffect();
+
+});
+</script>
 <!-- ================= TAMAT CHATBOT ================= -->
  
 <script>
