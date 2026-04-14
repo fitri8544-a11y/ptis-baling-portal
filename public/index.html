@@ -916,29 +916,6 @@ document.addEventListener("DOMContentLoaded", () => {
 }  
 </style>
 
-<!-- ================= BACKGROUND MUSIC ================= -->
-<audio id="bgMusic" autoplay loop muted playsinline>
-  <source src="assets/background-music.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-  const audio = document.createElement("audio");
-audio.src = "assets/music.mp3";
-audio.autoplay = true;
-audio.loop = true;
-audio.muted = true;
-audio.playsInline = true;
-
-document.body.appendChild(audio);
-
-// volume
-audio.volume = 0.5;
-
-// autoplay fix
-document.addEventListener("click", () => {
-  audio.muted = false;
-  audio.play();
-}, { once: true });
 </script>
 
 </body>
