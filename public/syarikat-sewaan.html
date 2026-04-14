@@ -124,6 +124,46 @@
 
 </header>
 
+<!-- ================= MAKLUMAT SYARIKAT ================= -->
+<section class="max-w-7xl mx-auto px-6 mt-10">
+
+  <!-- HEADER -->
+  <div class="text-center mb-10">
+    <h2 class="text-3xl font-bold text-blue-900">
+      🏢 Maklumat Syarikat Sewaan
+    </h2>
+    <p class="text-gray-600 mt-2">
+      Peralatan ICT Sekolah Zon Kuala Ketil
+    </p>
+  </div>
+
+  <!-- RINGKASAN -->
+  <div class="grid md:grid-cols-3 gap-6 mb-10">
+
+    <div class="bg-white rounded-xl shadow p-6 text-center">
+      <p class="text-gray-500">Jumlah Syarikat</p>
+      <h3 id="totalSyarikat" class="text-2xl font-bold text-blue-900">0</h3>
+    </div>
+
+    <div class="bg-white rounded-xl shadow p-6 text-center">
+      <p class="text-gray-500">Peralatan Aktif</p>
+      <h3 id="totalAktif" class="text-2xl font-bold text-green-600">0</h3>
+    </div>
+
+    <div class="bg-white rounded-xl shadow p-6 text-center">
+      <p class="text-gray-500">Fasa Terlibat</p>
+      <h3 id="totalFasa" class="text-2xl font-bold text-yellow-500">0</h3>
+    </div>
+
+  </div>
+
+  <!-- SENARAI -->
+  <div id="syarikatList"
+       class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+  </div>
+
+</section>
+
 <!-- ================= FOOTER ================= -->
 <footer class="bg-blue-900 text-white mt-12">
   <div class="max-w-7xl mx-auto px-6 py-6 text-center text-sm">
@@ -344,6 +384,72 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
+</script>
+
+<script>
+async function loadSyarikat() {
+  const url = "https://opensheet.elk.sh/1rdmHCCrBplfxSRitiYVOaXoPled1UTMQt-yk4FZrH_A/SYARIKAT%20SEWAAN";
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+  let html = "";
+
+  let total = 0;
+  let aktif = 0;
+  let fasaSet = new Set();
+
+  data.forEach(item => {
+
+    total++;
+
+    let status = item["STATUS"] || "AKTIF";
+    if (status.toLowerCase() === "aktif") aktif++;
+
+    let fasa = item["CATATAN"] || "-";
+    fasaSet.add(fasa);
+
+    let statusColor =
+      status.toLowerCase() === "aktif"
+        ? "bg-green-100 text-green-700"
+        : "bg-red-100 text-red-700";
+
+    html += `
+      <div class="bg-white rounded-xl shadow hover:shadow-xl transition p-6">
+
+        <h3 class="font-bold text-blue-900 text-lg mb-2">
+          🏢 ${item["NAMA SYARIKAT"]}
+        </h3>
+
+        <p class="text-gray-600 text-sm mb-1">
+          💻 ${item["PERALATAN"]}
+        </p>
+
+        <p class="text-gray-500 text-sm mb-3">
+          ⏳ ${item["TEMPOH"]}
+        </p>
+
+        <span class="px-3 py-1 text-xs rounded-full ${statusColor}">
+          ${status}
+        </span>
+
+        <div class="mt-3 text-sm text-yellow-600 font-semibold">
+          📊 ${fasa}
+        </div>
+
+      </div>
+    `;
+  });
+
+  document.getElementById("syarikatList").innerHTML = html;
+
+  // Statistik
+  document.getElementById("totalSyarikat").innerText = total;
+  document.getElementById("totalAktif").innerText = aktif;
+  document.getElementById("totalFasa").innerText = fasaSet.size;
+}
+
+loadSyarikat();
 </script>
 
 </body>
