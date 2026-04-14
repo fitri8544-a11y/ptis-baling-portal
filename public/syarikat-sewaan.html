@@ -123,3 +123,228 @@
   </nav>
 
 </header>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-blue-900 text-white mt-12">
+  <div class="max-w-7xl mx-auto px-6 py-6 text-center text-sm">
+    © 2026 PASUKAN TEKNIKAL ICT SEKOLAH DAERAH BALING<br>
+    ZON KUALA KETIL
+  </div>
+</footer>
+
+<script>
+  function kemaskiniTarikh() {
+    const hari = ["Ahad","Isnin","Selasa","Rabu","Khamis","Jumaat","Sabtu"];
+    const bulan = ["Januari","Februari","Mac","April","Mei","Jun","Julai",
+                   "Ogos","September","Oktober","November","Disember"];
+
+    const d = new Date();
+
+    document.getElementById("tarikhHari").textContent =
+      hari[d.getDay()] + ", " +
+      d.getDate() + " " +
+      bulan[d.getMonth()] + " " +
+      d.getFullYear() + " • " +
+      d.toLocaleTimeString("ms-MY");
+  }
+
+  kemaskiniTarikh();
+  setInterval(kemaskiniTarikh, 1000);
+</script>
+
+<!-- ================= CHATBOT FLOATING ================= -->
+<style>
+  .chatbot-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    animation: float 2.5s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+  }
+
+  .chatbot-text {
+    background: #1e40af;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  .chatbot-icon {
+    width: 60px;
+    height: 60px;
+    background: #2563eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    color: white;
+    font-size: 24px;
+  }
+
+  .chatbot-modal {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 360px;
+    height: 520px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
+    z-index: 9999;
+    display: none;
+  }
+
+  .chatbot-header {
+    background: #1e40af;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .chatbot-header button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 640px) {
+    .chatbot-modal {
+      width: 95%;
+      height: 80%;
+      right: 2.5%;
+      bottom: 90px;
+    }
+  }
+</style>
+
+<style>
+/* MENU AKTIF */
+.nav-active {
+  color: #fde047; /* kuning Tailwind */
+  font-weight: 700;
+  position: relative;
+}
+
+.nav-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background-color: #fde047;
+  border-radius: 999px;
+}
+
+/* SUBMENU AKTIF */
+.submenu-active {
+  background-color: #dbeafe; /* biru lembut */
+  font-weight: 600;
+}
+</style>
+
+<!-- BUTTON -->
+<div class="chatbot-btn" onclick="bukaChatbot()">
+  <div class="chatbot-text" id="chatbotText">
+    Salam Ramadan 🌙 <br>
+    Perlukan bantuan? Klik untuk bertanya.
+  </div>
+  <div class="chatbot-icon">
+  <img src="assets/chatbot-avatar.png" alt="Chatbot Assistant">
+  <span class="status-dot"></span>
+</div>
+</div>
+
+<!-- MODAL CHATBOT -->
+<div class="chatbot-modal" id="chatbotModal">
+  <div class="chatbot-header">
+    PTIS Kuala Ketil
+    <button onclick="tutupChatbot()">✖</button>
+  </div>
+
+  <iframe
+    src="https://app.edcafe.ai/chatbots/695cb8cc88fa84267a8b4b04"
+    title="PTIS KUALA KETIL"
+    allow="microphone"
+    style="border:none; width:100%; height:100%;">
+  </iframe>
+</div>
+
+<script>
+  function bukaChatbot() {
+    document.getElementById("chatbotModal").style.display = "block";
+  }
+
+  function tutupChatbot() {
+    document.getElementById("chatbotModal").style.display = "none";
+  }
+</script>
+<!-- ================= TAMAT CHATBOT ================= -->
+ 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const currentPath = window.location.pathname;
+
+  document.querySelectorAll(".nav-link").forEach(link => {
+    const linkPath = new URL(link.href).pathname;
+
+    if (linkPath === currentPath) {
+      link.classList.add("nav-active");
+
+      // Jika submenu → highlight parent dropdown
+      const parentDropdown = link.closest("li.relative.group");
+      if (parentDropdown) {
+        const parentBtn = parentDropdown.querySelector("button");
+        parentBtn?.classList.add("nav-active");
+        link.classList.add("submenu-active");
+      }
+    }
+  });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  const text = document.getElementById("chatbotText");
+  const hour = new Date().getHours();
+
+  if (hour >= 6 && hour < 18) {
+    // Waktu siang
+    text.innerHTML = `
+      Selamat Menjalani Ibadah Puasa 🌤️<br>
+      Perlukan bantuan? Klik untuk bertanya.
+    `;
+  } else {
+    // Waktu malam
+    text.innerHTML = `
+      Selamat Berbuka & Salam Tarawih 🌙<br>
+      Ada pertanyaan? Saya sedia membantu.
+    `;
+  }
+
+});
+</script>
+
+</body>
+</html>
