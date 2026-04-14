@@ -321,20 +321,20 @@ body { overflow: hidden; }
 
 </div>
 
-<!-- SLIDE: QR -->
-<div class="slide fade text-center">
+  <!-- SLIDE 2: QR -->
+  <div class="slide fade text-center">
+    <h2 class="text-2xl font-bold mb-6">📱 SCAN UNTUK PINJAM</h2>
 
-  <h2 class="text-2xl font-bold mb-6">
-    📱 SCAN UNTUK PINJAM
-  </h2>
+    <img src="assets/qr-form.png" class="mx-auto w-72 mb-4">
 
-  <img src="assets/qr-form.png" class="mx-auto w-72 mb-4">
-
-  <p class="text-lg text-gray-300">
-    Scan QR untuk membuat tempahan peralatan ICT
-  </p>
+    <p class="text-lg text-gray-300">
+      Scan QR untuk membuat tempahan peralatan ICT
+    </p>
+  </div>
 
 </div>
+
+</div> <!-- tutup slideshow-container -->
 
 <!-- ================= SCRIPT ================= -->
 
@@ -568,7 +568,7 @@ async function loadSyarikat() {
   const res = await fetch(url);
   const data = await res.json();
 
-   let html = "";
+  let html = "";
 
   data.forEach(item => {
 
