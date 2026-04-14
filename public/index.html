@@ -922,16 +922,23 @@ document.addEventListener("DOMContentLoaded", () => {
 </audio>
 
 <script>
-  const music = document.getElementById("bgMusic");
+  const audio = document.createElement("audio");
+audio.src = "assets/music.mp3";
+audio.autoplay = true;
+audio.loop = true;
+audio.muted = true;
+audio.playsInline = true;
 
-  // volume lembut
-  music.volume = 0.5;
+document.body.appendChild(audio);
 
-  // autoplay fix (browser block issue)
-  document.addEventListener("click", () => {
-    music.muted = false;
-    music.play();
-  }, { once: true });
+// volume
+audio.volume = 0.5;
+
+// autoplay fix
+document.addEventListener("click", () => {
+  audio.muted = false;
+  audio.play();
+}, { once: true });
 </script>
 
 </body>
