@@ -2,6 +2,14 @@
   "projects": {
     "default": "ptiszonkualaketil"
   },
-  "targets": {},
+  "targets": {
+    "ptiszonkualaketil": {
+      "hosting": {
+        "main": [
+          "ptiszonkualaketil"
+        ]
+      }
+    }
+  },
   "etags": {}
 }
