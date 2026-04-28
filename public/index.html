@@ -839,9 +839,9 @@ if (!snap.exists()) {
 }
 
 /* ================= COUNT (1 SESSION) ================= */
-if (!sessionStorage.getItem("hasVisited")) {
+if (!localStorage.getItem("hasVisited")) {
   await updateDoc(ref, { count: increment(1) });
-  sessionStorage.setItem("hasVisited", "true");
+  localStorage.setItem("hasVisited", "true");
 }
 
 /* ================= DISPLAY ================= */
