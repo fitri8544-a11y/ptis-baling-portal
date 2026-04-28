@@ -16,12 +16,12 @@
 
   <script>
     const firebaseConfig = {
-      apiKey: "API_KEY_ANDA",
-      authDomain: "PROJECT_ID.firebaseapp.com",
-      projectId: "PROJECT_ID",
-      storageBucket: "PROJECT_ID.appspot.com",
-      messagingSenderId: "SENDER_ID",
-      appId: "APP_ID"
+      apiKey: "AIzaSyDxZSjjGrzDPuw8b4XUM-8BVwq9cmCtghA",
+  authDomain: "ptiszonkualaketil.firebaseapp.com",
+  projectId: "ptiszonkualaketil",
+  storageBucket: "ptiszonkualaketil.appspot.com",
+  messagingSenderId: "634031867148",
+  appId: "1:634031867148:web:5ffe2b9427e31f17563529"
     };
 
     firebase.initializeApp(firebaseConfig);
@@ -815,16 +815,16 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
 /* ================= FIREBASE CONFIG ================= */
-const firebaseconfig = {
-  apiKey: "API_KEY_ANDA",
+const firebaseConfig = {
+  apiKey: "AIzaSyDxZSjjGrzDPuw8b4XUM-8BVwq9cmCtghA",
   authDomain: "ptiszonkualaketil.firebaseapp.com",
   projectId: "ptiszonkualaketil",
   storageBucket: "ptiszonkualaketil.appspot.com",
-  messagingSenderId: "XXXX",
-  appId: "XXXX"
+  messagingSenderId: "634031867148",
+  appId: "1:634031867148:web:5ffe2b9427e31f17563529"
 };
 
-/* ================= INIT SEKALI SAHAJA ================= */
+/* ================= INIT ================= */
 const app = getApps().length
   ? getApps()[0]
   : initializeApp(firebaseConfig);
@@ -832,31 +832,25 @@ const app = getApps().length
 const db = getFirestore(app);
 const ref = doc(db, "stats", "visitors");
 
-/* ================= PASTIKAN DOKUMEN WUJUD ================= */
+/* ================= CREATE DOC ================= */
 await setDoc(ref, { count: 0 }, { merge: true });
 
-/* ================= KIRA SEKALI SETIAP SESI ================= */
+/* ================= COUNT (1 SESSION) ================= */
 if (!sessionStorage.getItem("hasVisited")) {
-  updateDoc(ref, { count: increment(1) })
-    .then(() => {
-      sessionStorage.setItem("hasVisited", "true");
-      console.log("Visitor +1");
-    })
-    .catch(err => console.error("Update error:", err));
+  await updateDoc(ref, { count: increment(1) });
+  sessionStorage.setItem("hasVisited", "true");
 }
 
-/* ================= PAPAR JUMLAH ================= */
+/* ================= DISPLAY ================= */
 onSnapshot(ref, snap => {
   if (snap.exists()) {
     const el = document.getElementById("visitorCount");
     if (el) {
-      el.textContent =
-        "Jumlah Pelawat : " + snap.data().count.toLocaleString();
+      el.textContent = "Jumlah Pelawat : " + snap.data().count.toLocaleString();
     }
   }
 });
 </script>
-
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -877,29 +871,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
-});
-</script>
-
-<script>
-const ref = db.collection("stats").doc("visitors");
-
-ref.get().then(doc => {
-  if (doc.exists) {
-    ref.update({
-      count: firebase.firestore.FieldValue.increment(1)
-    });
-  } else {
-    ref.set({ count: 1 });
-  }
-});
-</script>
-
-<script>
-db.collection("stats").doc("visitors")
-.onSnapshot(doc => {
-  if (doc.exists) {
-    document.getElementById("visitorCount").innerText = doc.data().count;
-  }
 });
 </script>
 
