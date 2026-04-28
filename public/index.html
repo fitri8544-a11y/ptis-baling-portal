@@ -833,7 +833,13 @@ const db = getFirestore(app);
 const ref = doc(db, "stats", "visitors");
 
 /* ================= CREATE DOC ================= */
-await setDoc(ref, { count: 0 }, { merge: true });
+import { getDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+const snap = await getDoc(ref);
+
+if (!snap.exists()) {
+  await setDoc(ref, { count: 0 });
+}
 
 /* ================= COUNT (1 SESSION) ================= */
 if (!sessionStorage.getItem("hasVisited")) {
