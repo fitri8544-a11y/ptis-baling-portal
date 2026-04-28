@@ -436,7 +436,7 @@
     <div id="infoBar" class="info-bar-footer">
       <span id="lastUpdate"></span>
       <span>|</span>
-      <span id="visitorCount"></span>
+      <span id="visitorCount">0</span>
     </div>
 
   </div>
@@ -877,6 +877,29 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+});
+</script>
+
+<script>
+const ref = db.collection("stats").doc("visitors");
+
+ref.get().then(doc => {
+  if (doc.exists) {
+    ref.update({
+      count: firebase.firestore.FieldValue.increment(1)
+    });
+  } else {
+    ref.set({ count: 1 });
+  }
+});
+</script>
+
+<script>
+db.collection("stats").doc("visitors")
+.onSnapshot(doc => {
+  if (doc.exists) {
+    document.getElementById("visitorCount").innerText = doc.data().count;
+  }
 });
 </script>
 
