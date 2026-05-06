@@ -7,34 +7,77 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-slate-950 text-white min-h-screen overflow-x-hidden">
 
 <!-- ================= HEADER ================= -->
-<header class="bg-blue-900 text-white">
-  <div class="flex justify-between items-center p-6 max-w-7xl mx-auto">
-    <div class="flex items-center gap-4">
-      <img src="/assets/logo.png" 
-      class="h-12 w-12 object-contain bg-white rounded p-1">
-      <div>
-        <h1 class="text-xl font-bold">DASHBOARD JTK</h1>
-        <p class="text-sm">Pasukan Teknikal ICT • Zon Kuala Ketil</p>
+<header class="sticky top-0 z-50
+               bg-slate-900/80 backdrop-blur-xl
+               border-b border-white/10">
+
+  <div class="flex justify-between items-center
+              p-6 max-w-7xl mx-auto">
+
+    <!-- LEFT -->
+    <div class="flex items-center gap-5">
+
+      <div class="relative">
+
+        <img src="/assets/logo.png"
+             class="h-14 w-14 object-contain
+                    bg-white rounded-2xl p-2 shadow-xl">
+
+        <div class="absolute -bottom-1 -right-1
+                    w-4 h-4 bg-green-400
+                    rounded-full border-2 border-slate-900
+                    animate-pulse">
+        </div>
+
       </div>
+
+      <div>
+
+        <h1 class="text-2xl lg:text-3xl
+                   font-black tracking-wide">
+
+          DASHBOARD JTK
+
+        </h1>
+
+        <p class="text-cyan-300 text-sm">
+          Pasukan Teknikal ICT • Zon Kuala Ketil
+        </p>
+
+      </div>
+
     </div>
 
-    <div class="text-right space-y-1">
-      <div id="tarikhHari" class="text-xs text-blue-100"></div>
+    <!-- RIGHT -->
+    <div class="text-right space-y-2">
+
+      <div id="tarikhHari"
+           class="text-xs text-cyan-300">
+      </div>
+
       <button onclick="logout()"
-        class="bg-white text-blue-900 px-4 py-2 rounded text-sm font-semibold">
+        class="bg-gradient-to-r from-red-500 to-pink-500
+               hover:scale-105 transition duration-300
+               px-5 py-2 rounded-xl
+               text-sm font-semibold shadow-lg">
+
         LOG KELUAR
+
       </button>
+
     </div>
+
   </div>
+
 </header>
 
 <main class="max-w-7xl mx-auto p-6 space-y-10">
 
   <div id="ucapanSelamatDatang"
-     class="mb-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded font-semibold text-blue-800 shadow-sm">
+     class="mb-6 p-5 bg-white/5 backdrop-blur-xl border border-cyan-400/20 rounded-3xl font-semibold text-cyan-300 shadow-2xl">
 </div>
 
   <!-- ================= AKSES PANTAS ================= -->
@@ -42,9 +85,14 @@
 
   <!-- ISD -->
   <a href="https://isd.moe.gov.my" target="_blank"
-     class="group rounded-xl border border-green-200 bg-green-50 p-4
-            shadow-sm hover:shadow-md transition
-            flex flex-col justify-between text-center">
+     class="group rounded-3xl
+       bg-white/5 backdrop-blur-xl
+       border border-white/10
+       p-6 shadow-2xl
+       hover:scale-105
+       hover:border-cyan-400/30
+       transition duration-300
+       flex flex-col justify-between text-center">
 
     <div class="text-2xl mb-2">🛠️</div>
 
@@ -61,9 +109,14 @@
 
   <!-- ScanMe -->
   <a href="https://idme.moe.gov.my/login" target="_blank"
-     class="group rounded-xl border border-yellow-200 bg-yellow-50 p-4
-            shadow-sm hover:shadow-md transition
-            flex flex-col justify-between text-center">
+     class="group rounded-3xl
+       bg-white/5 backdrop-blur-xl
+       border border-white/10
+       p-6 shadow-2xl
+       hover:scale-105
+       hover:border-cyan-400/30
+       transition duration-300
+       flex flex-col justify-between text-center">
 
     <div class="text-2xl mb-2">📲</div>
 
@@ -80,9 +133,14 @@
 
   <!-- S3PTIS -->
   <a href="#"
-     class="group rounded-xl border border-purple-200 bg-purple-50 p-4
-            shadow-sm hover:shadow-md transition
-            flex flex-col justify-between text-center">
+     class="group rounded-3xl
+       bg-white/5 backdrop-blur-xl
+       border border-white/10
+       p-6 shadow-2xl
+       hover:scale-105
+       hover:border-cyan-400/30
+       transition duration-300
+       flex flex-col justify-between text-center">
 
     <div class="text-2xl mb-2">📊</div>
 
@@ -99,9 +157,14 @@
 
   <!-- EDU Baling -->
   <a href="https://edubaling.web.app" target="_blank"
-     class="group rounded-xl border border-indigo-200 bg-indigo-50 p-4
-            shadow-sm hover:shadow-md transition
-            flex flex-col justify-between text-center">
+     class="group rounded-3xl
+       bg-white/5 backdrop-blur-xl
+       border border-white/10
+       p-6 shadow-2xl
+       hover:scale-105
+       hover:border-cyan-400/30
+       transition duration-300
+       flex flex-col justify-between text-center">
 
     <div class="text-2xl mb-2">🌐</div>
 
@@ -119,13 +182,18 @@
   <!-- Pelan Lantai PKGKK -->
   <a href="https://drive.google.com/drive/folders/1sPkACgxmbZXPFl-d0Q9hH49wVBurm599?usp=sharing"
      target="_blank"
-     class="group rounded-xl border border-blue-200 bg-blue-50 p-4
-            shadow-sm hover:shadow-md transition
-            flex flex-col justify-between text-center">
+     class="group rounded-3xl
+       bg-white/5 backdrop-blur-xl
+       border border-white/10
+       p-6 shadow-2xl
+       hover:scale-105
+       hover:border-cyan-400/30
+       transition duration-300
+       flex flex-col justify-between text-center">
 
     <div class="text-2xl mb-2">📐</div>
 
-    <h3 class="text-sm font-semibold text-blue-900 group-hover:underline">
+    <h3 class="text-sm font-semibold text-cyan-300 group-hover:underline">
       Pelan Lantai PKGKK
     </h3>
     <p class="text-xs text-blue-700">Muat Turun Dokumen</p>
@@ -139,9 +207,14 @@
   <!-- MyGovUC -->
   <a href="https://redtoneservicedesk.freshservice.com/support/home"
      target="_blank"
-     class="group rounded-xl border border-red-200 bg-red-50 p-4
-            shadow-sm hover:shadow-md transition
-            flex flex-col justify-between text-center">
+     class="group rounded-3xl
+       bg-white/5 backdrop-blur-xl
+       border border-white/10
+       p-6 shadow-2xl
+       hover:scale-105
+       hover:border-cyan-400/30
+       transition duration-300
+       flex flex-col justify-between text-center">
 
     <div class="text-2xl mb-2">📧</div>
 
@@ -160,9 +233,14 @@
   <a id="intuneCard"
      href="https://intune.microsoft.com"
      target="_blank"
-     class="hidden group rounded-xl border border-sky-200 bg-sky-50 p-4
-            shadow-sm hover:shadow-md transition
-            flex flex-col justify-between text-center">
+     class="group rounded-3xl
+       bg-white/5 backdrop-blur-xl
+       border border-white/10
+       p-6 shadow-2xl
+       hover:scale-105
+       hover:border-cyan-400/30
+       transition duration-300
+       flex flex-col justify-between text-center">
 
     <div class="text-2xl mb-2">🛡️</div>
 
@@ -181,9 +259,14 @@
 <a
   href="https://docs.google.com/spreadsheets/d/1U-uEoDnY407Qfy2WDae-9YfhC4oGbHjN8ggw7cILFW0/edit"
   target="_blank"
-  class="group rounded-xl border border-emerald-200 bg-emerald-50 p-4
-         shadow-sm hover:shadow-md transition
-         flex flex-col justify-between text-center">
+  class="group rounded-3xl
+       bg-white/5 backdrop-blur-xl
+       border border-white/10
+       p-6 shadow-2xl
+       hover:scale-105
+       hover:border-cyan-400/30
+       transition duration-300
+       flex flex-col justify-between text-center">
 
   <div class="text-2xl mb-2">📊</div>
 
@@ -205,26 +288,41 @@
 
 <!-- ================= ADMIN ONLY ================= -->
   <section id="adminSection"
-           class="hidden bg-white p-6 rounded shadow space-y-6 border border-red-200">
+         class="hidden
+                bg-white/5 backdrop-blur-xl
+                border border-red-400/20
+                rounded-3xl
+                p-8 shadow-2xl
+                space-y-6">
 
   <h2 class="text-xl font-bold text-red-700 flex items-center gap-2">
     🔐 Maklumat Peranti Sewaan & Admin Password
   </h2>
 
-  <p class="text-sm text-gray-600">
+  <p class="text-sm text-gray-300">
     Maklumat ini adalah sulit. Untuk kegunaan dalaman Pasukan Teknikal ICT sahaja.
   </p>
 
   <!-- ================= PERALATAN PdP ================= -->
-  <details class="border rounded">
-    <summary class="cursor-pointer p-4 font-semibold bg-blue-50">
+  <details class="bg-white/5
+                border border-white/10
+                rounded-2xl
+                overflow-hidden">
+    <summary class="cursor-pointer p-5
+                bg-white/5
+                hover:bg-white/10
+                transition
+                font-semibold">
       💻 Peralatan Pembelajaran & Pengajaran (PdP)
     </summary>
 
     <div class="p-4 space-y-4 text-sm">
 
       <!-- FASA 1 -->
-      <details class="border rounded">
+      <details class="bg-white/5
+                border border-white/10
+                rounded-2xl
+                overflow-hidden">
         <summary class="cursor-pointer p-3 font-semibold bg-gray-50">
           Fasa 1
         </summary>
@@ -237,7 +335,10 @@
       </details>
 
       <!-- FASA 2 -->
-      <details class="border rounded">
+      <details class="bg-white/5
+                border border-white/10
+                rounded-2xl
+                overflow-hidden">
         <summary class="cursor-pointer p-3 font-semibold bg-gray-50">
           Fasa 2
         </summary>
@@ -250,7 +351,10 @@
       </details>
 
       <!-- FASA 3 -->
-      <details class="border rounded">
+      <details class="bg-white/5
+                border border-white/10
+                rounded-2xl
+                overflow-hidden">
         <summary class="cursor-pointer p-3 font-semibold bg-gray-50">
           Fasa 3
         </summary>
@@ -263,7 +367,10 @@
       </details>
 
       <!-- FASA 4 -->
-      <details class="border rounded">
+      <details class="bg-white/5
+                border border-white/10
+                rounded-2xl
+                overflow-hidden">
         <summary class="cursor-pointer p-3 font-semibold bg-gray-50">
           Fasa 4
         </summary>
@@ -279,15 +386,25 @@
   </details>
 
   <!-- ================= PERALATAN PENTADBIRAN ================= -->
-  <details class="border rounded">
-    <summary class="cursor-pointer p-4 font-semibold bg-green-50">
+  <details class="bg-white/5
+                border border-white/10
+                rounded-2xl
+                overflow-hidden">
+    <summary class="cursor-pointer p-5
+                bg-white/5
+                hover:bg-white/10
+                transition
+                font-semibold">
       🗄️ Peralatan Pentadbiran
     </summary>
 
     <div class="p-4 space-y-4 text-sm">
 
       <!-- FASA 1 -->
-      <details class="border rounded">
+      <details class="bg-white/5
+                border border-white/10
+                rounded-2xl
+                overflow-hidden">
         <summary class="cursor-pointer p-3 font-semibold bg-gray-50">
           Fasa 1
         </summary>
@@ -299,7 +416,10 @@
       </details>
 
       <!-- FASA 2 -->
-      <details class="border rounded">
+      <details class="bg-white/5
+                border border-white/10
+                rounded-2xl
+                overflow-hidden">
         <summary class="cursor-pointer p-3 font-semibold bg-gray-50">
           Fasa 2
         </summary>
@@ -317,15 +437,25 @@
   </details>
 
 <!-- ================= PERANTI GURU ================= -->
-<details class="border rounded">
-  <summary class="cursor-pointer p-4 font-semibold bg-purple-50">
+<details class="bg-white/5
+                border border-white/10
+                rounded-2xl
+                overflow-hidden">
+  <summary class="cursor-pointer p-5
+                bg-white/5
+                hover:bg-white/10
+                transition
+                font-semibold">
     👨‍🏫 Peranti Guru
   </summary>
 
   <div class="p-4 space-y-4 text-sm">
 
     <!-- FASA 1 -->
-    <details class="border rounded">
+    <details class="bg-white/5
+                border border-white/10
+                rounded-2xl
+                overflow-hidden">
       <summary class="cursor-pointer p-3 font-semibold bg-gray-50">
         Fasa 1
       </summary>
@@ -336,7 +466,10 @@
     </details>
 
     <!-- FASA 2 -->
-    <details class="border rounded">
+    <details class="bg-white/5
+                border border-white/10
+                rounded-2xl
+                overflow-hidden">
       <summary class="cursor-pointer p-3 font-semibold bg-gray-50">
         Fasa 2
       </summary>
@@ -357,12 +490,15 @@
 <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
 
 <!-- ================= INTERNET & M365A1 ================= -->
-<div class="bg-white rounded-xl shadow p-6 h-full flex flex-col">
-  <h2 class="text-lg font-bold text-blue-900">
+<div class="bg-white/5 backdrop-blur-xl
+border border-white/10
+rounded-3xl
+shadow-2xl">
+  <h2 class="text-lg font-bold text-cyan-300">
     🏫 Maklumat Internet Sekolah Seliaan
   </h2>
 
-  <p class="text-sm text-gray-600 mb-2">
+  <p class="text-sm text-gray-300 mb-2">
     Data dikemaskini secara langsung melalui Google Sheets
   </p>
 
@@ -371,17 +507,20 @@
     <li class="italic text-gray-400">Memuatkan data...</li>
   </ul>
 
-  <p class="text-sm font-semibold text-blue-900 mt-3">
+  <p class="text-sm font-semibold text-cyan-300 mt-3">
     Jumlah Sekolah: <span id="jumlahInternet">0</span>
   </p>
 </div>
 
-<div class="bg-white rounded-xl shadow p-6 h-full flex flex-col">
+<div class="bg-white/5 backdrop-blur-xl
+border border-white/10
+rounded-3xl
+shadow-2xl">
   <h2 class="text-lg font-bold text-purple-900">
     ☁️ Maklumat Microsoft Office M365 A1
   </h2>
 
-  <p class="text-sm text-gray-600 mb-2">
+  <p class="text-sm text-gray-300 mb-2">
     Akaun rasmi sekolah (Akses Terhad)
   </p>
 
@@ -401,12 +540,15 @@
 <section class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
 
   <!-- HARTA MODAL -->
-  <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col h-full">
-    <h2 class="text-lg font-bold text-blue-900">
+  <div class="bg-white/5 backdrop-blur-xl
+border border-white/10
+rounded-3xl
+shadow-2xl">
+    <h2 class="text-lg font-bold text-cyan-300">
       🏷️ Maklumat Harta Modal ICT Sekolah
     </h2>
 
-    <p class="text-sm text-gray-600 mb-2">
+    <p class="text-sm text-gray-300 mb-2">
       Data peralatan ICT sekolah seliaan
     </p>
 
@@ -415,19 +557,22 @@
       <li class="italic text-gray-400">Memuatkan data...</li>
     </ul>
 
-    <p class="text-sm font-semibold text-blue-900 mt-3">
+    <p class="text-sm font-semibold text-cyan-300 mt-3">
       Jumlah Sekolah: <span id="jumlahHartaModal">0</span>
     </p>
   </div>
 
 
   <!-- PERANTI GURU -->
-  <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col h-full">
+  <div class="bg-white/5 backdrop-blur-xl
+border border-white/10
+rounded-3xl
+shadow-2xl">
     <h2 class="text-lg font-bold text-indigo-900 flex items-center gap-2">
       👨‍🏫 Maklumat Peranti Guru
     </h2>
 
-    <p class="text-sm text-gray-600 mb-3">
+    <p class="text-sm text-gray-300 mb-3">
       Peranti Sewaan Mengikut Fasa
     </p>
 
@@ -439,17 +584,20 @@
 
 
   <!-- PERALATAN PDP -->
-  <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col h-full">
+  <div class="bg-white/5 backdrop-blur-xl
+border border-white/10
+rounded-3xl
+shadow-2xl">
     <h2 class="text-lg font-bold text-amber-700 flex items-center gap-2">
       🖥️ Maklumat Peralatan PdP
     </h2>
 
-    <p class="text-sm text-gray-600 mb-4">
+    <p class="text-sm text-gray-300 mb-4">
       Peranti sewaan pembelajaran
     </p>
 
     <div class="flex-1">
-  <ul id="senaraiPeralatanPDP" class="space-y-3 text-sm text-gray-700">
+  <ul id="senaraiPeralatanPDP" class="space-y-3 text-sm text-gray-200">
     <li class="italic text-gray-400">
       Memuatkan data peralatan PdP...
     </li>
@@ -464,12 +612,15 @@
 
 
   <!-- PERALATAN PDT -->
-  <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col h-full">
+  <div class="bg-white/5 backdrop-blur-xl
+border border-white/10
+rounded-3xl
+shadow-2xl">
     <h2 class="text-lg font-bold text-orange-700 flex items-center gap-2">
       📁 Maklumat Peralatan PDT
     </h2>
 
-    <p class="text-sm text-gray-600 mb-4">
+    <p class="text-sm text-gray-300 mb-4">
       Peranti sewaan pentadbiran
     </p>
 
@@ -485,7 +636,10 @@
 
 <!-- ================= MAKLUMAN ================= -->
 <section class="mt-8">
-  <div class="bg-white rounded-xl shadow p-6 border-2 border-dashed border-red-300">
+  <div class="bg-white/5 backdrop-blur-xl
+border border-white/10
+rounded-3xl
+shadow-2xl">
 
     <h2 class="text-lg font-bold text-indigo-900 flex items-center gap-2">
       📢 Makluman & Aplikasi Akan Datang
@@ -495,7 +649,7 @@
       </span>
     </h2>
 
-    <ul class="mt-4 text-sm text-gray-700 list-disc list-inside space-y-2">
+    <ul class="mt-4 text-sm text-gray-200 list-disc list-inside space-y-2">
       <li>📌 Sistem Inventori Terperinci</li>
       <li>📌 Laporan Aduan ICT Sekolah</li>
       <li>📌 Integrasi Laporan Automatik</li>
@@ -512,7 +666,10 @@
 </main>
 
 <!-- ================= FOOTER ================= -->
-<footer class="bg-blue-900 text-white text-center p-4 mt-12 text-sm">
+<footer class="border-t border-white/10
+               bg-slate-900/80
+               backdrop-blur-xl
+               text-center p-6 mt-16 text-sm text-gray-300">
   © 2026 Pasukan Teknikal ICT Sekolah Daerah Baling • Zon Kuala Ketil
 </footer>
 
@@ -607,7 +764,7 @@ function loadInternet(email) {
         const li = document.createElement("li");
         li.innerHTML = `
           <strong>${row["NAMA SEKOLAH"]}</strong><br>
-          <span class="text-xs text-gray-600">
+          <span class="text-xs text-gray-300">
             ISP: ${row.ISP ?? "-"} |
             Modem: ${row["JUMLAH MODEM"] ?? "-"} |
             Status: ${row["STATUS PEMASANGAN SUBWARAN 2"] ?? "-"}
@@ -667,7 +824,7 @@ function loadM365(email) {
   const li = document.createElement("li");
   li.innerHTML = `
     <strong>${namaSekolah}</strong><br>
-    <span class="text-xs text-gray-600">
+    <span class="text-xs text-gray-300">
       ID M365A1: ${row["ID M365A1"] ?? "-"} |
       Jumlah ID: ${row["JUMLAH ID"] ?? "-"}
     </span>
@@ -726,8 +883,8 @@ function loadHartaModal(email) {
 
 list.innerHTML += `
   <li class="mb-4 p-3 rounded ${statusClass}">
-    <strong class="text-blue-900">${sekolah}</strong><br>
-    <span class="text-xs text-gray-700">
+    <strong class="text-cyan-300">${sekolah}</strong><br>
+    <span class="text-xs text-gray-200">
       Baik: <strong>${baik}</strong> |
       Rosak: <strong>${rosak}</strong>
     </span><br>
@@ -815,7 +972,7 @@ function loadPerantiGuru(email) {
             ${sekolah}
           </strong>
 
-          <div class="text-sm text-gray-700 space-y-1">
+          <div class="text-sm text-gray-200 space-y-1">
             <div>FASA 1 : <strong>${data[1]} UNIT</strong></div>
             <div>FASA 2 : <strong>${data[2]} UNIT</strong></div>
           </div>
@@ -894,7 +1051,7 @@ function loadPDT(email) {
             ${sekolah}
           </strong>
 
-          <div class="text-sm text-gray-700 space-y-1">
+          <div class="text-sm text-gray-200 space-y-1">
             <div>
               FASA 1 :
               <strong>${data[1].pc} PC</strong> |
@@ -989,7 +1146,7 @@ function loadPeralatanPDP(email) {
             ${sekolah}
           </strong>
 
-          <div class="text-sm text-gray-700 space-y-1">
+          <div class="text-sm text-gray-200 space-y-1">
             <div>FASA 1 : <strong>${data[1]}</strong></div>
             <div>FASA 2 : <strong>${data[2]}</strong></div>
             <div>FASA 3 : <strong>${data[3]}</strong></div>
@@ -1096,4 +1253,20 @@ function logout() {
 </script>
 
 </body>
+
+<!-- BACKGROUND EFFECT -->
+<div class="fixed inset-0 -z-10 overflow-hidden">
+
+  <div class="absolute top-0 left-0
+              w-[500px] h-[500px]
+              bg-cyan-500/20 blur-3xl rounded-full">
+  </div>
+
+  <div class="absolute bottom-0 right-0
+              w-[500px] h-[500px]
+              bg-purple-500/20 blur-3xl rounded-full">
+  </div>
+
+</div>
+
 </html>
