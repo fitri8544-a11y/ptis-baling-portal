@@ -934,8 +934,8 @@ function loadHartaModal(email) {
 
         const statusClass =
   rosak > 0
-    ? "border-l-4 border-red-500 bg-red-50"
-    : "border-l-4 border-green-500 bg-green-50";
+    ? "border-l-4 border-red-400 bg-slate-800/70 backdrop-blur-xl"
+    : "border-l-4 border-green-400 bg-slate-800/70 backdrop-blur-xl";
 
 list.innerHTML += `
   <li class="mb-4 p-3 rounded ${statusClass}">
@@ -1218,7 +1218,7 @@ function loadPeralatanPDP(email) {
 
       list.innerHTML += `
         <li class="border-l-4 border-blue-500 bg-blue-50 p-4 rounded shadow-sm">
-          <strong class="text-blue-800 block mb-2">
+          <strong class="text-cyan-300 text-lg">
             ${sekolah}
           </strong>
 
