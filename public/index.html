@@ -215,15 +215,21 @@ drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]
 
 <!-- ================= MODUL INTERAKTIF ================= -->
 
-<li class="dropdown">
+<li class="relative group">
 
-  <a href="#" onclick="return false;">
+  <span class="flex items-center gap-1 cursor-pointer hover:underline">
+	🎮 MODUL INTERAKTIF ▾
+	<svg class="h-4 w-4 transition-transform duration-200 group-hover:rotate-180"
+         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </span>
 
-    🎮 MODUL INTERAKTIF ▾
-
-  </a>
-
-  <ul class="dropdown-menu">
+  <ul 
+   class="absolute left-0 top-full
+           hidden group-hover:block
+           bg-white text-blue-900 min-w-[260px]
+           rounded shadow-lg border z-50">
 
     <li>
 
