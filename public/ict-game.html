@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>
+    ICT Troubleshooting Challenge
+  </title>
+
+  <!-- TAILWIND -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GAME CSS -->
+  <link rel="stylesheet"
+        href="/assets/css/game.css">
+
+</head>
+
+<body class="
+
+bg-gradient-to-br
+from-slate-950
+via-blue-950
+to-slate-900
+
+min-h-screen
+
+text-white
+
+">
+
+<!-- ================= GAME ================= -->
+
+<section class="px-6 py-10">
+
+<div class="
+
+max-w-5xl
+mx-auto
+
+bg-slate-900/70
+backdrop-blur-xl
+
+border border-cyan-400/20
+rounded-3xl
+
+p-8
+
+shadow-2xl
+shadow-cyan-500/10
+
+">
+
+  <!-- HEADER -->
+
+  <div class="text-center mb-10">
+
+    <h2 class="
+
+    text-5xl
+    font-black
+    text-cyan-300
+
+    drop-shadow-[0_0_12px_rgba(34,211,238,0.6)]
+
+    ">
+
+    🎮 ICT Troubleshooting Challenge
+
+    </h2>
+
+    <p class="
+
+    text-slate-300
+    mt-4
+    text-lg
+
+    ">
+
+    Uji kemahiran troubleshooting ICT anda seperti juruteknik PTIS sebenar.
+
+    </p>
+
+  </div>
+
+  <!-- SCORE -->
+
+  <div class="
+
+  flex justify-between items-center
+
+  mb-8
+
+  bg-white/5
+  border border-white/10
+
+  rounded-2xl
+
+  p-4
+
+  ">
+
+    <div>
+
+      <p class="text-slate-400 text-sm">
+
+        SCORE
+
+      </p>
+
+      <h3 id="gameScore"
+
+      class="
+
+      text-4xl
+      font-black
+      text-emerald-300
+
+      ">
+
+      0
+
+      </h3>
+
+    </div>
+
+    <div>
+
+      <p class="text-slate-400 text-sm">
+
+        LEVEL
+
+      </p>
+
+      <h3
+
+      class="
+
+      text-4xl
+      font-black
+      text-cyan-300
+
+      ">
+
+      1
+
+      </h3>
+
+    </div>
+
+  </div>
+
+  <!-- QUESTION -->
+
+  <div id="questionBox"
+
+  class="
+
+  bg-white/5
+  border border-white/10
+
+  rounded-3xl
+
+  p-8
+
+  ">
+
+    <h3 id="questionText"
+
+    class="
+
+    text-3xl
+    font-black
+    text-white
+
+    mb-8
+
+    ">
+
+    Loading...
+
+    </h3>
+
+    <!-- OPTIONS -->
+
+    <div class="grid gap-4">
+
+      <button onclick="checkAnswer(0)"
+      class="gameOption"></button>
+
+      <button onclick="checkAnswer(1)"
+      class="gameOption"></button>
+
+      <button onclick="checkAnswer(2)"
+      class="gameOption"></button>
+
+      <button onclick="checkAnswer(3)"
+      class="gameOption"></button>
+
+    </div>
+
+  </div>
+
+  <!-- RESULT -->
+
+  <div id="gameResult"
+
+  class="
+
+  hidden
+  mt-8
+
+  rounded-2xl
+  p-5
+
+  text-center
+  text-xl
+  font-bold
+
+  ">
+
+  </div>
+
+</div>
+
+</section>
+
+<!-- GAME JS -->
+<script src="/assets/js/game.js"></script>
+
+</body>
+</html>
