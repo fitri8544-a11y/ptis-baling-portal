@@ -175,6 +175,8 @@ function checkAnswer(selected){
 
 }
 
+/* ================= START GAME ================= */
+
 document.addEventListener("DOMContentLoaded", () => {
 
   loadQuestion();
