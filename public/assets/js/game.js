@@ -512,9 +512,10 @@ function showFinalScreen(){
 
     if(successSound){
 
-     successSound.play();
+     successSound.currentTime = 0;
 
-    }
+     successSound.play()
+     .catch(err => console.log(err));
 
   let rank = "Trainee";
 
