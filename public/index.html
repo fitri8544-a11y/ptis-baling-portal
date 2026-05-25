@@ -35,78 +35,6 @@
     .arrow-rotate {
       transform: rotate(180deg);
     }
-
-    /* ================= DROPDOWN ================= */
-
-.dropdown{
-  position: relative;
-}
-
-.dropdown-menu{
-
-  position: absolute;
-
-  top: 100%;
-  left: 0;
-
-  min-width: 300px;
-
-  background: rgba(15,23,42,0.98);
-
-  backdrop-filter: blur(18px);
-
-  border: 1px solid rgba(34,211,238,0.15);
-
-  border-radius: 20px;
-
-  padding: 12px;
-
-  margin-top: 12px;
-
-  display: none;
-
-  z-index: 9999;
-
-  box-shadow:
-    0 10px 40px rgba(0,0,0,0.4);
-
-}
-
-/* SHOW DROPDOWN */
-
-.dropdown:hover .dropdown-menu{
-
-  display: block;
-
-}
-
-/* SUBMENU LINK */
-
-.dropdown-menu a{
-
-  display: block;
-
-  padding: 14px 16px;
-
-  border-radius: 14px;
-
-  color: white;
-
-  font-weight: 600;
-
-  transition: .3s;
-
-}
-
-.dropdown-menu a:hover{
-
-  background: rgba(34,211,238,0.15);
-
-  color: #67e8f9;
-
-  transform: translateX(4px);
-
-}
   </style>
 
 </head>
@@ -287,13 +215,9 @@ drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]
 
 <!-- ================= MODUL INTERAKTIF ================= -->
 
-<li class="dropdown relative">
+<li class="dropdown">
 
-  <a href="#"
-
-  onclick="return false;"
-
-  class="nav-link hover:underline">
+  <a href="#" onclick="return false;">
 
     🎮 MODUL INTERAKTIF ▾
 
@@ -307,7 +231,7 @@ drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]
 
       onclick="showSection('ictGameSection'); return false;">
 
-      🖥 ICT Troubleshooting Challenge
+      ICT Troubleshooting Challenge
 
       </a>
 
