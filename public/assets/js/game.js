@@ -507,6 +507,15 @@ function checkAnswer(selected){
 
 function showFinalScreen(){
 
+    const successSound =
+    document.getElementById("successSound");
+
+    if(successSound){
+
+     successSound.play();
+
+    }
+
   let rank = "Trainee";
 
   if(score >= 160){
