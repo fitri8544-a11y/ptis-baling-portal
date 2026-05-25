@@ -1,3 +1,5 @@
+console.log("GAME JS LOADED");
+
 /* ================= GAME ================= */
 
 let score = 0;
@@ -173,4 +175,8 @@ function checkAnswer(selected){
 
 }
 
-loadQuestion();
+document.addEventListener("DOMContentLoaded", () => {
+
+  loadQuestion();
+
+});
