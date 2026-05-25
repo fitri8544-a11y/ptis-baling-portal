@@ -508,13 +508,16 @@ function checkAnswer(selected){
 function showFinalScreen(){
 
     const successSound =
-    document.getElementById("successSound");
+document.getElementById("successSound");
 
-    if(successSound){
+if(successSound){
 
-     successSound.play();
+  successSound.currentTime = 0;
 
-    }
+  successSound.play()
+  .catch(err => console.log(err));
+
+}
 
   let rank = "Trainee";
 
