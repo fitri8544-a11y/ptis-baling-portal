@@ -9,15 +9,19 @@
         content="width=device-width, initial-scale=1.0">
 
   <title>
-    ICT Troubleshooting Challenge
+
+    PTIS ICT Troubleshooting Simulator
+
   </title>
 
   <!-- TAILWIND -->
+
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- GAME CSS -->
+
   <link rel="stylesheet"
-    href="/assets/css/game.css">
+        href="assets/css/game.css">
 
 </head>
 
@@ -32,11 +36,134 @@ min-h-screen
 
 text-white
 
+overflow-x-hidden
+
 ">
 
-<!-- ================= GAME ================= -->
+<!-- ================= BACKGROUND GLOW ================= -->
 
-<section class="px-6 py-10">
+<div class="
+
+fixed
+top-[-200px]
+left-[-200px]
+
+w-[500px]
+h-[500px]
+
+bg-cyan-500/20
+blur-[120px]
+
+rounded-full
+
+pointer-events-none
+
+"></div>
+
+<div class="
+
+fixed
+bottom-[-200px]
+right-[-200px]
+
+w-[500px]
+h-[500px]
+
+bg-blue-500/20
+blur-[120px]
+
+rounded-full
+
+pointer-events-none
+
+"></div>
+
+<!-- ================= HEADER ================= -->
+
+<header class="
+
+sticky top-0 z-50
+
+backdrop-blur-2xl
+bg-slate-950/70
+
+border-b border-white/10
+
+">
+
+  <div class="
+
+  max-w-7xl
+  mx-auto
+
+  px-6 py-4
+
+  flex items-center justify-between
+
+  ">
+
+    <div>
+
+      <h1 class="
+
+      text-2xl
+      md:text-3xl
+
+      font-black
+
+      text-cyan-300
+
+      ">
+
+      🚀 PTIS ICT Troubleshooting Simulator
+
+      </h1>
+
+      <p class="
+
+      text-slate-400
+      text-sm
+
+      mt-1
+
+      ">
+
+      Pasukan Teknikal ICT Sekolah Daerah Baling
+
+      </p>
+
+    </div>
+
+    <a href="/index.html"
+
+    class="
+
+    px-5 py-3
+
+    rounded-2xl
+
+    bg-white/5
+    hover:bg-white/10
+
+    border border-white/10
+
+    transition-all duration-300
+
+    font-bold
+
+    ">
+
+    ⬅ Kembali Portal
+
+    </a>
+
+  </div>
+
+</header>
+
+<!-- ================= MAIN ================= -->
+
+<main class="px-6 py-10">
 
 <div class="
 
@@ -54,7 +181,36 @@ p-8
 shadow-2xl
 shadow-cyan-500/10
 
+relative
+overflow-hidden
+
 ">
+
+  <!-- TOP BADGE -->
+
+  <div class="
+
+  inline-flex
+  items-center gap-2
+
+  px-4 py-2
+
+  rounded-full
+
+  bg-cyan-500/10
+  border border-cyan-400/20
+
+  text-cyan-300
+  text-sm
+  font-bold
+
+  mb-8
+
+  ">
+
+  ⚡ LIVE TROUBLESHOOTING TRAINING
+
+  </div>
 
   <!-- HEADER -->
 
@@ -62,11 +218,16 @@ shadow-cyan-500/10
 
     <h2 class="
 
-    text-5xl
+    text-4xl
+    md:text-6xl
+
     font-black
+
     text-cyan-300
 
-    drop-shadow-[0_0_12px_rgba(34,211,238,0.6)]
+    drop-shadow-[0_0_18px_rgba(34,211,238,0.7)]
+
+    leading-tight
 
     ">
 
@@ -77,39 +238,55 @@ shadow-cyan-500/10
     <p class="
 
     text-slate-300
-    mt-4
+    mt-5
     text-lg
+
+    max-w-3xl
+    mx-auto
 
     ">
 
-    Uji kemahiran troubleshooting ICT anda seperti juruteknik PTIS sebenar.
+    Uji kemahiran troubleshooting ICT anda melalui simulasi masalah sebenar
+    seperti juruteknik PTIS profesional.
 
     </p>
 
   </div>
 
-  <!-- SCORE -->
+  <!-- SCORE AREA -->
 
   <div class="
 
-  flex justify-between items-center
+  grid
+  md:grid-cols-3
+
+  gap-4
 
   mb-8
 
-  bg-white/5
-  border border-white/10
-
-  rounded-2xl
-
-  p-4
-
   ">
 
-    <div>
+    <!-- SCORE -->
 
-      <p class="text-slate-400 text-sm">
+    <div class="
 
-        SCORE
+    bg-white/5
+    border border-white/10
+
+    rounded-2xl
+
+    p-5
+
+    ">
+
+      <p class="
+
+      text-slate-400
+      text-sm
+
+      ">
+
+      SCORE
 
       </p>
 
@@ -117,9 +294,12 @@ shadow-cyan-500/10
 
       class="
 
-      text-4xl
+      text-5xl
       font-black
+
       text-emerald-300
+
+      mt-2
 
       ">
 
@@ -129,101 +309,156 @@ shadow-cyan-500/10
 
     </div>
 
-    <!-- PROGRESS -->
+    <!-- LEVEL -->
 
-<div class="mt-6">
+    <div class="
 
-  <div class="flex justify-between mb-2">
+    bg-white/5
+    border border-white/10
 
-    <span class="text-slate-400">
+    rounded-2xl
 
-      Progress
+    p-5
 
-    </span>
+    ">
 
-    <span id="questionNumber"
-    class="text-cyan-300 font-bold">
+      <p class="
 
-    1 / 20
+      text-slate-400
+      text-sm
 
-    </span>
+      ">
 
-  </div>
+      RANK
 
-  <div class="
+      </p>
 
-  w-full
-  h-4
+      <h3 id="gameRank"
 
-  bg-white/10
-  rounded-full
-  overflow-hidden
+      class="
 
-  ">
+      text-3xl
+      font-black
 
-    <div id="progressBar"
+      text-cyan-300
 
-    class="
+      mt-4
 
-    h-full
-    bg-cyan-400
+      ">
 
-    transition-all duration-500
+      Trainee
 
-    "
+      </h3>
 
-    style="width:5%">
+    </div>
+
+    <!-- TIMER -->
+
+    <div class="
+
+    bg-white/5
+    border border-white/10
+
+    rounded-2xl
+
+    p-5
+
+    ">
+
+      <p class="
+
+      text-slate-400
+      text-sm
+
+      ">
+
+      MASA MENJAWAB
+
+      </p>
+
+      <h3 id="timer"
+
+      class="
+
+      text-5xl
+      font-black
+
+      text-red-300
+
+      mt-2
+
+      ">
+
+      20s
+
+      </h3>
 
     </div>
 
   </div>
 
-</div>
+  <!-- PROGRESS -->
 
-<!-- TIMER -->
+  <div class="mb-10">
 
-<div class="mt-6">
+    <div class="
 
-  <div class="flex justify-between mb-2">
+    flex justify-between
 
-    <span class="text-slate-400">
+    mb-3
 
-      Masa
+    ">
 
-    </span>
+      <span class="text-slate-400">
 
-    <span id="timer"
-    class="text-red-300 font-bold">
+        Progress Simulasi
 
-    15s
+      </span>
 
-    </span>
-
-  </div>
-
-</div>
-
-    <div>
-
-      <p class="text-slate-400 text-sm">
-
-        LEVEL
-
-      </p>
-
-      <h3
+      <span id="questionNumber"
 
       class="
 
-      text-4xl
-      font-black
       text-cyan-300
+      font-bold
 
       ">
 
-      1
+      1 / 20
 
-      </h3>
+      </span>
+
+    </div>
+
+    <div class="
+
+    w-full
+    h-4
+
+    bg-white/10
+
+    rounded-full
+    overflow-hidden
+
+    ">
+
+      <div id="progressBar"
+
+      class="
+
+      h-full
+
+      bg-gradient-to-r
+      from-cyan-400
+      to-blue-500
+
+      transition-all duration-500
+
+      "
+
+      style="width:5%">
+
+      </div>
 
     </div>
 
@@ -242,17 +477,49 @@ shadow-cyan-500/10
 
   p-8
 
+  relative
+
   ">
+
+    <div class="
+
+    absolute
+    top-4 right-4
+
+    px-3 py-1
+
+    rounded-full
+
+    bg-cyan-500/10
+    border border-cyan-400/20
+
+    text-cyan-300
+    text-xs
+    font-bold
+
+    ">
+
+    LIVE SCENARIO
+
+    </div>
+
+    <!-- QUESTION -->
 
     <h3 id="questionText"
 
     class="
 
-    text-3xl
+    text-2xl
+    md:text-3xl
+
     font-black
     text-white
 
-    mb-8
+    leading-relaxed
+
+    mb-10
+
+    pr-16
 
     ">
 
@@ -264,17 +531,13 @@ shadow-cyan-500/10
 
     <div class="grid gap-4">
 
-      <button onclick="checkAnswer(0)"
-      class="gameOption"></button>
+      <button class="gameOption"></button>
 
-      <button onclick="checkAnswer(1)"
-      class="gameOption"></button>
+      <button class="gameOption"></button>
 
-      <button onclick="checkAnswer(2)"
-      class="gameOption"></button>
+      <button class="gameOption"></button>
 
-      <button onclick="checkAnswer(3)"
-      class="gameOption"></button>
+      <button class="gameOption"></button>
 
     </div>
 
@@ -287,14 +550,19 @@ shadow-cyan-500/10
   class="
 
   hidden
+
   mt-8
 
   rounded-2xl
-  p-5
+
+  p-6
 
   text-center
+
   text-xl
   font-bold
+
+  transition-all duration-300
 
   ">
 
@@ -302,9 +570,27 @@ shadow-cyan-500/10
 
 </div>
 
-</section>
+</main>
 
-<!-- GAME JS -->
+<!-- ================= FOOTER ================= -->
+
+<footer class="
+
+text-center
+
+pb-10
+
+text-slate-500
+text-sm
+
+">
+
+PTIS Smart Data Center • Interactive ICT Learning Hub
+
+</footer>
+
+<!-- ================= GAME JS ================= -->
+
 <script src="assets/js/game.js"></script>
 
 </body>
